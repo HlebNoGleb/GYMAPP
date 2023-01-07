@@ -17,5 +17,10 @@
     "tslib": "^2.4.1",
     "typescript": "^4.9.3",
     "vite": "^4.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "svelte-i18n": "^3.6.0",
+    "swiper": "^8.4.5"
   }
 }
