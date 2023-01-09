@@ -15,7 +15,7 @@
 
     function startUsingApp() {
         skipHelloScreen = true;
-        localStorage.setItem("skipHelloScreen", skipHelloScreen);
+        localStorage.setItem("skipHelloScreen", `${skipHelloScreen}`);
     }
 </script>
 
