@@ -4,5 +4,14 @@
     "main_page_slide_2": "Слайд 2",
     "main_page_slide_3": "Слайд 3",
     "continue": "Продолжить",
-    "StartScreenText": "Текст начального экрана"
+    "trainings": {
+        "trainingsText": "Текст тренировок",
+        "trainingsName": "Мои тренировки",
+        "noTrainings": "У вас нет тренировок"
+    },
+    "exercises": {
+        "exercisesText": "Текст упражнений",
+        "exercisesName": "Мои упражнения",
+        "noExercises": "Вы еще не добавили упражнения в тренировку"
+    }
 }

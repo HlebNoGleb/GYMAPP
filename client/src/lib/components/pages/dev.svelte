@@ -25,7 +25,7 @@
 <style>
     .dev-menu-toggle{
         position: fixed;
-        bottom: 10px;
+        bottom: 50%;
         right: 10px;
         z-index: 9999;
     }

@@ -4,5 +4,14 @@
     "main_page_slide_2": "Slide 2",
     "main_page_slide_3": "Slide 3",
     "continue": "Continue",
-    "StartScreenText": "Start Screen Text"
+    "trainings": {
+        "trainingsText": "Trainings Text",
+        "trainingsName": "My trainings",
+        "noTrainings": "No trainings"
+    },
+    "exercises": {
+        "exercisesText": "Exercises Text",
+        "exercisesName": "My exercises",
+        "noExercises": "You haven't added exercises to your workout yet"
+    }
 }
