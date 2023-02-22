@@ -1,4 +1,5 @@
 import config from "./configs/config";
+import trainingsJson from "../testData/trainings.json"
 
 function getTrainings(){
     if (config.useServer){
@@ -10,18 +11,17 @@ function getTrainings(){
 
 async function getTrainingsFromServer(){
     const trainingPromise = new Promise(async (resolve, reject) => {
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 500));
         const response = await fetch("https://jsonplaceholder.typicode.com/users");
         if (response.ok) {
-            const trainings = await response.json();
+            //const trainings = await response.json();
+            const trainings = trainingsJson;
             resolve(trainings)
         } else {
             reject("server error");
         }
-    }).then(data => {
-        console.log(data);
-        saveTrainings(data);
-        return data;
+    }).then(trainings => {
+        return trainings;
     }).catch(err => {
         console.error(err);
         return null;
@@ -83,3 +83,5 @@ const storage = {
 }
 
 export default storage;
+
+

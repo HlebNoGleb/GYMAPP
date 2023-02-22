@@ -1,0 +1,26 @@
+[
+    {
+        "id": "11111",
+        "parentId": 2,
+        "userId": 1,
+        "exerciseName": "Упражнение 1"
+    },
+    {
+        "id": "22222",
+        "parentId": 2,
+        "userId": 1,
+        "exerciseName": "Упражнение 2"
+    },
+    {
+        "id": "33333",
+        "parentId": 2,
+        "userId": 1,
+        "exerciseName": "Упражнение 3"
+    },
+    {
+        "id": "44444",
+        "parentId": 2,
+        "userId": 1,
+        "exerciseName": "Упражнение 4"
+    }
+]

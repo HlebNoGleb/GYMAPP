@@ -7,7 +7,14 @@
     "trainings": {
         "trainingsText": "Trainings Text",
         "trainingsName": "My trainings",
-        "noTrainings": "No trainings"
+        "noTrainings": "No trainings",
+        "add": "Add new training",
+        "lastDate": "Last training",
+        "start":"Start",
+        "details":"Details",
+        "more":"More",
+        "change":"Change",
+        "showExercises":"Exercises"
     },
     "exercises": {
         "exercisesText": "Exercises Text",

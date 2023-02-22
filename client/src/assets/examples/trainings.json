@@ -1,0 +1,117 @@
+[
+
+]
+
+
+var training1 = {
+    id: "111",
+    name: "Название",
+    exercises: [11111, 22222]
+}
+
+var training2 = {
+    id: "222",
+    name: "Название",
+    exercises: [11111, 33333]
+}
+
+var exercise1 = {
+    id: "11111"
+    exerciseName: "Упражнение",
+}
+
+var exercise2 = {
+    id: "11111"
+    exerciseName: "Упражнение",
+}
+
+var exercise3 = {
+    id: "11111"
+    exerciseName: "Упражнение",
+}
+
+var history1 = {
+    id: "12345",
+    exerciseID: "11111",
+    trainingID: 111,
+    date: 06.01.2021,
+    podhods: [
+        {
+            weight: 70,
+            count: 10
+        },
+        {
+            weight: 70,
+            count: 10
+        },
+        {
+            weight: 70,
+            count: 10
+        },
+        {
+            weight: 80,
+            count: 7
+        }
+    ]
+}
+
+var history2 = {
+    id: "123456789",
+    exerciseID: "11111",
+    trainingID: 222,
+    date: 06.01.2021,
+    podhods: [
+        {
+            weight: 70,
+            count: 10
+        },
+        {
+            weight: 70,
+            count: 10
+        },
+        {
+            weight: 70,
+            count: 10
+        },
+        {
+            weight: 80,
+            count: 7
+        }
+    ]
+}
+
+
+var history3 = {
+    id: "12345",
+    exerciseID: "11111",
+    trainingID: 111,
+    date: 06.01.2021,
+    podhods: [
+        {
+            weight: 70,
+            count: 10
+        },
+        {
+            weight: 70,
+            count: 10
+        },
+        {
+            weight: 70,
+            count: 10
+        },
+        {
+            weight: 80,
+            count: 7
+        }
+    ]
+}
+
+// запрос для статистики тренировки
+select * from history
+where trainingId = 111 // history1, history3
+
+// запрос для статистики упражнения
+select * from history
+where exercisesId = 11111 // history1, history2, history3
+
+

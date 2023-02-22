@@ -1,22 +1,17 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
-    import Trainings from './trainings.svelte';
+    import { currentRoute, currentRouteData } from "../../helpers/routes";
     import Navbar from '../common/navbar.svelte';
 
-    const defaultComponent = Trainings;
-    let currentComponent = defaultComponent;
-
-    function changeRoute(data: { detail: { route: any; }; }){
-        const route = data.detail.route;
-        currentComponent = route.component;
-    }
+    console.log(currentRoute);
 </script>
 
+
 <div class="container">
-    <svelte:component this={currentComponent}/>
+    <svelte:component this={$currentRoute.component}/>
 </div>
 
-<Navbar on:changeRoute={changeRoute}/>
+<Navbar/>
 
 <style>
     .container{

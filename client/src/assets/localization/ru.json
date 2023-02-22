@@ -7,7 +7,14 @@
     "trainings": {
         "trainingsText": "Текст тренировок",
         "trainingsName": "Мои тренировки",
-        "noTrainings": "У вас нет тренировок"
+        "noTrainings": "У вас нет тренировок",
+        "add": "Добавить новую тренировку",
+        "lastDate": "Последняя тренировка",
+        "start":"Начать",
+        "details":"Детали",
+        "more":"Еще",
+        "change":"Изменить",
+        "showExercises":"Упражнения"
     },
     "exercises": {
         "exercisesText": "Текст упражнений",

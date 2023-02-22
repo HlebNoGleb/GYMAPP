@@ -1,18 +1,12 @@
 <script lang="ts">
-    import {createEventDispatcher} from 'svelte';
-    import routes from '../../helpers/routes';
-    const dispatch = createEventDispatcher();
-
-    function changeRoute(data) {
-        dispatch('changeRoute', data)
-    }
+    import routes, { currentRoute, changeRoute } from "../../helpers/routes";
 </script>
 
 <nav class="navbar fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-buttons">
-            <button type="button" style="background-image: url('{routes.training.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute({route:routes.training})}></button>
-            <button type="button" style="background-image: url('{routes.exercises.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-2" on:click={() => changeRoute({route:routes.exercises})}></button>
+            <button type="button" style="background-image: url('{routes.trainingsGrid.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.trainingsGrid)}></button>
+            <button type="button" style="background-image: url('{routes.exercises.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-2" on:click={() => changeRoute(routes.exercises)}></button>
         </div>
     </div>
 </nav>

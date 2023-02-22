@@ -1,0 +1,94 @@
+[
+    {
+        "id": "h1",
+        "exerciseID": "11111",
+        "date": 123213213213213,
+        "podhods": [
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    },
+    {
+        "id": "h1",
+        "exerciseID": "11111",
+        "date": 123213213213213,
+        "podhods": [
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    },
+    {
+        "id": "h1",
+        "exerciseID": "11111",
+        "date": 123213213213213,
+        "podhods": [
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    },
+    {
+        "id": "h1",
+        "exerciseID": "11111",
+        "date": 123213213213213,
+        "podhods": [
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    }
+]

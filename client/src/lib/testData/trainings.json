@@ -1,0 +1,68 @@
+[
+    {
+        "id": 1,
+        "userId": 1,
+        "name":"Тренировка 1",
+        "dates": {
+            "lastTrainingDate": 1504095567183
+        },
+        "exercises": [
+            11111,22222, 11111,22222, 11111,22222, 11111,22222, 11111,22222, 11111,22222, 11111,22222
+        ]
+    },
+    {
+        "id": 2,
+        "userId": 1,
+        "name":"Тренировка 2",
+        "dates": {
+            "lastTrainingDate": 1504999597983
+        },
+        "exercises": [
+            11111,22222
+        ]
+    },
+    {
+        "id": 3,
+        "userId": 1,
+        "name":"Тренировка 2",
+        "dates": {
+            "lastTrainingDate": 1504999597983
+        },
+        "exercises": [
+            11111,22222
+        ]
+    },
+    {
+        "id": 4,
+        "userId": 1,
+        "name":"Тренировка 2",
+        "dates": {
+            "lastTrainingDate": 1504999597983
+        },
+        "exercises": [
+            11111,22222
+        ]
+    },
+    {
+        "id": 5,
+        "userId": 1,
+        "name":"Тренировка 2",
+        "dates": {
+            "lastTrainingDate": 1504999597983
+        },
+        "exercises": [
+            11111,22222
+        ]
+    },
+    {
+        "id": 6,
+        "userId": 1,
+        "name":"Тренировка 2",
+        "dates": {
+            "lastTrainingDate": 1504999597983
+        },
+        "exercises": [
+            11111,22222
+        ]
+    }
+]
