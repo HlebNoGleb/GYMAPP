@@ -4,6 +4,7 @@ import { writable } from 'svelte/store';
 import Exercises from '../components/pages/exercises.svelte';
 import ExercisesTest from '../components/pages/exercisesTest.svelte';
 import TrainignsGrid from '../components/pages/trainignsGrid.svelte';
+import TrainingHistory from '../components/pages/trainingHistory.svelte';
 
 let routes = {
     trainingsGrid:{
@@ -26,12 +27,20 @@ let routes = {
         images: {
             icon: "src/assets/images/icons/navbarIcons/dumbbell.png",
         }
+    },
+    trainingHistory:{
+        name: _ => _('trainingsHistory'),
+        component: TrainingHistory,
+        images: {
+            icon: "src/assets/images/icons/navbarIcons/dumbbell.png",
+        }
     }
 }
 
 
 export let currentRoute = writable(routes.trainingsGrid);
 export let currentRouteData = writable(null);
+
 export let previosRoute = writable(routes.trainingsGrid);
 
 export async function changeRoute(route, routeData) {
@@ -40,6 +49,7 @@ export async function changeRoute(route, routeData) {
         currentRouteData.set(routeData);
     }
     currentRoute.set(route);
+    console.log(route.name)
 }
 
 function setPreviosRoute(){

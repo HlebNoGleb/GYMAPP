@@ -14,7 +14,7 @@
     <p class="card-text">{$_('trainings.lastDate')}: {new Date(trainingData.dates.lastTrainingDate).toLocaleDateString()}</p>
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
         <button type="button" class="btn btn-outline-primary" on:click={() => changeRoute(routes.exercisesTest, trainingData.exercises.length)}>{$_('trainings.start')}</button>
-        <button type="button" class="btn btn-outline-primary">{$_('trainings.details')}</button>
+        <button type="button" class="btn btn-outline-primary" on:click={() => changeRoute(routes.trainingHistory, trainingData.exercises)}>{$_('trainings.details')}</button>
         <div class="btn-group" role="group">
             <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             {$_('trainings.more')}

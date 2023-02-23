@@ -1,0 +1,90 @@
+[
+    {
+        "exerciseID": 111,
+        "date": 123213213213213,
+        "sets": [
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    },
+    {
+        "exerciseID": 222,
+        "date": 123213213213213,
+        "sets": [
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    },
+    {
+        "exerciseID": 111,
+        "date": 123213213213213,
+        "sets": [
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    },
+    {
+        "exerciseID": 222,
+        "date": 123213213213213,
+        "sets": [
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    }
+]
