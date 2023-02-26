@@ -1,0 +1,62 @@
+[
+    {
+        "id": "1",
+        "name": "Упражнение 1",
+        "description":"some text about this exercise thats mean how to do it",
+        "type": 1
+    },
+    {
+        "id": "2",
+        "name": "Упражнение 2",
+        "description":"some text about this exercise thats mean how to do it",
+        "type": 3
+    },
+    {
+        "id": "3",
+        "name": "Упражнение 3",
+        "description":"some text about this exercise thats mean how to do it",
+        "type": 1
+    },
+    {
+        "id": "4",
+        "name": "Упражнение 4",
+        "description":"some text about this exercise thats mean how to do it",
+        "type": 2
+    },
+    {
+        "id": "5",
+        "name": "Упражнение 5",
+        "description":"some text about this exercise thats mean how to do it",
+        "type": 1
+    },
+    {
+        "id": "6",
+        "name": "Упражнение 6",
+        "description":"some text about this exercise thats mean how to do it",
+        "type": 1
+    },
+    {
+        "id": "7",
+        "name": "Упражнение 7",
+        "description":"some text about this exercise thats mean how to do it",
+        "type": 1
+    },
+    {
+        "id": "8",
+        "name": "Упражнение 8",
+        "description":"some text about this exercise thats mean how to do it",
+        "type": 1
+    },
+    {
+        "id": "9",
+        "name": "Упражнение 9",
+        "description":"some text about this exercise thats mean how to do it",
+        "type": 1
+    },
+    {
+        "id": "10",
+        "name": "Упражнение 10",
+        "description":"some text about this exercise thats mean how to do it",
+        "type": 1
+    }
+]

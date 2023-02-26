@@ -1,0 +1,146 @@
+[
+    {
+        "id": "123213",
+        "name": "Пользовательское упражнение 1",
+        "type": 1,
+        "lastDateTime": 1677242211,
+        "lastHistory":[
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    },
+    {
+        "id": "43324123",
+        "name": "Пользовательское упражнение 2",
+        "type": 2,
+        "lastDateTime": 1677155811,
+        "lastHistory":[
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    },
+    {
+        "id": "234324",
+        "name": "Упражнение 3",
+        "type": 3,
+        "lastDateTime": 1676983011,
+        "lastHistory":[
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    },
+    {
+        "id": "435332",
+        "name": "Упражнение 4",
+        "type": 3,
+        "lastDateTime": 1677415011,
+        "lastHistory":[
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    },
+    {
+        "id": "64643",
+        "name": "Упражнение 5",
+        "type": 3,
+        "lastDateTime": 1677415011,
+        "lastHistory":[
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    },
+    {
+        "id": "45646",
+        "name": "упражнение 6",
+        "type": 3,
+        "lastDateTime": 1677415011,
+        "lastHistory":[
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 70,
+                "count": 10
+            },
+            {
+                "weight": 80,
+                "count": 7
+            }
+        ]
+    }
+]

@@ -1,3 +1,17 @@
-$primary: #287094;
+$primary: #04ba71;
 
-@import "../../node_modules/bootstrap/scss/bootstrap"
+@import "../../node_modules/bootstrap/scss/bootstrap";
+:root{
+    --main-color: #04ba71;
+    --sub-color: #fff;
+}
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-active-color: #fff;
+    --bs-btn-hover-color: #fff;
+}
+
+.btn-outline-primary{
+    --bs-btn-active-color: #fff;
+    --bs-btn-hover-color: #fff;
+}

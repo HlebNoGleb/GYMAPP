@@ -1,63 +1,129 @@
-import { tick } from 'svelte';
 import { _ } from 'svelte-i18n';
 import { writable } from 'svelte/store';
-import Exercises from '../components/pages/exercises.svelte';
-import ExercisesTest from '../components/pages/exercisesTest.svelte';
-import TrainignsGrid from '../components/pages/trainignsGrid.svelte';
-import TrainingHistory from '../components/pages/trainingHistory.svelte';
+import ExercisesList from '../components/pages/Exercises/List.svelte';
+import TrainignsGrid from '../components/pages/Trainings/Grid.svelte';
+import TrainignsAdd from '../components/pages/Trainings/Add.svelte';
+import TrainingHistory from '../components/pages/Trainings/History.svelte';
+import ExercisesAddNew from '../components/pages/Exercises/Add.svelte';
 
-let routes = {
+const routes = {
     trainingsGrid:{
-        name: _ => _('trainingsName'),
+        name: "111",//_ => _('trainingsName'),
         component: TrainignsGrid,
         images: {
             icon: "src/assets/images/icons/navbarIcons/dumbbell.png",
         }
     },
-    exercises:{
-        name: _ => _('exercisesName'),
-        component: Exercises,
+    trainingsAdd:{
+        name: "111",//_ => _('trainingsName'),
+        component: TrainignsAdd,
         images: {
             icon: "src/assets/images/icons/navbarIcons/dumbbell.png",
         }
     },
-    exercisesTest:{
-        name: _ => _('exercisesName111'),
-        component: ExercisesTest,
+    exercises:{
+        name: "222",
+        component: ExercisesList,
         images: {
             icon: "src/assets/images/icons/navbarIcons/dumbbell.png",
         }
     },
     trainingHistory:{
-        name: _ => _('trainingsHistory'),
+        name: "444",
         component: TrainingHistory,
+        images: {
+            icon: "src/assets/images/icons/navbarIcons/dumbbell.png",
+        }
+    },
+    exercisesAddNew:{
+        name: "444",
+        component: ExercisesAddNew,
         images: {
             icon: "src/assets/images/icons/navbarIcons/dumbbell.png",
         }
     }
 }
 
+export default routes;
 
-export let currentRoute = writable(routes.trainingsGrid);
-export let currentRouteData = writable(null);
+export let currentRoute = writable(routes.exercises);
+export let currentRouteData = writable([111,222]);
 
-export let previosRoute = writable(routes.trainingsGrid);
+export let previosRoutes = writable([]);
 
-export async function changeRoute(route, routeData) {
-    setPreviosRoute();
+
+export function changeRoute(route, routeData, changeHistory = true) {
+    if (changeHistory){
+        setPreviosRoute();
+    }
+
+    currentRoute.set(route);
+
     if (routeData) {
         currentRouteData.set(routeData);
+    } else {
+        currentRouteData.set(null);
     }
-    currentRoute.set(route);
-    console.log(route.name)
+}
+
+export function goBack(){
+    let prev = getPreviousRoutes();
+    let lastRoute = prev[prev.length - 1];
+
+    if (lastRoute){
+        changeRoute(lastRoute.route, lastRoute.data, false);
+
+        prev.pop();
+        console.log(prev);
+        previosRoutes.set(prev);
+    } else {
+        changeRoute(routes.trainingsGrid, null, false);
+    }
+
+
 }
 
 function setPreviosRoute(){
-    let prev = null;
-    currentRoute.subscribe(val => {
-        prev = val
-    })
-    previosRoute.set(prev);
+    let cur = getCurrentRoute();
+    let curData = getCurrentRouteData();
+    let prev = getPreviousRoutes();
+
+    let newPrev = {
+        route: cur,
+        data: curData
+    }
+
+    prev.push(newPrev);
+    console.log(prev);
+    previosRoutes.set(prev);
 }
 
-export default routes;
+function getPreviousRoutes(){
+    let prev = [];
+
+    previosRoutes.subscribe(val => {
+        prev = val;
+    });
+
+    return prev;
+}
+
+function getCurrentRoute(){
+    let cur = {};
+
+    currentRoute.subscribe(val => {
+        cur = val;
+    });
+
+    return cur;
+}
+
+function getCurrentRouteData(){
+    let curData = null;
+
+    currentRouteData.subscribe(val => {
+        curData = val;
+    });
+
+    return curData;
+}

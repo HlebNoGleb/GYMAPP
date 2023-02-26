@@ -2,6 +2,7 @@
     import Localizator from "../common/localizator.svelte";
     import ThemeChanger from "../common/themeChanger.svelte";
 
+
     function clearHelloScreenStorage(){
         localStorage.removeItem("skipHelloScreen");
     }

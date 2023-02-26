@@ -1,0 +1,19 @@
+[
+    {
+        "id": "123213",
+        "name": "Пользовательское упражнение 1",
+        "description":"some text about this exercise thats mean how to do it",
+        "type": 1
+    },
+    {
+        "id": "43324123",
+        "name": "Пользовательское упражнение 2",
+        "type": 2
+    },
+    {
+        "id": "234324",
+        "name": "Пользовательское упражнение 3",
+        "description":"some text about this exercise thats mean how to do it",
+        "type": 3
+    }
+]

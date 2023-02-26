@@ -4,7 +4,6 @@
     import Navbar from '../common/navbar.svelte';
 </script>
 
-
 <div class="container">
     <svelte:component this={$currentRoute.component} data={$currentRouteData}/>
 </div>
@@ -13,6 +12,6 @@
 
 <style>
     .container{
-        padding-bottom: 80px;
+        padding-bottom: 100px;
     }
 </style>

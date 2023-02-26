@@ -15,7 +15,3 @@
 {:else}
     <HelloScreenSlider on:updateState={startUsingApp}/>
 {/if}
-
-<style>
-
-</style>
