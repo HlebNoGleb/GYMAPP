@@ -1,7 +1,7 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
     import ButtonBack from '../../common/buttonBack.svelte';
-    import routes, { changeRoute } from '../../../helpers/routes';
+    import routes, { goBack } from '../../../helpers/routes';
 
     let newWeight = {
         weight: '',
@@ -13,6 +13,7 @@
         if (newWeight && newWeight.weight){
             console.log(newWeight);
             alert(`saved`);
+            goBack();
         } else {
             alert("что-то не записал")
         }
