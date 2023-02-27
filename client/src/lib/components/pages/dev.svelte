@@ -5,6 +5,7 @@
 
     function clearHelloScreenStorage(){
         localStorage.removeItem("skipHelloScreen");
+        window.location.reload();
     }
 
 </script>
@@ -26,7 +27,7 @@
 <style>
     .dev-menu-toggle{
         position: fixed;
-        bottom: 50%;
+        bottom: 10%;
         right: 10px;
         z-index: 9999;
     }

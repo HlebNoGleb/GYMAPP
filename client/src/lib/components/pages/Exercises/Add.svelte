@@ -16,9 +16,9 @@
 
     function handleSubmit() {
         if (newExercise.type && newExercise.name){
-            alert(`answered question ${newExercise.type.id} with "${newExercise.name}"`);
+            alert(`saved`);
         } else {
-            alert("Выберите")
+            alert("что-то не записал")
         }
 
 	}

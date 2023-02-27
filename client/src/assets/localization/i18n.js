@@ -6,7 +6,7 @@ import ru from './ru.json';
 const currentLocale = localStorage.getItem("locale");
 
 if (!currentLocale) {
-    const defaultLocale = 'en';
+    const defaultLocale = 'ru';
     localStorage.setItem("locale", defaultLocale);
 }
 

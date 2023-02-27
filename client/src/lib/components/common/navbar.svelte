@@ -14,7 +14,7 @@
 <style>
     .navbar{
         background-color: var(--body-background);
-        box-shadow: 0px -10px 10px 5px var(--body-background), 0px -20px 20px 5px var(--body-background);
+        /* box-shadow: 0px -10px 10px 5px var(--body-background), 0px -20px 20px 5px var(--body-background); */
     }
     .navbar-buttons{
         display: flex;

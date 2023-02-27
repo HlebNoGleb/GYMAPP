@@ -6,8 +6,7 @@ export function calcAgo(date) {
     let now = new Date();
     const diffTime = Math.abs(dateStart - now);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    console.log(diffDays);
-    // console.log(dateStart, now);
+
     return `${diffDays} days ago`
 }
 

@@ -5,49 +5,83 @@ import TrainignsGrid from '../components/pages/Trainings/Grid.svelte';
 import TrainignsAdd from '../components/pages/Trainings/Add.svelte';
 import TrainingHistory from '../components/pages/Trainings/History.svelte';
 import ExercisesAddNew from '../components/pages/Exercises/Add.svelte';
+import ExercisesHistory from '../components/pages/Exercises/History/Grid.svelte';
+import ExerciseHistoryAddNew from '../components/pages/Exercises/History/Add.svelte';
+import ExerciseHistoryChange from '../components/pages/Exercises/History/Change.svelte';
+import ExerciseHistoryProgress from '../components/pages/Exercises/History/Progress.svelte';
+import iconTest from '/images/icons/navbarIcons/dumbbell.png'
+import oneExerciseHistory from "../testData/oneExerciseHistory.json"
 
 const routes = {
     trainingsGrid:{
         name: "111",//_ => _('trainingsName'),
         component: TrainignsGrid,
         images: {
-            icon: "src/assets/images/icons/navbarIcons/dumbbell.png",
+            icon: iconTest,
         }
     },
     trainingsAdd:{
         name: "111",//_ => _('trainingsName'),
         component: TrainignsAdd,
         images: {
-            icon: "src/assets/images/icons/navbarIcons/dumbbell.png",
+            icon: iconTest,
         }
     },
     exercises:{
         name: "222",
         component: ExercisesList,
         images: {
-            icon: "src/assets/images/icons/navbarIcons/dumbbell.png",
+            icon: iconTest,
         }
     },
     trainingHistory:{
         name: "444",
         component: TrainingHistory,
         images: {
-            icon: "src/assets/images/icons/navbarIcons/dumbbell.png",
+            icon: iconTest,
         }
     },
     exercisesAddNew:{
         name: "444",
         component: ExercisesAddNew,
         images: {
-            icon: "src/assets/images/icons/navbarIcons/dumbbell.png",
+            icon: iconTest,
+        }
+    },
+    exerciseHistory:{
+        name: "444",
+        component: ExercisesHistory,
+        images: {
+            icon: iconTest,
+        }
+    },
+    exerciseHistoryAddNew:{
+        name: "444",
+        component: ExerciseHistoryAddNew,
+        images: {
+            icon: iconTest,
+        }
+    },
+    exerciseHistoryChange:{
+        name: "444",
+        component: ExerciseHistoryChange,
+        images: {
+            icon: iconTest,
+        }
+    },
+    exerciseHistoryProgress:{
+        name: "444",
+        component: ExerciseHistoryProgress,
+        images: {
+            icon: iconTest,
         }
     }
 }
 
 export default routes;
 
-export let currentRoute = writable(routes.exercises);
-export let currentRouteData = writable([111,222]);
+export let currentRoute = writable(routes.trainingsGrid);
+export let currentRouteData = writable(null);
 
 export let previosRoutes = writable([]);
 
@@ -56,6 +90,8 @@ export function changeRoute(route, routeData, changeHistory = true) {
     if (changeHistory){
         setPreviosRoute();
     }
+
+    console.log(route);
 
     currentRoute.set(route);
 

@@ -1,7 +1,7 @@
 <script>
   let themes = [
-    "dark-theme",
-    "light-theme"
+    "light-theme",
+    "dark-theme"
   ]
 
   let currentTheme = localStorage.getItem("theme");
