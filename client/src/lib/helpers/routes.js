@@ -9,78 +9,104 @@ import ExercisesHistory from '../components/pages/Exercises/History/Grid.svelte'
 import ExerciseHistoryAddNew from '../components/pages/Exercises/History/Add.svelte';
 import ExerciseHistoryChange from '../components/pages/Exercises/History/Change.svelte';
 import ExerciseHistoryProgress from '../components/pages/Exercises/History/Progress.svelte';
-import iconTest from '/images/icons/navbarIcons/dumbbell.png'
-import oneExerciseHistory from "../testData/oneExerciseHistory.json"
+import WeightList from '../components/pages/Weight/List.svelte';
+import WeightAdd from '../components/pages/Weight/Add.svelte';
+import SocialMain from '../components/pages/Social/Main.svelte';
+import trainingsIcon from '/images/icons/navbarIcons/dumbbell.png';
+import exercisesIcon from '/images/icons/navbarIcons/kettlebell.png';
+import weightIcon from '/images/icons/navbarIcons/weight-scale.png';
+import socialIcon from '/images/icons/navbarIcons/network.png';
 
 const routes = {
     trainingsGrid:{
         name: "111",//_ => _('trainingsName'),
         component: TrainignsGrid,
         images: {
-            icon: iconTest,
+            icon: trainingsIcon,
         }
     },
     trainingsAdd:{
         name: "111",//_ => _('trainingsName'),
         component: TrainignsAdd,
         images: {
-            icon: iconTest,
+            icon: trainingsIcon,
         }
     },
     exercises:{
         name: "222",
         component: ExercisesList,
         images: {
-            icon: iconTest,
+            icon: exercisesIcon,
         }
     },
     trainingHistory:{
         name: "444",
         component: TrainingHistory,
         images: {
-            icon: iconTest,
+            icon: trainingsIcon,
         }
     },
     exercisesAddNew:{
         name: "444",
         component: ExercisesAddNew,
         images: {
-            icon: iconTest,
+            icon: trainingsIcon,
         }
     },
     exerciseHistory:{
         name: "444",
         component: ExercisesHistory,
         images: {
-            icon: iconTest,
+            icon: trainingsIcon,
         }
     },
     exerciseHistoryAddNew:{
         name: "444",
         component: ExerciseHistoryAddNew,
         images: {
-            icon: iconTest,
+            icon: trainingsIcon,
         }
     },
     exerciseHistoryChange:{
         name: "444",
         component: ExerciseHistoryChange,
         images: {
-            icon: iconTest,
+            icon: trainingsIcon,
         }
     },
     exerciseHistoryProgress:{
         name: "444",
         component: ExerciseHistoryProgress,
         images: {
-            icon: iconTest,
+            icon: trainingsIcon,
+        }
+    },
+    weightList:{
+        name: "444",
+        component: WeightList,
+        images: {
+            icon: weightIcon,
+        }
+    },
+    weightAdd:{
+        name: "444",
+        component: WeightAdd,
+        images: {
+            icon: weightIcon,
+        }
+    },
+    socialMain:{
+        name: "444",
+        component: SocialMain,
+        images: {
+            icon: socialIcon,
         }
     }
 }
 
 export default routes;
 
-export let currentRoute = writable(routes.trainingsGrid);
+export let currentRoute = writable(routes.weightList);
 export let currentRouteData = writable(null);
 
 export let previosRoutes = writable([]);

@@ -1,13 +1,13 @@
-import { addMessages, init} from 'svelte-i18n';
+import { addMessages, init } from 'svelte-i18n';
 
 import en from './en.json';
 import ru from './ru.json';
 
-const currentLocale = localStorage.getItem("locale");
+let currentLocale = localStorage.getItem("locale");
 
 if (!currentLocale) {
-    const defaultLocale = 'ru';
-    localStorage.setItem("locale", defaultLocale);
+    currentLocale = 'ru';
+    localStorage.setItem("locale", currentLocale);
 }
 
 addMessages('en', en);

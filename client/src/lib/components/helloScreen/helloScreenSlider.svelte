@@ -1,6 +1,6 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
-    import {createEventDispatcher} from 'svelte';
+    import { createEventDispatcher } from 'svelte';
     import { Swiper, SwiperSlide } from "swiper/svelte";
     // Import Swiper styles
     import "swiper/css";

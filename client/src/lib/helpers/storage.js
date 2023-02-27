@@ -2,11 +2,20 @@ import config from "./configs/config";
 import trainingsJson from "../testData/trainings.json"
 import trainingExercisesJson from "../testData/trainingExercises.json"
 import oneExerciseHistory from "../testData/oneExerciseHistory.json"
+import weight from "../testData/weight.json"
 
 
 function getTrainings(){
     if (config.useServer){
         return getTrainingsFromServer();
+    } else {
+        // return getTrainingsLocalStorage();
+    }
+}
+
+function getExercises(){
+    if (config.useServer){
+        return getExercisesFromServer();
     } else {
         // return getTrainingsLocalStorage();
     }
@@ -34,9 +43,59 @@ function getExerciseHistory(exerciseId){
     }
 }
 
+function getWeight(){
+    if (config.useServer){
+        return getWeightFromServer();
+    } else {
+        // return getTrainingsLocalStorage();
+    }
+}
+
+async function getWeightFromServer(){
+    const trainingPromise = new Promise(async (resolve, reject) => {
+        await new Promise(resolve => setTimeout(resolve, 200));
+        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+        if (response.ok) {
+            //const trainings = await response.json();
+            const trainings = weight;
+            resolve(trainings)
+        } else {
+            reject("server error");
+        }
+    }).then(trainings => {
+        return trainings;
+    }).catch(err => {
+        console.error(err);
+        return null;
+    })
+
+    return trainingPromise;
+}
+
 async function getTrainingsFromServer(){
     const trainingPromise = new Promise(async (resolve, reject) => {
         await new Promise(resolve => setTimeout(resolve, 200));
+        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+        if (response.ok) {
+            //const trainings = await response.json();
+            const trainings = trainingsJson;
+            resolve(trainings)
+        } else {
+            reject("server error");
+        }
+    }).then(trainings => {
+        return trainings;
+    }).catch(err => {
+        console.error(err);
+        return null;
+    })
+
+    return trainingPromise;
+}
+
+async function getExercisesFromServer(){
+    const trainingPromise = new Promise(async (resolve, reject) => {
+        await new Promise(resolve => setTimeout(resolve, 2000));
         const response = await fetch("https://jsonplaceholder.typicode.com/users");
         if (response.ok) {
             //const trainings = await response.json();
@@ -153,7 +212,7 @@ async function getExerciseHistoryFromServer(exerciseId){
 // }
 
 const storage = {
-    getTrainings, getTrainingExercise, getExerciseHistory//saveTrainings
+    getTrainings, getExercises, getTrainingExercise, getExerciseHistory, getWeight//saveTrainings
 }
 
 export default storage;
