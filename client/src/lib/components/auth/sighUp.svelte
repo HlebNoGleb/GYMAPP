@@ -3,7 +3,7 @@
     import ButtonBack from '../common/buttonBack.svelte';
 </script>
 
-<h1>Регистрация </h1>
+<h1>Страница регистрация</h1>
 
 
 <ButtonBack/>
