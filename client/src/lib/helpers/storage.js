@@ -54,10 +54,10 @@ function getWeight(){
 async function getWeightFromServer(){
     const trainingPromise = new Promise(async (resolve, reject) => {
         await new Promise(resolve => setTimeout(resolve, 200));
-        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+        const response = await fetch("http://localhost:3001/weights/?id=64063abe393fad22e8d17028");
         if (response.ok) {
-            //const trainings = await response.json();
-            const trainings = weight;
+            const trainings = await response.json();
+            // const trainings = weight;
             resolve(trainings)
         } else {
             reject("server error");
