@@ -3,30 +3,45 @@
     import ButtonBack from '../../common/buttonBack.svelte';
     import DefaultExercises from '../../../testData/exercisesDefault.json';
     import UserExercises from '../../../testData/exercisesUser.json';
-    import routes, { changeRoute } from '../../../helpers/routes';
+    import storage from '../../../helpers/storage/storage';
+    import routes, { changeRoute, goBack } from '../../../helpers/routes';
+
+    let exercisesPromise = storage.getExercises();
+    let newTrainingName = '';
 
     let selection = [];
 
-    $:{
-        console.log(selection);
-    }
+    function saveExercises() {
+        if (newTrainingName && selection.length > 0){
+            let training = {
+                name: newTrainingName,
+                exercises: selection
+            }
+            storage.addNewTraining(training);
+            alert("Добавлено")
+            goBack();
+        } else {
+            alert("что-то не записал")
+        }
+	}
 
-    let exercises = [].concat(UserExercises, DefaultExercises);
-    console.log(exercises);
 </script>
 
 <h1>{$_('trainings.addTitle')}</h1>
 
 <ButtonBack/>
-<button class="btn btn-primary" on:click={() => changeRoute(routes.trainingsGrid, null)}>Сохранить</button>
+<button class="btn btn-primary" on:click={saveExercises}>Сохранить</button>
 
 <div class="mb-3 mt-3">
     <label for="exampleInputEmail1" class="form-label">Название тренировки</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="email" bind:value={newTrainingName} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     <div id="emailHelp" class="form-text">Будет использоваться для обозначения тренировки</div>
   </div>
 
-{#each exercises as exercise}
+{#await exercisesPromise}
+    <p>loading...</p>
+{:then exercises}
+    {#each exercises as exercise}
     <div class="list-group" >
         <div class="accordion-item mb-2">
             <li class="list-group-item">
@@ -47,7 +62,8 @@
             {/if}
         </div>
     </div>
-{/each}
+    {/each}
+{/await}
 
 <button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exercisesAddNew, null)}>+</button>
 

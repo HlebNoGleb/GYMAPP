@@ -1,12 +1,9 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
     import ButtonBack from '../../common/buttonBack.svelte';
-    import routes, { changeRoute } from '../../../helpers/routes';
+    import routes, { changeRoute, goBack } from '../../../helpers/routes';
     import exercisesTypes from '../../../testData/exercisesTypes.json';
-
-    let selected;
-	let name = '';
-    let description = '';
+    import storage from '../../../helpers/storage/storage';
 
     let newExercise = {
         name: '',
@@ -14,13 +11,14 @@
         type: exercisesTypes[0],
     }
 
-    function handleSubmit() {
+    function saveExercises() {
         if (newExercise.type && newExercise.name){
-            alert(`saved`);
+            storage.addNewExercise(newExercise);
+            alert("Добавлено")
+            goBack();
         } else {
             alert("что-то не записал")
         }
-
 	}
 </script>
 
@@ -48,4 +46,4 @@
 
 <ButtonBack/>
 
-<button class="btn btn-primary" on:click={handleSubmit}>Добавить</button>
+<button class="btn btn-primary" on:click={saveExercises}>Добавить</button>

@@ -10,7 +10,7 @@
     </span>
     <div class="card-body">
         <h5 class="card-title">{trainingData.name}</h5>
-        <p class="card-text">{$_('trainings.lastDate')}: {new Date(trainingData.dates.lastTrainingDate).toLocaleDateString()}</p>
+        <p class="card-text">{$_('trainings.lastDate')}: {new Date(trainingData?.dates?.lastTrainingDate).toLocaleDateString()}</p>
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
             <button type="button" class="btn btn-outline-primary" on:click={() => changeRoute(routes.exercises, trainingData.exercises)}>{$_('trainings.start')}</button>
             <button type="button" class="btn btn-outline-primary" on:click={() => changeRoute(routes.trainingHistory, trainingData.exercises)}>{$_('trainings.details')}</button>

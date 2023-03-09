@@ -1,5 +1,16 @@
 import config from "../../configs/config";
 import trainingsJson from "../../../testData/trainings.json"
+import random from "../../random";
+
+interface Training {
+    id: string
+    userId?: string,
+    name: string,
+    dates?: {
+        "lastTrainingDate": number
+    },
+    exercises: number[]
+}
 
 const trainings = {
     get, add
@@ -13,16 +24,16 @@ export default trainings
 
 function get(){
     if (config.useServer){
-        return []//getTrainingsFromServer();
+        return getTrainingsFromServer();
     } else {
         return getTrainingsFromLocalStorage();//getTrainingsLocalStorage();
     }
 }
-
 /**
-@param {Array} newTraining
+@param {Training} newTraining
 **/
-function add(newTraining){
+function add(newTraining: Training){
+    console.log(newTraining);
     if (config.useServer){
         return null;
     } else {
@@ -65,6 +76,7 @@ function getTrainingsFromLocalStorage() {
 
 function addNewTrainingToLocalStorage(newTraining){
     try {
+        newTraining.id = random.generageUniqueId();
         const trainings = localStorage.getItem(keys.trainings);
         const trainingsArray = trainings ? JSON.parse(trainings) : [];
         trainingsArray.push(newTraining);

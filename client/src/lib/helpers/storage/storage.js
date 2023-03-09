@@ -5,19 +5,25 @@ import oneExerciseHistory from "../../testData/oneExerciseHistory.json"
 import weight from "../../testData/weight.json"
 
 import trainings from "../storage/Trainings/trainings";
+import exercises from "../storage/Exercises/exercises";
 
 function getTrainings(){
     const trainingsArray = trainings.get();
-
     return trainingsArray;
 }
 
+function addNewTraining(newTraining){
+    console.log(newTraining);
+    trainings.add(newTraining);
+}
+
 function getExercises(){
-    if (config.useServer){
-        return getExercisesFromServer();
-    } else {
-        return getTrainingsLocalStorage();
-    }
+    const exercisesArray = exercises.get();
+    return exercisesArray;
+}
+
+function addNewExercise(newExercise){
+    exercises.add(newExercise);
 }
 
 /**
@@ -182,7 +188,7 @@ function getTrainingsLocalStorage(){
 }
 
 const storage = {
-    getTrainings, getExercises, getTrainingExercise, getExerciseHistory, getWeight//saveTrainings
+    getTrainings, getExercises, getTrainingExercise, getExerciseHistory, getWeight, addNewExercise, addNewTraining//saveTrainings
 }
 
 export default storage;
