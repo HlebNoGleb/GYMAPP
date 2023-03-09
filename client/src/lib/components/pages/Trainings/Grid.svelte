@@ -1,12 +1,14 @@
 <!-- trainings main page -->
 <script>
     import { _ } from 'svelte-i18n';
-    import storage from "../../../helpers/storage";
+    import storage from "../../../helpers/storage/storage";
     import TrainingCard from './Card.svelte';
     import ContentLoader from 'svelte-content-loader';
     import routes, { changeRoute } from '../../../helpers/routes';
 
     let trainingPromise = storage.getTrainings();
+
+    console.log(trainingPromise);
 
     const updateTrainings = () => {
         trainingPromise = storage.getTrainings();
@@ -47,7 +49,6 @@
 {:then trainings}
     {#if trainings && trainings.length == 0}
         <h1>{$_('trainings.noTrainings')}</h1>
-        <button type="button" class="btn btn-primary">{$_('trainings.add')}</button>
     {:else}
         <h1>{$_('trainings.trainingsText')}</h1>
         <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3">
@@ -57,8 +58,8 @@
                 </div>
             {/each}
         </div>
-        <button type="button" class="mt-3 btn btn-primary" on:click={() => changeRoute(routes.trainingsAdd)}>{$_('trainings.add')}</button>
     {/if}
+    <button type="button" class="mt-3 btn btn-primary" on:click={() => changeRoute(routes.trainingsAdd)}>{$_('trainings.add')}</button>
 {:catch error}
 	<p>Oh no: {error}</p>
 {/await}

@@ -1,7 +1,7 @@
 <script>
     import { _ } from 'svelte-i18n';
     import routes, { currentRoute, currentRouteData, changeRoute } from "../../../helpers/routes";
-    import storage from "../../../helpers/storage";
+    import storage from "../../../helpers/storage/storage";
     import dateTimeHelper from "../../../helpers/dateTime";
     import ButtonBack from '../../common/buttonBack.svelte';
     import ContentLoader from 'svelte-content-loader';

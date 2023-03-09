@@ -106,7 +106,7 @@ const routes = {
 
 export default routes;
 
-export let currentRoute = writable(routes.weightList);
+export let currentRoute = writable(routes.trainingsGrid);
 export let currentRouteData = writable(null);
 
 export let previosRoutes = writable([]);
