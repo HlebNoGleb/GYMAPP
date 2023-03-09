@@ -25,7 +25,8 @@ export default exercises;
 const keys = {
     exercises: "exercises",
     defaultExercises: "defaultExercises",
-    userExercises: "userExercises"
+    userExercises: "userExercises",
+    userDefaultExercises: "userDefaultExercises"
 }
 
 function get(){
@@ -48,9 +49,9 @@ function add(exercise: exercise){
 }
 
 async function getExercisesFromLocalStorage() {
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 200));
     try {
-      const exercises = localStorage.getItem(keys.exercises);
+      const exercises = localStorage.getItem(keys.userExercises);
       return joinUserAndDefaultExercises(exercises)
     } catch (error) {
       console.error(`Failed to get objects from localStorage: ${error}`);
@@ -62,10 +63,10 @@ function joinUserAndDefaultExercises(exercises:string) {
     const defaultExercises : exercise[] = DefaultExercises;
     try {
         let userExercisesArray : exercise[] = JSON.parse(exercises);
-        return userExercisesArray ? [].concat(userExercisesArray, defaultExercises) : defaultExercises;
+        return userExercisesArray ? [].concat(userExercisesArray, /*defaultExercises*/) : [];//defaultExercises;
     } catch (error) {
         console.error(`Failed to parse objects from localStorage: ${error}`);
-        return defaultExercises;
+        return [];//defaultExercises;
     }
 }
 
@@ -76,10 +77,10 @@ function joinUserAndDefaultExercises(exercises:string) {
 function addNewExerciseToLocalStorage(exercise){
     try {
         exercise.id = random.generageUniqueId();
-        const exercises = localStorage.getItem(keys.exercises);
+        const exercises = localStorage.getItem(keys.userExercises);
         const exercisesArray = exercises ? JSON.parse(exercises) : [];
         exercisesArray.push(exercise);
-        localStorage.setItem(keys.exercises, JSON.stringify(exercisesArray));
+        localStorage.setItem(keys.userExercises, JSON.stringify(exercisesArray));
     } catch (error) {
         console.error(`Failed to add object to localStorage: ${error}`);
     }

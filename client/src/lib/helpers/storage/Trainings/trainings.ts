@@ -7,7 +7,8 @@ interface Training {
     userId?: string,
     name: string,
     dates?: {
-        "lastTrainingDate": number
+        lastTrainingDate: number,
+        createDate: number
     },
     exercises: number[]
 }
@@ -77,6 +78,8 @@ function getTrainingsFromLocalStorage() {
 function addNewTrainingToLocalStorage(newTraining){
     try {
         newTraining.id = random.generageUniqueId();
+        newTraining.dates = {createDate: new Date().getTime()}
+        console.log(newTraining);
         const trainings = localStorage.getItem(keys.trainings);
         const trainingsArray = trainings ? JSON.parse(trainings) : [];
         trainingsArray.push(newTraining);

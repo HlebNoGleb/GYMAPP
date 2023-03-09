@@ -8,7 +8,7 @@
     let newExercise = {
         name: '',
         description: '',
-        type: exercisesTypes[0],
+        type: exercisesTypes[0].id
     }
 
     function saveExercises() {
@@ -31,7 +31,7 @@
 <div class="mb-3">
     <select class="form-select" bind:value={newExercise.type}>
 		{#each exercisesTypes as type}
-			<option value={type}>
+			<option value={type.id}>
 				{type.name}
 			</option>
 		{/each}
