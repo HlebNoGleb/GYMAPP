@@ -1,5 +1,7 @@
 import { _ } from 'svelte-i18n';
 import { writable } from 'svelte/store';
+import AuthorizationSignUp from '../components/auth/signUp.svelte';
+import AuthorizationSignIn from '../components/auth/signIn.svelte';
 import ExercisesList from '../components/pages/Exercises/List.svelte';
 import TrainignsGrid from '../components/pages/Trainings/Grid.svelte';
 import TrainignsAdd from '../components/pages/Trainings/Add.svelte';
@@ -98,6 +100,20 @@ const routes = {
     socialMain:{
         name: "444",
         component: SocialMain,
+        images: {
+            icon: socialIcon,
+        }
+    },
+    authSignIn:{
+        name: "444",
+        component: AuthorizationSignIn,
+        images: {
+            icon: socialIcon,
+        }
+    },
+    authSignUp:{
+        name: "444",
+        component: AuthorizationSignUp,
         images: {
             icon: socialIcon,
         }
