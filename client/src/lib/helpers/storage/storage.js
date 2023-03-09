@@ -1,23 +1,22 @@
-import config from "./configs/config";
-import trainingsJson from "../testData/trainings.json"
-import trainingExercisesJson from "../testData/trainingExercises.json"
-import oneExerciseHistory from "../testData/oneExerciseHistory.json"
-import weight from "../testData/weight.json"
+import config from "../configs/config";
+import trainingsJson from "../../testData/trainings.json"
+import trainingExercisesJson from "../../testData/trainingExercises.json"
+import oneExerciseHistory from "../../testData/oneExerciseHistory.json"
+import weight from "../../testData/weight.json"
 
+import trainings from "../storage/Trainings/trainings";
 
 function getTrainings(){
-    if (config.useServer){
-        return getTrainingsFromServer();
-    } else {
-        // return getTrainingsLocalStorage();
-    }
+    const trainingsArray = trainings.get();
+
+    return trainingsArray;
 }
 
 function getExercises(){
     if (config.useServer){
         return getExercisesFromServer();
     } else {
-        // return getTrainingsLocalStorage();
+        return getTrainingsLocalStorage();
     }
 }
 
@@ -28,7 +27,7 @@ function getTrainingExercise(exercises){
     if (config.useServer){
         return getTrainingExercisesFromServer(exercises);
     } else {
-        // return getTrainingsLocalStorage();
+        return getTrainingsLocalStorage();
     }
 }
 
@@ -39,7 +38,7 @@ function getExerciseHistory(exerciseId){
     if (config.useServer){
         return getExerciseHistoryFromServer(exerciseId);
     } else {
-        // return getTrainingsLocalStorage();
+        return getTrainingsLocalStorage();
     }
 }
 
@@ -47,7 +46,7 @@ function getWeight(){
     if (config.useServer){
         return getWeightFromServer();
     } else {
-        // return getTrainingsLocalStorage();
+        return getTrainingsLocalStorage();
     }
 }
 
@@ -163,58 +162,31 @@ async function getExerciseHistoryFromServer(exerciseId){
     return trainingPromise;
 }
 
-// function getTrainingsLocalStorage(){
-//     const trainingPromise = new Promise(async (resolve, reject) => {
-//         const data = localStorage.getItem("trainings");
-//         if (data) {
-//             const trainings = JSON.parse(data);
-//             resolve(trainings);
-//         } else {
-//             reject("no data in localStorage")
-//         }
-//     }).then(data => {
-//         return data;
-//     }).catch(err => {
-//         console.error(err);
-//         return null;
-//     })
+function getTrainingsLocalStorage(){
+    const trainingPromise = new Promise(async (resolve, reject) => {
+        const data = localStorage.getItem("trainings");
+        if (data) {
+            const trainings = JSON.parse(data);
+            resolve(trainings);
+        } else {
+            reject("no data")
+        }
+    }).then(data => {
+        return data;
+    }).catch(err => {
+        console.error(err);
+        return [];
+    })
 
-//     return trainingPromise;
-// }
-
-/**
- * @param {Object} trainings
- */
-// function saveTrainings(trainings){
-//     if (!config.useServer || config.saveServerData){
-//         return saveTrainingsOnLocalStorage(trainings);
-//     } else {
-//         return saveTrainingsOnServer(trainings);
-//     }
-// }
-
-// function saveTrainingsOnServer(trainings){
-//     // FETCH POST trainings
-// }
-
-// function saveTrainingsOnLocalStorage(trainings) {
-//     const savedTrainings = localStorage.getItem("trainings");
-
-//     if (savedTrainings){
-//         const newTrainings = JSON.parse(savedTrainings);
-//         newTrainings.concat(trainings);
-//         localStorage.removeItem("trainings");
-//         localStorage.setItem("trainings", JSON.stringify(newTrainings));
-//         return;
-//     }
-
-//     localStorage.setItem("trainings", JSON.stringify(trainings));
-// }
+    return trainingPromise;
+}
 
 const storage = {
     getTrainings, getExercises, getTrainingExercise, getExerciseHistory, getWeight//saveTrainings
 }
 
 export default storage;
+
+
 
 

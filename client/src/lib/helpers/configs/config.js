@@ -1,5 +1,5 @@
 let config = {
-    useServer: true,
+    useServer: false,
     saveServerData: true,
 }
 

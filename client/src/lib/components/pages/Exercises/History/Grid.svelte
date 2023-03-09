@@ -3,7 +3,7 @@
     import { _ } from 'svelte-i18n';
     import routes, { currentRouteData, changeRoute } from "../../../../helpers/routes";
     import dateTimeHelper from "../../../../helpers/dateTime";
-    import storage from "../../../../helpers/storage";
+    import storage from "../../../../helpers/storage/storage";
     import ButtonBack from '../../../common/buttonBack.svelte';
     import ContentLoader from 'svelte-content-loader';
     import historyHelper from '../../../../helpers/historyHelper';
