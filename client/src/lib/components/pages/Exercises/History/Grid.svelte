@@ -1,6 +1,7 @@
 <script>
 // @ts-nocheck
     import { _ } from 'svelte-i18n';
+    import { onMount } from 'svelte';
     import routes, { currentRouteData, changeRoute } from "../../../../helpers/routes";
     import dateTimeHelper from "../../../../helpers/dateTime";
     import storage from "../../../../helpers/storage/storage";
@@ -9,12 +10,11 @@
     import historyHelper from '../../../../helpers/historyHelper';
     let exerciseData = $currentRouteData;
 
-    let exerciseHistoryPromise = storage.getExerciseHistory(exerciseData.id);
-
+    let exerciseHistoryPromise = storage.getHistory(exerciseData.id);
     console.log(exerciseHistoryPromise);
 
     const updateExercises = () => {
-        exerciseHistoryPromise = storage.getTrainingExercise(exerciseData.id);
+        exerciseHistoryPromise = storage.getHistory(exerciseData.id);
     }
 </script>
 
@@ -48,33 +48,33 @@
             </div>
         </div>
     {:then histories}
-        {#if histories && histories.length == 0}
-            <p>no history</p>
-        {:else}
+        {#if histories}
             <button class="btn btn-primary mb-2" on:click={() => changeRoute(routes.exerciseHistoryProgress, histories)}>Прогресс</button>
             <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3">
+                {JSON.stringify(histories)}
                 {#each histories as history}
-                <div class="col">
-                    <div class="card h-100">
-                        <div class="card-header text-muted">
-                            {new Date(history.date).toLocaleDateString()}
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header text-muted">
+
+                                <!-- {new Date(history.date).toLocaleDateString()} -->
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <!-- <button on:click={() => changeRoute(routes.exerciseHistoryChange, history)} class="list-group-item list-group-item-action">{historyHelper.calcWeight(history.weight)} x {historyHelper.calcCount(history.count)}</button> -->
+                            </ul>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            {#each history.podhods as set}
-                                <button on:click={() => changeRoute(routes.exerciseHistoryChange, set)} class="list-group-item list-group-item-action">{historyHelper.calcWeight(set.weight)} x {historyHelper.calcCount(set.count)}</button>
-                            {/each}
-                        </ul>
                     </div>
-                </div>
                 {/each}
             </div>
+        {:else}
+            <p>no history</p>
         {/if}
     {:catch error}
         <p>Oh no: {error}</p>
     {/await}
 </div>
 
-<button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exerciseHistoryAddNew, null)}>+</button>
+<button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exerciseHistoryAddNew, exerciseData.id)}>+</button>
 
 <style>
 

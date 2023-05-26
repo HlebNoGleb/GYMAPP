@@ -7,10 +7,11 @@
     import ContentLoader from 'svelte-content-loader';
     import ExerciseCard from '../Exercises/Card.svelte';
 
-    let exercisesPromise = storage.getTrainingExercise($currentRouteData);
+    let exercisesPromise = storage.getExercises($currentRouteData);
+    console.log(exercisesPromise);
 
     const updateExercises = () => {
-        exercisesPromise = storage.getTrainingExercise($currentRouteData);
+        exercisesPromise = storage.getExercises($currentRouteData);
     }
 </script>
 

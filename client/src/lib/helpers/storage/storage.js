@@ -6,6 +6,8 @@ import weight from "../../testData/weight.json"
 
 import trainings from "../storage/Trainings/trainings";
 import exercises from "../storage/Exercises/exercises";
+import history from "../storage/Exercises/History/history";
+
 
 function getTrainings(){
     const trainingsArray = trainings.get();
@@ -17,14 +19,34 @@ function addNewTraining(newTraining){
     trainings.add(newTraining);
 }
 
-function getExercises(){
-    const exercisesArray = exercises.get();
+/**
+ * @param {Array} exercisesIds
+ */
+function getExercises(exercisesIds){
+    const exercisesArray = exercises.get(exercisesIds);
     return exercisesArray;
 }
 
 function addNewExercise(newExercise){
     exercises.add(newExercise);
 }
+
+/**
+ * @param {Number} exercisesId
+ */
+async function getHistory(exercisesId){
+    const historyArray = history.get(exercisesId);
+    return historyArray;
+}
+
+function addNewHistory(newHistory){
+    history.add(newHistory);
+}
+
+/**
+ * @param {Array} history
+ */
+
 
 /**
  * @param {Array} exercises
@@ -188,7 +210,15 @@ function getTrainingsLocalStorage(){
 }
 
 const storage = {
-    getTrainings, getExercises, getTrainingExercise, getExerciseHistory, getWeight, addNewExercise, addNewTraining//saveTrainings
+    getTrainings,
+    getExercises,
+    getTrainingExercise,
+    getExerciseHistory,
+    getWeight,
+    addNewExercise,
+    addNewTraining,//saveTrainings
+    getHistory,
+    addNewHistory
 }
 
 export default storage;

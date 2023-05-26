@@ -2,6 +2,9 @@
  * @param {Number} date
  */
 export function calcAgo(date) {
+    if (!date){
+        return ""
+    }
     let dateStart = new Date(date * 1000);
     let now = new Date();
     const diffTime = Math.abs(dateStart - now);

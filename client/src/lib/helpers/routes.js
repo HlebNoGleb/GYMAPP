@@ -133,7 +133,7 @@ export function changeRoute(route, routeData, changeHistory = true) {
         setPreviosRoute();
     }
 
-    console.log(route);
+    // console.log(route);
 
     currentRoute.set(route);
 
@@ -152,7 +152,7 @@ export function goBack(){
         changeRoute(lastRoute.route, lastRoute.data, false);
 
         prev.pop();
-        console.log(prev);
+        // console.log(prev);
         previosRoutes.set(prev);
     } else {
         changeRoute(routes.trainingsGrid, null, false);
@@ -172,7 +172,7 @@ function setPreviosRoute(){
     }
 
     prev.push(newPrev);
-    console.log(prev);
+    // console.log(prev);
     previosRoutes.set(prev);
 }
 

@@ -6,25 +6,21 @@
 
     let exerciseHistory = $currentRouteData;
 
+    console.log(exerciseHistory);
+
     let labels = exerciseHistory.reduce((acc, cur) => {
         let label = new Date(cur.date * 1000).toLocaleDateString();
-        cur.podhods.forEach(set => {
-            acc.push(label);
-        });
+        acc.push(label);
         return acc;
     }, []);
 
     const weights = exerciseHistory.reduce((acc, cur) => {
-        cur.podhods.forEach(set => {
-            acc.push(set.weight);
-        });
+        acc.push(cur.weight);
         return acc;
     }, []);
 
     const counts = exerciseHistory.reduce((acc, cur) => {
-        cur.podhods.forEach(set => {
-            acc.push(set.count);
-        });
+        acc.push(cur.count);
         return acc;
     }, []);
 

@@ -1,17 +1,26 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
     import ButtonBack from '../../../common/buttonBack.svelte';
+    import { currentRouteData } from "../../../../helpers/routes";
+    import storage from "../../../../helpers/storage/storage";
+
+    let exerciseId = $currentRouteData;
+    console.log(exerciseId);
 
     let newHistory = {
-        count: '',
+        exerciseId: exerciseId,
+        date: new Date().getTime(),
         weight: '',
+        count: '',
         sets: 1,
-        note: ''
+        note: '',
     }
 
     function handleSubmit() {
         if (newHistory && newHistory.weight && newHistory.count){
-            alert(`saved`);
+            console.log(newHistory);
+            storage.addNewHistory(newHistory);
+            alert("Добавлено")
         } else {
             alert("что-то не записал")
         }

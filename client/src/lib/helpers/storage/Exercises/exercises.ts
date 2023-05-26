@@ -1,6 +1,7 @@
 import config from "../../configs/config";
 import DefaultExercises from '../../../testData/exercisesDefault.json';
 import random from "../../random";
+import arrayHelper from "../../array";
 
 enum exerciseType {
     WeightCount,
@@ -29,11 +30,14 @@ const keys = {
     userDefaultExercises: "userDefaultExercises"
 }
 
-function get(){
+/**
+ * @param {Array} exercisesIds
+ */
+function get(exercisesIds){
     if (config.useServer){
         return null;
     } else {
-        return getExercisesFromLocalStorage();
+        return getExercisesFromLocalStorage(exercisesIds);
     }
 }
 
@@ -48,25 +52,24 @@ function add(exercise: exercise){
     }
 }
 
-async function getExercisesFromLocalStorage() {
+/**
+ * @param {Array} exercisesIds
+ */
+async function getExercisesFromLocalStorage(exercisesIds) {
     await new Promise(resolve => setTimeout(resolve, 200));
     try {
-      const exercises = localStorage.getItem(keys.userExercises);
-      return joinUserAndDefaultExercises(exercises)
-    } catch (error) {
-      console.error(`Failed to get objects from localStorage: ${error}`);
-      return [];
-    }
-}
+        const exercisesJson = localStorage.getItem(keys.userExercises);
+        const allExercises = arrayHelper.parseFromJson(exercisesJson);
+        if (arrayHelper.hasData(exercisesIds)) {
+            const filteredExercises = allExercises.filter(obj => exercisesIds.includes(obj.id));
+            return filteredExercises;
+        }
 
-function joinUserAndDefaultExercises(exercises:string) {
-    const defaultExercises : exercise[] = DefaultExercises;
-    try {
-        let userExercisesArray : exercise[] = JSON.parse(exercises);
-        return userExercisesArray ? [].concat(userExercisesArray, /*defaultExercises*/) : [];//defaultExercises;
+        return allExercises;
+
     } catch (error) {
-        console.error(`Failed to parse objects from localStorage: ${error}`);
-        return [];//defaultExercises;
+        console.error(`Failed to get objects from localStorage: ${error}`);
+        return [];
     }
 }
 
