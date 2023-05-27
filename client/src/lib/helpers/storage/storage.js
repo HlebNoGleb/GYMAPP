@@ -102,6 +102,14 @@ function addNewWeight(newWeight){
     weights.add(newWeight);
 }
 
+function changeWeight(newWeight){
+    weights.change(newWeight);
+}
+
+function removeWeight(newWeight){
+    weights.remove(newWeight);
+}
+
 async function getWeightFromServer(){
     const trainingPromise = new Promise(async (resolve, reject) => {
         await new Promise(resolve => setTimeout(resolve, 200));
@@ -260,6 +268,8 @@ const storage = {
     getExerciseHistory,
     getWeight,
     addNewWeight,
+    changeWeight,
+    removeWeight,
     addNewExercise,
     addNewTraining,
     getHistory,

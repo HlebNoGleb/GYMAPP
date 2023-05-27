@@ -1,0 +1,42 @@
+<script>
+    import { _ } from 'svelte-i18n';
+    import routes, { currentRouteData, goBack } from '../../../helpers/routes';
+    import storage from '../../../helpers/storage/storage';
+    import ButtonBack from '../../common/buttonBack.svelte';
+
+    let currentWeight = $currentRouteData;
+
+    function changeWeight() {
+        if (currentWeight && currentWeight.weight && currentWeight.measure) {
+            console.log(currentWeight)
+            storage.changeWeight(currentWeight);
+            goBack();
+        }
+    }
+
+    function removeWeight() {
+        const removeChoice = confirm("Вы уверены?");
+        if (removeChoice) {
+            storage.removeWeight(currentWeight);
+            goBack();
+        }
+    }
+</script>
+
+<h1>Изменение веса</h1>
+
+<div class="mb-3">
+    <label for="weightName" class="form-label">Значение веса</label>
+    <input type="number" bind:value={currentWeight.weight} class="form-control" id="exerciseName" placeholder="90">
+</div>
+<div class="mb-3">
+    <select class="form-select" bind:value={currentWeight.measure}>
+        <option value={1}>kg</option>
+        <option value={2}>lbs</option>
+	</select>
+</div>
+
+<ButtonBack/>
+
+<button class="btn btn-primary" on:click={changeWeight}>Изменить</button>
+<button class="btn btn-danger" on:click={removeWeight}>Удалить</button>

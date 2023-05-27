@@ -41,7 +41,8 @@
     {:else}
         <div class="list-group">
             {#each weights as weight}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <li on:click={() => changeRoute(routes.weightChange, weight)} class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" style="cursor: pointer">
                     <span><span>{dateTimeHelper.calcAgo(weight.date)}</span> - <span class="text-muted">{new Date(weight.date).toLocaleDateString()}</span></span>
                     <span class="badge bg-primary rounded-pill">{historyHelper.calcWeight(weight.weight)}</span>
                 </li>

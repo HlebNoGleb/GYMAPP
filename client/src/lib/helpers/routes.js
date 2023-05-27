@@ -14,6 +14,7 @@ import ExerciseHistoryChange from '../components/pages/Exercises/History/Change.
 import ExerciseHistoryProgress from '../components/pages/Exercises/History/Progress.svelte';
 import WeightList from '../components/pages/Weight/List.svelte';
 import WeightAdd from '../components/pages/Weight/Add.svelte';
+import WeightChange from '../components/pages/Weight/Change.svelte';
 import SocialMain from '../components/pages/Social/Main.svelte';
 import trainingsIcon from '/images/icons/navbarIcons/dumbbell.png';
 import exercisesIcon from '/images/icons/navbarIcons/kettlebell.png';
@@ -101,6 +102,13 @@ const routes = {
     weightAdd:{
         name: "444",
         component: WeightAdd,
+        images: {
+            icon: weightIcon,
+        }
+    },
+    weightChange:{
+        name: "444",
+        component: WeightChange,
         images: {
             icon: weightIcon,
         }
