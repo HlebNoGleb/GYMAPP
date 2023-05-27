@@ -43,6 +43,16 @@ function addNewHistory(newHistory){
     history.add(newHistory);
 }
 
+
+function changeHistory(newHistory){
+    history.change(newHistory);
+}
+
+
+function removeHistory(newHistory){
+    history.remove(newHistory);
+}
+
 /**
  * @param {Array} history
  */
@@ -218,7 +228,9 @@ const storage = {
     addNewExercise,
     addNewTraining,//saveTrainings
     getHistory,
-    addNewHistory
+    addNewHistory,
+    changeHistory,
+    removeHistory
 }
 
 export default storage;
