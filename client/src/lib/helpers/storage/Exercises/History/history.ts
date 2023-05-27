@@ -134,7 +134,6 @@ function addNewHistoryToLocalStorage(newHistory){
 **/
 
 function changeHistoryToLocalStorage(newHistory) {
-    debugger;
     const id = newHistory.id;
     const historyKey = `${keys.history}-${newHistory.exerciseId}`;
     const historyString = localStorage.getItem(historyKey);
@@ -146,7 +145,6 @@ function changeHistoryToLocalStorage(newHistory) {
 
 
 function removeHistoryFromLocalStorage(newHistory) {
-    debugger;
     const id = newHistory.id;
     const historyKey = `${keys.history}-${newHistory.exerciseId}`;
     const historyString = localStorage.getItem(historyKey);

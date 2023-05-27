@@ -2,6 +2,7 @@ import config from "../../configs/config";
 import DefaultExercises from '../../../testData/exercisesDefault.json';
 import random from "../../random";
 import arrayHelper from "../../array";
+import trainings from "../Trainings/trainings";
 
 enum exerciseType {
     WeightCount,
@@ -18,7 +19,7 @@ interface exercise {
 }
 
 const exercises = {
-    get, add
+    get, add, change, remove
 }
 
 export default exercises;
@@ -49,6 +50,30 @@ function add(exercise: exercise){
         return null;
     } else {
         return addNewExerciseToLocalStorage(exercise);
+    }
+}
+
+
+/**
+@param {exercise} exercise
+**/
+function change(exercise: exercise){
+    if (config.useServer){
+        return null;
+    } else {
+        return changeExerciseToLocalStorage(exercise);
+    }
+}
+
+
+/**
+@param {exercise} exercise
+**/
+function remove(exercise: exercise){
+    if (config.useServer){
+        return null;
+    } else {
+        return removeExerciseToLocalStorage(exercise);
     }
 }
 
@@ -84,6 +109,52 @@ function addNewExerciseToLocalStorage(exercise){
         const exercisesArray = exercises ? JSON.parse(exercises) : [];
         exercisesArray.push(exercise);
         localStorage.setItem(keys.userExercises, JSON.stringify(exercisesArray));
+    } catch (error) {
+        console.error(`Failed to add object to localStorage: ${error}`);
+    }
+}
+
+/**
+@param {exercise} exercise
+**/
+
+function changeExerciseToLocalStorage(exercise){
+    try {
+        const id = exercise.id;
+        const exercises = localStorage.getItem(keys.userExercises);
+        const exercisesArray = exercises ? JSON.parse(exercises) : [];
+        const exerciseForChangeIndex = exercisesArray.findIndex(x=>x.id === id);
+        exercisesArray[exerciseForChangeIndex] = exercise;
+        localStorage.setItem(keys.userExercises, JSON.stringify(exercisesArray));
+    } catch (error) {
+        console.error(`Failed to add object to localStorage: ${error}`);
+    }
+}
+
+/**
+@param {exercise} exercise
+**/
+
+function removeExerciseToLocalStorage(exercise: exercise): void{
+    try {
+        debugger;
+        const id = exercise.id;
+        const exercises = localStorage.getItem(keys.userExercises);
+        const exercisesArray = exercises ? JSON.parse(exercises) : [];
+        const exerciseRemoveIndex = exercisesArray.findIndex(x=>x.id === id);
+        exercisesArray.splice(exerciseRemoveIndex, 1);
+        localStorage.setItem(keys.userExercises, JSON.stringify(exercisesArray));
+
+        //also remove exercise from training
+        const trainingsKey = trainings.keys.trainings;
+        const trainingsString = localStorage.getItem(trainingsKey);
+        const trainingsArray = trainingsString ? JSON.parse(trainingsString) : [];
+
+        trainingsArray.forEach(training => {
+            training.exercises = training.exercises.filter(e => e !== id);
+        });
+
+        localStorage.setItem(trainingsKey, JSON.stringify(trainingsArray));
     } catch (error) {
         console.error(`Failed to add object to localStorage: ${error}`);
     }

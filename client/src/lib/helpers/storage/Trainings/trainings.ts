@@ -13,12 +13,16 @@ interface Training {
     exercises: number[]
 }
 
-const trainings = {
-    get, add
-}
 
 const keys = {
     trainings: "trainings"
+}
+
+
+const trainings = {
+    keys,
+    get,
+    add
 }
 
 export default trainings

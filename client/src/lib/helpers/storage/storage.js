@@ -31,6 +31,16 @@ function addNewExercise(newExercise){
     exercises.add(newExercise);
 }
 
+
+function changeExercise(newExercise){
+    exercises.change(newExercise);
+}
+
+
+function removeExercise(newExercise){
+    exercises.remove(newExercise);
+}
+
 /**
  * @param {Number} exercisesId
  */
@@ -251,11 +261,13 @@ const storage = {
     getWeight,
     addNewWeight,
     addNewExercise,
-    addNewTraining,//saveTrainings
+    addNewTraining,
     getHistory,
     addNewHistory,
     changeHistory,
-    removeHistory
+    removeHistory,
+    changeExercise,
+    removeExercise
 }
 
 export default storage;
