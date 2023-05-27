@@ -5,7 +5,7 @@ export function calcAgo(date) {
     if (!date){
         return ""
     }
-    let dateStart = new Date(date * 1000);
+    let dateStart = new Date(date);
     let now = new Date();
     const diffTime = Math.abs(dateStart - now);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
