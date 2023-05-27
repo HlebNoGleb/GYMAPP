@@ -2,8 +2,8 @@ import config from "../configs/config";
 import trainingsJson from "../../testData/trainings.json"
 import trainingExercisesJson from "../../testData/trainingExercises.json"
 import oneExerciseHistory from "../../testData/oneExerciseHistory.json"
-import weight from "../../testData/weight.json"
 
+import weights from "../storage/Weights/weights"
 import trainings from "../storage/Trainings/trainings";
 import exercises from "../storage/Exercises/exercises";
 import history from "../storage/Exercises/History/history";
@@ -74,8 +74,12 @@ function getWeight(){
     if (config.useServer){
         return getWeightFromServer();
     } else {
-        return getTrainingsLocalStorage();
+        return getWeightsLocalStorage();
     }
+}
+
+function addNewWeight(newWeight){
+    weights.add(newWeight);
 }
 
 async function getWeightFromServer(){
@@ -209,12 +213,33 @@ function getTrainingsLocalStorage(){
     return trainingPromise;
 }
 
+function getWeightsLocalStorage(){
+    const weightPromise = new Promise(async (resolve, reject) => {
+        const data = localStorage.getItem("weights");
+        if (data) {
+            const weights = JSON.parse(data);
+            console.log(weights)
+            resolve(weights);
+        } else {
+            reject("no data")
+        }
+    }).then(data => {
+        return data;
+    }).catch(err => {
+        console.error(err);
+        return [];
+    })
+
+    return weightPromise;
+}
+
 const storage = {
     getTrainings,
     getExercises,
     getTrainingExercise,
     getExerciseHistory,
     getWeight,
+    addNewWeight,
     addNewExercise,
     addNewTraining,//saveTrainings
     getHistory,
