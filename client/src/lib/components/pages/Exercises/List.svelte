@@ -60,3 +60,4 @@
 	<p>Oh no: {error}</p>
 {/await}
 </div>
+<button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exercisesAddNew, null)}>+</button>
