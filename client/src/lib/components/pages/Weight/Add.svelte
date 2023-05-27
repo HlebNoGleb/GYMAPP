@@ -17,7 +17,6 @@
                 measure: newWeight.measure
             }
             storage.addNewWeight(weight);
-            console.log(newWeight);
             alert(`saved`);
             goBack();
         } else {
