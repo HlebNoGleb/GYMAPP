@@ -9,18 +9,23 @@
     console.log(exerciseHistory);
 
     let labels = exerciseHistory.reduce((acc, cur) => {
-        let label = new Date(cur.date * 1000).toLocaleDateString();
-        acc.push(label);
+        cur.data.forEach(() => {
+            acc.push(cur.date);
+        });
         return acc;
     }, []);
 
     const weights = exerciseHistory.reduce((acc, cur) => {
-        acc.push(cur.weight);
+        cur.data.forEach(history => {
+            acc.push(history.weight);
+        });
         return acc;
     }, []);
 
     const counts = exerciseHistory.reduce((acc, cur) => {
-        acc.push(cur.count);
+        cur.data.forEach(history => {
+            acc.push(history.count);
+        });
         return acc;
     }, []);
 
@@ -37,6 +42,8 @@
             }
         ]
   };
+
+  console.log(data);
   let chartRef;
   const onExport = () => chartRef.exportChart();
 </script>
