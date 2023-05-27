@@ -15,7 +15,7 @@ interface Ihistory {
 }
 
 const history = {
-    get, add
+    get, add, change, remove
 };
 
 export default history;
@@ -47,6 +47,28 @@ function add(newHistory: Ihistory){
 }
 
 /**
+@param {Ihistory} newHistory
+**/
+function change(newHistory: Ihistory){
+    if (config.useServer){
+        return null;
+    } else {
+        return changeHistoryToLocalStorage(newHistory);
+    }
+}
+
+/**
+@param {Ihistory} newHistory
+**/
+function remove(newHistory){
+    if (config.useServer){
+        return null;
+    } else {
+        return removeHistoryFromLocalStorage(newHistory);
+    }
+}
+
+/**
  * @param {Number} exercisesId
  */
 async function getHistoryFromLocalStorage(exercisesId) {
@@ -69,26 +91,24 @@ async function getHistoryFromLocalStorage(exercisesId) {
 }
 
 async function sortHistoryByDate(history) {
-    let test = 0;
     const result = history.reduce(function(acc, obj) {
 
-        console.log(obj);
         const datetime = new Date(obj.date);
-        const date = datetime.getTime();
-        //const hour = datetime.getMinutes(); // тестовая группировка по часу (минуте, секунде) - убрать [hour] для группировке по дням
-        if (!acc[date]) {
-          acc[date] = []; // {} - для доп группировки нужен объект
-        }
-        // if (!acc[date][hour]) {
-        //   acc[date][hour] = [];
-        // }
+        const date = datetime.toLocaleDateString();
 
-        acc[date]/*[hour]*/.push(obj);
-        console.log(acc);
+        var found = acc.find(function(item) {
+            return item.date === date;
+        });
+
+        if (found) {
+            found.data.push(obj);
+        } else {
+            acc.push({date: date, data: [obj]});
+        }
+
         return acc;
     }, []);
 
-    console.log(result);
     return result;
 }
 
@@ -107,4 +127,31 @@ function addNewHistoryToLocalStorage(newHistory){
     } catch (error) {
         console.error(`Failed to add object to localStorage: ${error}`);
     }
+}
+
+/**
+@param {Ihistory} newHistory
+**/
+
+function changeHistoryToLocalStorage(newHistory) {
+    debugger;
+    const id = newHistory.id;
+    const historyKey = `${keys.history}-${newHistory.exerciseId}`;
+    const historyString = localStorage.getItem(historyKey);
+    const historyArray = historyString ? JSON.parse(historyString) : [];
+    const historyForChangeIndex = historyArray.findIndex(x=>x.id === id);
+    historyArray[historyForChangeIndex] = newHistory;
+    localStorage.setItem(historyKey, JSON.stringify(historyArray));
+}
+
+
+function removeHistoryFromLocalStorage(newHistory) {
+    debugger;
+    const id = newHistory.id;
+    const historyKey = `${keys.history}-${newHistory.exerciseId}`;
+    const historyString = localStorage.getItem(historyKey);
+    const historyArray = historyString ? JSON.parse(historyString) : [];
+    const historyRemoveIndex = historyArray.findIndex(x=>x.id === id);
+    historyArray.splice(historyRemoveIndex, 1)
+    localStorage.setItem(historyKey, JSON.stringify(historyArray));
 }

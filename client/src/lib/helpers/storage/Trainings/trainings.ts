@@ -67,7 +67,7 @@ async function getTrainingsFromServer(){
 
 async function getTrainingsFromLocalStorage() {
     try {
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 200));
 
       const objects = localStorage.getItem(keys.trainings);
       return objects ? JSON.parse(objects) : [];
