@@ -6,6 +6,7 @@ import ExercisesList from '../components/pages/Exercises/List.svelte';
 import TrainignsGrid from '../components/pages/Trainings/Grid.svelte';
 import TrainignsAdd from '../components/pages/Trainings/Add.svelte';
 import TrainingHistory from '../components/pages/Trainings/History.svelte';
+import TrainingChange from '../components/pages/Trainings/Change.svelte';
 import ExercisesAddNew from '../components/pages/Exercises/Add.svelte';
 import ExercisesChange from '../components/pages/Exercises/Change.svelte';
 import ExercisesHistory from '../components/pages/Exercises/History/Grid.svelte';
@@ -46,6 +47,13 @@ const routes = {
     trainingHistory:{
         name: "444",
         component: TrainingHistory,
+        images: {
+            icon: trainingsIcon,
+        }
+    },
+    trainingChange:{
+        name: "444",
+        component: TrainingChange,
         images: {
             icon: trainingsIcon,
         }

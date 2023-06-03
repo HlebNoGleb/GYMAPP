@@ -61,7 +61,7 @@ function change(exercise: exercise){
     if (config.useServer){
         return null;
     } else {
-        return changeExerciseToLocalStorage(exercise);
+        return changeExerciseInLocalStorage(exercise);
     }
 }
 
@@ -73,7 +73,7 @@ function remove(exercise: exercise){
     if (config.useServer){
         return null;
     } else {
-        return removeExerciseToLocalStorage(exercise);
+        return removeExerciseFromLocalStorage(exercise);
     }
 }
 
@@ -118,7 +118,7 @@ function addNewExerciseToLocalStorage(exercise){
 @param {exercise} exercise
 **/
 
-function changeExerciseToLocalStorage(exercise){
+function changeExerciseInLocalStorage(exercise){
     try {
         const id = exercise.id;
         const exercises = localStorage.getItem(keys.userExercises);
@@ -135,7 +135,7 @@ function changeExerciseToLocalStorage(exercise){
 @param {exercise} exercise
 **/
 
-function removeExerciseToLocalStorage(exercise: exercise): void{
+function removeExerciseFromLocalStorage(exercise: exercise): void{
     try {
         debugger;
         const id = exercise.id;

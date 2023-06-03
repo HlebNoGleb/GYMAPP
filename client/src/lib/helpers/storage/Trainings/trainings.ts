@@ -22,7 +22,9 @@ const keys = {
 const trainings = {
     keys,
     get,
-    add
+    add,
+    change,
+    remove
 }
 
 export default trainings
@@ -43,6 +45,26 @@ function add(newTraining: Training){
         return null;
     } else {
         return addNewTrainingToLocalStorage(newTraining)//getTrainingsLocalStorage();
+    }
+}
+
+/**
+@param {Training} training
+**/
+function change(training: Training){
+    console.log(training);
+    if (config.useServer){
+        return null;
+    } else {
+        return changeTrainingInLocalStorage(training);
+    }
+}
+
+function remove(id: Number){
+    if (config.useServer){
+        return null;
+    } else {
+        return removeTrainingFromLocalStorage(id);//getTrainingsLocalStorage();
     }
 }
 
@@ -89,6 +111,32 @@ function addNewTrainingToLocalStorage(newTraining){
         const trainings = localStorage.getItem(keys.trainings);
         const trainingsArray = trainings ? JSON.parse(trainings) : [];
         trainingsArray.push(newTraining);
+        localStorage.setItem(keys.trainings, JSON.stringify(trainingsArray));
+    } catch (error) {
+        console.error(`Failed to add object to localStorage: ${error}`);
+    }
+}
+
+function changeTrainingInLocalStorage(training){
+    try {
+        debugger;
+        const id = training.id;
+        const trainings = localStorage.getItem(keys.trainings);
+        const trainingsArray = trainings ? JSON.parse(trainings) : [];
+        const trainingForChangeIndex = trainingsArray.findIndex(x=>x.id === id);
+        trainingsArray[trainingForChangeIndex] = training;
+        localStorage.setItem(keys.trainings, JSON.stringify(trainingsArray));
+    } catch (error) {
+        console.error(`Failed to add object to localStorage: ${error}`);
+    }
+}
+
+function removeTrainingFromLocalStorage(id){
+    try {
+        const trainings = localStorage.getItem(keys.trainings);
+        const trainingsArray = trainings ? JSON.parse(trainings) : [];
+        const trainingRemoveIndex = trainingsArray.findIndex(x=>x.id === id);
+        trainingsArray.splice(trainingRemoveIndex, 1);
         localStorage.setItem(keys.trainings, JSON.stringify(trainingsArray));
     } catch (error) {
         console.error(`Failed to add object to localStorage: ${error}`);

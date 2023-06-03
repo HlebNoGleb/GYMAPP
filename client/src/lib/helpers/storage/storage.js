@@ -19,6 +19,16 @@ function addNewTraining(newTraining){
     trainings.add(newTraining);
 }
 
+function changeTraining(training){
+    console.log(training);
+    trainings.change(training);
+}
+
+
+function removeTraining(id){
+    trainings.remove(id);
+}
+
 /**
  * @param {Array} exercisesIds
  */
@@ -277,7 +287,9 @@ const storage = {
     changeHistory,
     removeHistory,
     changeExercise,
-    removeExercise
+    removeExercise,
+    changeTraining,
+    removeTraining
 }
 
 export default storage;
