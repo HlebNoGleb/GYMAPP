@@ -7,8 +7,12 @@ var logger = require('morgan');
 var config = require('./config');
 const cors = require('cors');
 
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const cookie = require('cookie');
+
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/api/users');
 var exercisesRouter = require('./routes/api/exercises');
 var trainingsRouter = require('./routes/api/trainings');
 var trainingHistoryRouter = require('./routes/api/trainingHistory');
@@ -25,7 +29,12 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(cors());
+const corsOptions = {
+  origin: ["http://localhost:5173"],
+ //update: or "origin: true," if you don't wanna add a specific one
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

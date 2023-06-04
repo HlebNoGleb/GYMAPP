@@ -35,10 +35,19 @@ POST http://localhost:488/api/orders
 }
 
 ###
-POST https://localhost:488/auth/login HTTP/1.1
+POST  http://localhost:3001/users/login HTTP/1.1
 content-type: application/json
 
 {
     "login" : "motorland.by",
     "password" : "123456",
+}
+
+###
+POST http://localhost:3001/users/getUser HTTP/1.1
+content-type: application/json
+
+{
+    "test" : 1,
+    "testr2" : 2
 }
