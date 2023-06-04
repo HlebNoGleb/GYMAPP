@@ -32,8 +32,9 @@ function removeTraining(id){
 /**
  * @param {Array} exercisesIds
  */
-function getExercises(exercisesIds){
-    const exercisesArray = exercises.get(exercisesIds);
+function getExercises(exercisesIds, withLastHistory = false){
+    console.log(withLastHistory);
+    const exercisesArray = exercises.get(exercisesIds, withLastHistory);
     return exercisesArray;
 }
 

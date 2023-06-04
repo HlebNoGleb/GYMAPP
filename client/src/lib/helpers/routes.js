@@ -2,7 +2,7 @@ import { _ } from 'svelte-i18n';
 import { writable } from 'svelte/store';
 import AuthorizationSignUp from '../components/auth/signUp.svelte';
 import AuthorizationSignIn from '../components/auth/signIn.svelte';
-import ExercisesList from '../components/pages/Exercises/List.svelte';
+import ExercisesList from '../components/pages/Exercises/Grid.svelte';
 import TrainignsGrid from '../components/pages/Trainings/Grid.svelte';
 import TrainignsAdd from '../components/pages/Trainings/Add.svelte';
 import TrainingHistory from '../components/pages/Trainings/History.svelte';

@@ -3,6 +3,7 @@ import DefaultExercises from '../../../testData/exercisesDefault.json';
 import random from "../../random";
 import arrayHelper from "../../array";
 import trainings from "../Trainings/trainings";
+import history from "./History/history";
 
 enum exerciseType {
     WeightCount,
@@ -34,11 +35,12 @@ const keys = {
 /**
  * @param {Array} exercisesIds
  */
-function get(exercisesIds){
+function get(exercisesIds, withLastHistory = false){
+    console.log(withLastHistory);
     if (config.useServer){
         return null;
     } else {
-        return getExercisesFromLocalStorage(exercisesIds);
+        return getExercisesFromLocalStorage(exercisesIds, withLastHistory);
     }
 }
 
@@ -80,14 +82,27 @@ function remove(exercise: exercise){
 /**
  * @param {Array} exercisesIds
  */
-async function getExercisesFromLocalStorage(exercisesIds) {
+async function getExercisesFromLocalStorage(exercisesIds, withLastHistory = false) {
     await new Promise(resolve => setTimeout(resolve, 200));
     try {
         const exercisesJson = localStorage.getItem(keys.userExercises);
         const allExercises = arrayHelper.parseFromJson(exercisesJson);
         if (arrayHelper.hasData(exercisesIds)) {
             const filteredExercises = allExercises.filter(obj => exercisesIds.includes(obj.id));
+
+            if (withLastHistory) {
+                for (const exercise of filteredExercises) {
+                    exercise.lastHistory = await history.get(exercise.id, true);
+                }
+            }
+
             return filteredExercises;
+        }
+
+        if (withLastHistory) {
+            for (const exercise of allExercises) {
+                exercise.lastHistory = await history.get(exercise.id, true);
+            }
         }
 
         return allExercises;

@@ -3,19 +3,25 @@
     import routes, { currentRoute, changeRoute } from "../../../helpers/routes";
     import historyHelper from '../../../helpers/historyHelper';
     import dateTimeHelper from '../../../helpers/dateTime';
+    import arrayHelper from '../../../helpers/array';
     export let exerciseData;
-
-    console.log(exerciseData);
-
-    function viewHistory(history) {
-        return history ? history.map(item => `<span class='badge bg-secondary m-1'>${historyHelper.calcCount(item.count)} x ${historyHelper.calcWeight(item.weight)}</span>`).join("") : "";
-    }
 </script>
 
 <div class="card h-100">
     <div class="card-body">
         <h5 class="card-title">{exerciseData.name}</h5>
-        <div class="card-text">{@html viewHistory(exerciseData.lastHistory)}</div>
+        {#if arrayHelper.hasData(exerciseData.lastHistory)}
+            {#each exerciseData.lastHistory as lastHistory}
+                {new Date(lastHistory.date).toLocaleDateString()} - {dateTimeHelper.getDayName(lastHistory.date)}
+                <div class="d-flex flex-wrap my-2" style="gap: 0.2rem;">
+                    {#each lastHistory.data as data}
+                        <span class='badge rounded-pill text-bg-primary'>
+                            {historyHelper.calcCount(data.count)} x {historyHelper.calcWeight(data.weight)}
+                        </span>
+                    {/each}
+                </div>
+            {/each}
+        {/if}
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
             <button class="btn btn-primary" on:click={() => changeRoute(routes.exerciseHistory, exerciseData)}>Перейти</button>
             <button class="btn btn-outline-primary" on:click={() => changeRoute(routes.exercisesChange, exerciseData)}>Изменить</button>

@@ -5,13 +5,13 @@
     import dateTimeHelper from "../../../helpers/dateTime";
     import ButtonBack from '../../common/buttonBack.svelte';
     import ContentLoader from 'svelte-content-loader';
-    import ExerciseCard from '../Exercises/Card.svelte';
+    import ExerciseCard from './Card.svelte';
 
-    let exercisesPromise = storage.getExercises($currentRouteData);
-    console.log(exercisesPromise);
+    let exercisesPromise = storage.getExercises($currentRouteData, true);
+    // console.log(exercisesPromise);
 
     const updateExercises = () => {
-        exercisesPromise = storage.getExercises($currentRouteData);
+        exercisesPromise = storage.getExercises($currentRouteData, true);
     }
 </script>
 

@@ -27,11 +27,11 @@ const keys = {
 /**
  * @param {Number} exercisesId
  */
-function get(exercisesId){
+function get(exercisesId, onlyLast = false){
     if (config.useServer){
         return null;
     } else {
-        return getHistoryFromLocalStorage(exercisesId);
+        return getHistoryFromLocalStorage(exercisesId, onlyLast);
     }
 }
 
@@ -71,18 +71,18 @@ function remove(newHistory){
 /**
  * @param {Number} exercisesId
  */
-async function getHistoryFromLocalStorage(exercisesId) {
+async function getHistoryFromLocalStorage(exercisesId, onlyLastHistory = false) {
     // await new Promise(resolve => setTimeout(resolve, 200));
     try {
         const historyKey = `${keys.history}-${exercisesId}`;
         const historyJson = localStorage.getItem(historyKey);
         const history = arrayHelper.parseFromJson(historyJson);
 
-
         const sortedHistory = await sortHistoryByDate(history);
-        console.log(sortedHistory);
 
-        return sortedHistory;
+        return onlyLastHistory ?
+            arrayHelper.hasData(sortedHistory)
+            ? [sortedHistory[0]] : sortedHistory : sortedHistory;
 
     } catch (error) {
         console.error(`Failed to get objects from localStorage: ${error}`);

@@ -19,7 +19,7 @@
         <div class="d-flex flex-wrap my-2" style="gap: 0.2rem;">
             {#each trainingData.exerciseData as exercise}
                 <!-- <div> -->
-                    <span class=" badge rounded-pill text-bg-primary">{exercise.name}</span>
+                    <span class="badge rounded-pill text-bg-primary">{exercise.name}</span>
                 <!-- </div> -->
             {/each}
         </div>
