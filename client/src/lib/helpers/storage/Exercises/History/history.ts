@@ -94,7 +94,7 @@ async function sortHistoryByDate(history) {
     const result = history.reduce(function(acc, obj) {
 
         const datetime = new Date(obj.date);
-        const date = datetime.toLocaleDateString();
+        const date = datetime.toDateString();
 
         var found = acc.find(function(item) {
             return item.date === date;
@@ -118,12 +118,16 @@ async function sortHistoryByDate(history) {
 
 function addNewHistoryToLocalStorage(newHistory){
     try {
-        newHistory.id = random.generageUniqueId();
-        const historyKey = `${keys.history}-${newHistory.exerciseId}`;
-        const historyString = localStorage.getItem(historyKey);
-        const historyArray = historyString ? JSON.parse(historyString) : [];
-        historyArray.push(newHistory);
-        localStorage.setItem(historyKey, JSON.stringify(historyArray));
+        const setsArray = Array(newHistory.sets).fill(1)
+        setsArray.forEach(set => {
+            newHistory.id = random.generageUniqueId();
+            newHistory.sets = 1;
+            const historyKey = `${keys.history}-${newHistory.exerciseId}`;
+            const historyString = localStorage.getItem(historyKey);
+            const historyArray = historyString ? JSON.parse(historyString) : [];
+            historyArray.push(newHistory);
+            localStorage.setItem(historyKey, JSON.stringify(historyArray));
+        });
     } catch (error) {
         console.error(`Failed to add object to localStorage: ${error}`);
     }

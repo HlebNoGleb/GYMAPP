@@ -10,7 +10,8 @@
 
     let labels = exerciseHistory.reduce((acc, cur) => {
         cur.data.forEach(() => {
-            acc.push(cur.date);
+            const date = new Date(cur.date).toLocaleDateString();
+            acc.push(date);
         });
         return acc;
     }, []);

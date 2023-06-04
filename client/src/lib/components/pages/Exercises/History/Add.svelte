@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
     import { _ } from 'svelte-i18n';
     import ButtonBack from '../../../common/buttonBack.svelte';
     import { currentRouteData } from "../../../../helpers/routes";
@@ -7,9 +7,11 @@
     let exerciseId = $currentRouteData;
     console.log(exerciseId);
 
+    let date = new Date().toISOString().slice(0, 16);
+
     let newHistory = {
         exerciseId: exerciseId,
-        date: new Date().getTime(),
+        date: null,
         weight: '',
         count: '',
         sets: 1,
@@ -18,7 +20,11 @@
 
     function handleSubmit() {
         if (newHistory && newHistory.weight && newHistory.count){
-            console.log(newHistory);
+            if (date){
+                newHistory.date = new Date(date).getTime();
+            } else {
+                newHistory.date = new Date().getTime()
+            }
             storage.addNewHistory(newHistory);
             alert("Добавлено")
         } else {
@@ -40,6 +46,10 @@
 <div class="mb-3">
     <label for="sets" class="form-label">Подходы</label>
     <input type="number" bind:value={newHistory.sets} class="form-control" id="sets" placeholder="1">
+</div>
+<div class="mb-3">
+    <label for="sets" class="form-label">Дата и время</label>
+    <input type="datetime-local" bind:value={date} class="form-control" id="date" placeholder="1">
 </div>
 <div class="mb-3">
     <label for="note" class="form-label">Описание упражнения</label>

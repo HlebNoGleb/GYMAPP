@@ -7,9 +7,15 @@
     import ButtonBack from '../../../common/buttonBack.svelte';
 
     let newHistory = $currentRouteData;
+    let date = new Date(newHistory.date).toISOString().slice(0, 16);
 
     function changeHistory() {
         if (newHistory && newHistory.weight && newHistory.count){
+            if (date){
+                newHistory.date = new Date(date).getTime();
+            } else {
+                newHistory.date = new Date().getTime()
+            }
             storage.changeHistory(newHistory);
             goBack();
         } else {
@@ -37,8 +43,8 @@
     <input type="number" bind:value={newHistory.count} class="form-control" id="count" placeholder="1">
 </div>
 <div class="mb-3">
-    <label for="sets" class="form-label">Подходы</label>
-    <input type="number" bind:value={newHistory.sets} class="form-control" id="sets" placeholder="1">
+    <label for="sets" class="form-label">Дата и время</label>
+    <input type="datetime-local" bind:value={date} class="form-control" id="date" placeholder="1">
 </div>
 <div class="mb-3">
     <label for="note" class="form-label">Описание упражнения</label>

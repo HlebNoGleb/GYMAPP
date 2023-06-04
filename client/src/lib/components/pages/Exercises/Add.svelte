@@ -15,7 +15,7 @@
         if (newExercise.type && newExercise.name){
             storage.addNewExercise(newExercise);
             alert("Добавлено")
-            goBack();
+            // goBack();
         } else {
             alert("что-то не записал")
         }

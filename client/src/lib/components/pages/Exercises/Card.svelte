@@ -5,6 +5,8 @@
     import dateTimeHelper from '../../../helpers/dateTime';
     export let exerciseData;
 
+    console.log(exerciseData);
+
     function viewHistory(history) {
         return history ? history.map(item => `<span class='badge bg-secondary m-1'>${historyHelper.calcCount(item.count)} x ${historyHelper.calcWeight(item.weight)}</span>`).join("") : "";
     }
@@ -17,9 +19,9 @@
         <button class="btn btn-primary" on:click={() => changeRoute(routes.exerciseHistory, exerciseData)}>Перейти</button>
         <button class="btn btn-info" on:click={() => changeRoute(routes.exercisesChange, exerciseData)}>Перейти</button>
     </div>
-    <div class="card-footer text-muted">
+    <!-- <div class="card-footer text-muted">
         {dateTimeHelper.calcAgo(exerciseData.lastDateTime)}
-    </div>
+    </div> -->
 </div>
 
 <style>
