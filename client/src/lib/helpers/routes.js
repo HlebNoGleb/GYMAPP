@@ -151,6 +151,8 @@ export let currentRouteData = writable(null);
 
 export let previosRoutes = writable([]);
 
+export let userStore = writable(null);
+
 
 export function changeRoute(route, routeData, changeHistory = true) {
     if (changeHistory){
