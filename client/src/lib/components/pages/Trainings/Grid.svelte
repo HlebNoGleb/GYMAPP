@@ -8,8 +8,6 @@
 
     let trainingPromise = storage.getTrainings();
 
-    console.log(trainingPromise);
-
     const updateTrainings = () => {
         trainingPromise = storage.getTrainings();
     }

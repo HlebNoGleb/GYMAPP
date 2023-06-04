@@ -1,6 +1,7 @@
 import config from "../../configs/config";
 import trainingsJson from "../../../testData/trainings.json"
 import random from "../../random";
+import exercises from "../Exercises/exercises";
 
 interface Training {
     id: string
@@ -11,6 +12,7 @@ interface Training {
         createDate: number
     },
     exercises: number[]
+    exercisesData: []
 }
 
 
@@ -94,13 +96,30 @@ async function getTrainingsFromServer(){
 async function getTrainingsFromLocalStorage() {
     try {
         await new Promise(resolve => setTimeout(resolve, 200));
+        const trainingsStr = localStorage.getItem(keys.trainings);
+        let trainings = trainingsStr ? JSON.parse(trainingsStr) : [];
 
-      const objects = localStorage.getItem(keys.trainings);
-      return objects ? JSON.parse(objects) : [];
+        let trainingsWithExercises = await getTrainingsExercises(trainings);
+
+
+        return trainingsWithExercises;
     } catch (error) {
       console.error(`Failed to get objects from localStorage: ${error}`);
       return [];
     }
+}
+
+async function getTrainingsExercises(trainings){
+    const trainingWithExercises = [];
+
+    for (const training of trainings) { // foreach not work with async/await
+        const exercisesIds = training.exercises;
+        let data = await exercises.get(exercisesIds);
+        training.exerciseData = data;
+        trainingWithExercises.push(training);
+    }
+
+    return trainingWithExercises;
 }
 
 function addNewTrainingToLocalStorage(newTraining){
