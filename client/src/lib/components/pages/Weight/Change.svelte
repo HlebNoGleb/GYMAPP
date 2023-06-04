@@ -5,10 +5,16 @@
     import ButtonBack from '../../common/buttonBack.svelte';
 
     let currentWeight = $currentRouteData;
+    let date = new Date(currentWeight.date).toISOString().slice(0, 16);
+
 
     function changeWeight() {
         if (currentWeight && currentWeight.weight && currentWeight.measure) {
-            console.log(currentWeight)
+            if (date){
+                currentWeight.date = new Date(date).getTime();
+            } else {
+                currentWeight.date = new Date().getTime()
+            }
             storage.changeWeight(currentWeight);
             goBack();
         }
@@ -34,6 +40,10 @@
         <option value={1}>kg</option>
         <option value={2}>lbs</option>
 	</select>
+</div>
+<div class="mb-3">
+    <label for="sets" class="form-label">Дата и время</label>
+    <input type="datetime-local" bind:value={date} class="form-control" id="date" placeholder="1">
 </div>
 
 <ButtonBack/>

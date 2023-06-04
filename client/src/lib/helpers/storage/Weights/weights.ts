@@ -53,11 +53,10 @@ async function getWeightsFromLocalStorage() {
         return [];
     }
 }
-    
+
 function addNewWeightToLocalStorage(newWeight){
     try {
         newWeight.id = random.generageUniqueId();
-        newWeight.date = new Date().getTime();
         const weights = localStorage.getItem(keys.weights);
         const weightsArray = weights ? JSON.parse(weights) : [];
         weightsArray.push(newWeight);
