@@ -24,9 +24,9 @@
             {/each}
         </div>
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <button type="button" class="btn btn-outline-primary" on:click={() => changeRoute(routes.exercises, trainingData.exercises)}>{$_('trainings.start')}</button>
+            <button type="button" class="btn btn-primary" on:click={() => changeRoute(routes.exercises, trainingData.exercises)}>{$_('trainings.start')}</button>
             <button type="button" class="btn btn-outline-primary" on:click={() => changeRoute(routes.trainingChange, trainingData)}>{$_('trainings.change')}</button>
-            <div class="btn-group" role="group">
+            <!-- <div class="btn-group" role="group">
                 <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 {$_('trainings.more')}
                 </button>
@@ -34,7 +34,7 @@
                     <li><a class="dropdown-item" href="#">{$_('trainings.showExercises')}</a></li>
                     <li><a class="dropdown-item" href="#">{$_('trainings.change')}</a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

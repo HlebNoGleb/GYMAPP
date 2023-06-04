@@ -16,8 +16,10 @@
     <div class="card-body">
         <h5 class="card-title">{exerciseData.name}</h5>
         <div class="card-text">{@html viewHistory(exerciseData.lastHistory)}</div>
-        <button class="btn btn-primary" on:click={() => changeRoute(routes.exerciseHistory, exerciseData)}>Перейти</button>
-        <button class="btn btn-info" on:click={() => changeRoute(routes.exercisesChange, exerciseData)}>Перейти</button>
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <button class="btn btn-primary" on:click={() => changeRoute(routes.exerciseHistory, exerciseData)}>Перейти</button>
+            <button class="btn btn-outline-primary" on:click={() => changeRoute(routes.exercisesChange, exerciseData)}>Изменить</button>
+        </div>
     </div>
     <!-- <div class="card-footer text-muted">
         {dateTimeHelper.calcAgo(exerciseData.lastDateTime)}

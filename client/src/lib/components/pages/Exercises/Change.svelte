@@ -7,7 +7,7 @@
 
     let newExercise = $currentRouteData;
 
-    function saveExercise() {
+    function changeExercise() {
         if (newExercise.type && newExercise.name){
             storage.changeExercise(newExercise);
             alert("Изменено")
@@ -50,5 +50,5 @@
 
 <ButtonBack/>
 
-<button class="btn btn-primary" on:click={saveExercise}>Добавить</button>
+<button class="btn btn-primary" on:click={changeExercise}>Изменить</button>
 <button class="btn btn-danger" on:click={removeExercise}>Удалить</button>

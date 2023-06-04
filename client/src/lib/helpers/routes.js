@@ -21,8 +21,16 @@ import trainingsIcon from '/images/icons/navbarIcons/dumbbell.png';
 import exercisesIcon from '/images/icons/navbarIcons/kettlebell.png';
 import weightIcon from '/images/icons/navbarIcons/weight-scale.png';
 import socialIcon from '/images/icons/navbarIcons/network.png';
+import MainPage from '../components/pages/MainPage/mainPage.svelte';
 
 const routes = {
+    mainPage:{
+        name: "111",//_ => _('trainingsName'),
+        component: MainPage,
+        images: {
+            icon: trainingsIcon,
+        }
+    },
     trainingsGrid:{
         name: "111",//_ => _('trainingsName'),
         component: TrainignsGrid,
