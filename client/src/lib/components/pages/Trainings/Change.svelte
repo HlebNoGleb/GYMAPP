@@ -34,7 +34,7 @@
 
 </script>
 
-<h1>{$_('trainings.addTitle')}</h1>
+<h1>{$_('trainings.changeTitle')} {trainingName}</h1>
 
 <ButtonBack/>
 <button class="btn btn-primary" on:click={saveTraining}>Сохранить</button>

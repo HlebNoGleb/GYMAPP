@@ -26,7 +26,7 @@
 	}
 </script>
 
-<h1>Редактирование упражнения</h1>
+<h1>Редактирование упражнения {newExercise.name}</h1>
 
 <div class="mb-3">
     <label for="exerciseName" class="form-label">Название упражнения</label>
