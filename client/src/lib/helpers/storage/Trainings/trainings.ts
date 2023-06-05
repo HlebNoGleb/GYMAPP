@@ -2,6 +2,7 @@ import config from "../../configs/config";
 import trainingsJson from "../../../testData/trainings.json"
 import random from "../../random";
 import exercises from "../Exercises/exercises";
+import arrayHelper from "../../array";
 
 interface Training {
     id: string
@@ -26,7 +27,8 @@ const trainings = {
     get,
     add,
     change,
-    remove
+    remove,
+    upload
 }
 
 export default trainings
@@ -47,6 +49,18 @@ function add(newTraining: Training){
         return null;
     } else {
         return addNewTrainingToLocalStorage(newTraining)//getTrainingsLocalStorage();
+    }
+}
+
+/**
+@param {Training} newTraining
+**/
+function upload(newTraining: Training){
+    console.log(newTraining);
+    if (config.useServer){
+        return null;
+    } else {
+        return uploadNewTrainingToLocalStorage(newTraining)//getTrainingsLocalStorage();
     }
 }
 
@@ -101,7 +115,6 @@ async function getTrainingsFromLocalStorage() {
 
         let trainingsWithExercises = await getTrainingsExercises(trainings);
 
-
         return trainingsWithExercises;
     } catch (error) {
       console.error(`Failed to get objects from localStorage: ${error}`);
@@ -111,11 +124,14 @@ async function getTrainingsFromLocalStorage() {
 
 async function getTrainingsExercises(trainings){
     const trainingWithExercises = [];
-
     for (const training of trainings) { // foreach not work with async/await
         const exercisesIds = training.exercises;
-        let data = await exercises.get(exercisesIds);
-        training.exerciseData = data;
+        console.log(exercisesIds);
+        if (arrayHelper.hasData(exercisesIds)) {
+            let data = await exercises.get(exercisesIds);
+            training.exerciseData = data;
+        }
+
         trainingWithExercises.push(training);
     }
 
@@ -136,9 +152,22 @@ function addNewTrainingToLocalStorage(newTraining){
     }
 }
 
+function uploadNewTrainingToLocalStorage(newTraining){
+    try {
+        newTraining.id = random.generageUniqueId();
+        newTraining.dates = {createDate: new Date().getTime()}
+        const trainings = localStorage.getItem(keys.trainings);
+        const trainingsArray = trainings ? JSON.parse(trainings) : [];
+        trainingsArray.push(newTraining);
+        localStorage.setItem(keys.trainings, JSON.stringify(trainingsArray));
+        return newTraining;
+    } catch (error) {
+        console.error(`Failed to add object to localStorage: ${error}`);
+    }
+}
+
 function changeTrainingInLocalStorage(training){
     try {
-        debugger;
         const id = training.id;
         const trainings = localStorage.getItem(keys.trainings);
         const trainingsArray = trainings ? JSON.parse(trainings) : [];

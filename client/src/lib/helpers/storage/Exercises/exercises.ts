@@ -20,7 +20,7 @@ interface exercise {
 }
 
 const exercises = {
-    get, add, change, remove
+    get, add, change, remove, upload
 }
 
 export default exercises;
@@ -52,6 +52,17 @@ function add(exercise: exercise){
         return null;
     } else {
         return addNewExerciseToLocalStorage(exercise);
+    }
+}
+
+/**
+@param {exercise} exercise
+**/
+function upload(exercise: exercise){
+    if (config.useServer){
+        return null;
+    } else {
+        return uploadNewExerciseToLocalStorage(exercise);
     }
 }
 
@@ -133,6 +144,24 @@ function addNewExerciseToLocalStorage(exercise){
 @param {exercise} exercise
 **/
 
+async function uploadNewExerciseToLocalStorage(exercise){
+    try {
+        await new Promise(resolve => setTimeout(resolve, 200));
+        exercise.id = random.generageUniqueId();
+        const exercises = localStorage.getItem(keys.userExercises);
+        const exercisesArray = exercises ? JSON.parse(exercises) : [];
+        exercisesArray.push(exercise);
+        localStorage.setItem(keys.userExercises, JSON.stringify(exercisesArray));
+        return exercise;
+    } catch (error) {
+        console.error(`Failed to add object to localStorage: ${error}`);
+    }
+}
+
+/**
+@param {exercise} exercise
+**/
+
 function changeExerciseInLocalStorage(exercise){
     try {
         const id = exercise.id;
@@ -152,7 +181,6 @@ function changeExerciseInLocalStorage(exercise){
 
 function removeExerciseFromLocalStorage(exercise: exercise): void{
     try {
-        debugger;
         const id = exercise.id;
         const exercises = localStorage.getItem(keys.userExercises);
         const exercisesArray = exercises ? JSON.parse(exercises) : [];

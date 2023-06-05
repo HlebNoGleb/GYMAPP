@@ -24,6 +24,10 @@ function removeTraining(id){
     trainings.remove(id);
 }
 
+function uploadTraining(newTraining){
+    return trainings.upload(newTraining);
+}
+
 
 // ------------- EXERCISES -------------
 /**
@@ -47,6 +51,10 @@ function changeExercise(newExercise){
 
 function removeExercise(newExercise){
     exercises.remove(newExercise);
+}
+
+function uploadExercise(newExercise){
+    return exercises.upload(newExercise);
 }
 
 // ------------- HISTORY -------------
@@ -106,7 +114,9 @@ const storage = {
     changeExercise,
     removeExercise,
     changeTraining,
-    removeTraining
+    removeTraining,
+    uploadExercise,
+    uploadTraining
 }
 
 export default storage;

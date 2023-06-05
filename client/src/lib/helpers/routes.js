@@ -22,6 +22,9 @@ import exercisesIcon from '/images/icons/navbarIcons/checklist.png';
 import weightIcon from '/images/icons/navbarIcons/weight-scale.png';
 import socialIcon from '/images/icons/navbarIcons/network.png';
 import MainPage from '../components/pages/MainPage/mainPage.svelte';
+import Share from '../components/pages/Trainings/Share.svelte';
+import ShareIcon from '/images/icons/share.png';
+import Receive from '../components/pages/Trainings/Receive.svelte';
 
 const routes = {
     mainPage:{
@@ -64,6 +67,20 @@ const routes = {
         component: TrainingChange,
         images: {
             icon: trainingsIcon,
+        }
+    },
+    trainingShare:{
+        name: "444",
+        component: Share,
+        images: {
+            icon: ShareIcon,
+        }
+    },
+    trainingReceive:{
+        name: "444",
+        component: Receive,
+        images: {
+            icon: ShareIcon,
         }
     },
     exercisesAddNew:{

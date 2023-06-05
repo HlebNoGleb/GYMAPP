@@ -1,6 +1,4 @@
 <script>
-
-    var dlAnchorElem = document.getElementById('downloadAnchorElem');
     let data = null;
 
     function exportDataFromLocalStorage() {
