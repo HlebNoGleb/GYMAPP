@@ -1,5 +1,7 @@
 <!-- trainings main page -->
 <script>
+// @ts-nocheck
+
     import { _ } from 'svelte-i18n';
     import storage from "../../../helpers/storage/storage";
     import TrainingCard from './Card.svelte';

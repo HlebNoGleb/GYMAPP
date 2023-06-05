@@ -31,11 +31,3 @@
         {dateTimeHelper.calcAgo(exerciseData.lastDateTime)}
     </div> -->
 </div>
-
-<style>
-    .card-text{
-        margin: -0.25rem !important;
-        margin-bottom: 0.5rem!important;
-    }
-</style>
-
