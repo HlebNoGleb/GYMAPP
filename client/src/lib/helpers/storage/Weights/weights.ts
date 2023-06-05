@@ -44,8 +44,7 @@ function remove(newWeight: Weight){
 
 async function getWeightsFromLocalStorage() {
     try{
-        await new Promise(res => setTimeout(res, 2000));
-
+        await new Promise(res => setTimeout(res, 200));
         const objects = localStorage.getItem(keys.weights);
         return objects ? JSON.parse(objects) : [];
     } catch (error) {

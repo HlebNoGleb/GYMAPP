@@ -102,11 +102,7 @@ function getExerciseHistory(exerciseId){
 }
 
 function getWeight(){
-    if (config.useServer){
-        return getWeightFromServer();
-    } else {
-        return getWeightsLocalStorage();
-    }
+    return weights.get();
 }
 
 function addNewWeight(newWeight){

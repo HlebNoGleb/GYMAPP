@@ -57,7 +57,7 @@
             {/each}
         </div>
     {/if}
-    <button type="button" class="mt-3 btn btn-primary" on:click={() => changeRoute(routes.trainingsAdd)}>{$_('trainings.add')}</button>
+    <button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.trainingsAdd)}>+</button>
 {:catch error}
 	<p>Oh no: {error}</p>
 {/await}

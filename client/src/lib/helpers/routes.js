@@ -13,7 +13,7 @@ import ExercisesHistory from '../components/pages/Exercises/History/Grid.svelte'
 import ExerciseHistoryAddNew from '../components/pages/Exercises/History/Add.svelte';
 import ExerciseHistoryChange from '../components/pages/Exercises/History/Change.svelte';
 import ExerciseHistoryProgress from '../components/pages/Exercises/History/Progress.svelte';
-import WeightList from '../components/pages/Weight/List.svelte';
+import WeightList from '../components/pages/Weight/Grid.svelte';
 import WeightAdd from '../components/pages/Weight/Add.svelte';
 import WeightChange from '../components/pages/Weight/Change.svelte';
 import SocialMain from '../components/pages/Social/Main.svelte';
