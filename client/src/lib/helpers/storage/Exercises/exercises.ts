@@ -35,12 +35,12 @@ const keys = {
 /**
  * @param {Array} exercisesIds
  */
-function get(exercisesIds, withLastHistory = false){
+function get(exercisesIds, withLastHistory = false, byDate = ""){
     console.log(withLastHistory);
     if (config.useServer){
         return null;
     } else {
-        return getExercisesFromLocalStorage(exercisesIds, withLastHistory);
+        return getExercisesFromLocalStorage(exercisesIds, withLastHistory, byDate);
     }
 }
 
@@ -93,7 +93,7 @@ function remove(exercise: exercise){
 /**
  * @param {Array} exercisesIds
  */
-async function getExercisesFromLocalStorage(exercisesIds, withLastHistory = false) {
+async function getExercisesFromLocalStorage(exercisesIds, withLastHistory = false, byDate = "") {
     await new Promise(resolve => setTimeout(resolve, 200));
     try {
         const exercisesJson = localStorage.getItem(keys.userExercises);
@@ -101,18 +101,18 @@ async function getExercisesFromLocalStorage(exercisesIds, withLastHistory = fals
         if (arrayHelper.hasData(exercisesIds)) {
             const filteredExercises = allExercises.filter(obj => exercisesIds.includes(obj.id));
 
-            if (withLastHistory) {
+            if (withLastHistory || byDate) {
                 for (const exercise of filteredExercises) {
-                    exercise.lastHistory = await history.get(exercise.id, true);
+                    exercise.lastHistory = await history.get(exercise.id, withLastHistory, byDate);
                 }
             }
 
             return filteredExercises;
         }
 
-        if (withLastHistory) {
+        if (withLastHistory || byDate) {
             for (const exercise of allExercises) {
-                exercise.lastHistory = await history.get(exercise.id, true);
+                exercise.lastHistory = await history.get(exercise.id, withLastHistory, byDate);
             }
         }
 

@@ -6,7 +6,7 @@ import arrayHelper from "../../../array";
 interface Ihistory {
     id: string,
     userId? : string,
-    exerciseID: Number
+    exerciseId: Number
     date: Number,
     weight: Number,
     count: Number,
@@ -15,23 +15,24 @@ interface Ihistory {
 }
 
 const history = {
-    get, add, change, remove
+    get, add, change, remove, getCalendar
 };
 
 export default history;
 
 const keys = {
-    history: "history-"
+    history: "history-",
+    calendar: "calendar"
 }
 
 /**
  * @param {Number} exercisesId
  */
-function get(exercisesId, onlyLast = false){
+function get(exercisesId, onlyLast = false, byDate = ""){
     if (config.useServer){
         return null;
     } else {
-        return getHistoryFromLocalStorage(exercisesId, onlyLast);
+        return getHistoryFromLocalStorage(exercisesId, onlyLast, byDate);
     }
 }
 
@@ -71,7 +72,18 @@ function remove(newHistory){
 /**
  * @param {Number} exercisesId
  */
-async function getHistoryFromLocalStorage(exercisesId, onlyLastHistory = false) {
+function getCalendar(){
+    if (config.useServer){
+        return null;
+    } else {
+        return getCalendarExercisesFromLocalStorage();
+    }
+}
+
+/**
+ * @param {Number} exercisesId
+ */
+async function getHistoryFromLocalStorage(exercisesId, onlyLastHistory = false, byDate = "") {
     // await new Promise(resolve => setTimeout(resolve, 200));
     try {
         const historyKey = `${keys.history}-${exercisesId}`;
@@ -80,9 +92,19 @@ async function getHistoryFromLocalStorage(exercisesId, onlyLastHistory = false) 
 
         const sortedHistory = await sortHistoryByDate(history);
 
-        return onlyLastHistory ?
-            arrayHelper.hasData(sortedHistory)
-            ? [sortedHistory[0]] : sortedHistory : sortedHistory;
+        if (!arrayHelper.hasData(sortedHistory)) {
+            return sortedHistory;
+        }
+
+        if (onlyLastHistory){
+            return [sortedHistory[sortedHistory.length - 1]]
+        }
+
+        if (byDate){
+            return [sortedHistory.find(x=>x.date == byDate)]
+        }
+
+        return sortedHistory
 
     } catch (error) {
         console.error(`Failed to get objects from localStorage: ${error}`);
@@ -94,7 +116,7 @@ async function sortHistoryByDate(history) {
     const result = history.reduce(function(acc, obj) {
 
         const datetime = new Date(obj.date);
-        const date = datetime.toDateString();
+        const date = datetime.toJSON().split("T")[0];
 
         var found = acc.find(function(item) {
             return item.date === date;
@@ -128,6 +150,9 @@ function addNewHistoryToLocalStorage(newHistory){
             historyArray.push(newHistory);
             localStorage.setItem(historyKey, JSON.stringify(historyArray));
         });
+
+        updateCalendar(newHistory);
+
     } catch (error) {
         console.error(`Failed to add object to localStorage: ${error}`);
     }
@@ -156,4 +181,29 @@ function removeHistoryFromLocalStorage(newHistory) {
     const historyRemoveIndex = historyArray.findIndex(x=>x.id === id);
     historyArray.splice(historyRemoveIndex, 1)
     localStorage.setItem(historyKey, JSON.stringify(historyArray));
+}
+
+function updateCalendar(newHistory) {
+    let calendarDate = new Date(newHistory.date).toJSON().split("T")[0];
+    let calendarArray = JSON.parse(localStorage.getItem(keys.calendar) || "[]");
+    let currentCalendarDay = calendarArray.find(x => x.date == calendarDate);
+    if (currentCalendarDay) {
+        if (!currentCalendarDay.exercises.includes(newHistory.exerciseId)) {
+            currentCalendarDay.exercises.push(newHistory.exerciseId);
+        }
+    } else {
+        calendarArray.push(
+            {
+                date: calendarDate,
+                exercises: [newHistory.exerciseId]
+            }
+        );
+    }
+
+    localStorage.setItem(keys.calendar, JSON.stringify(calendarArray));
+}
+
+function getCalendarExercisesFromLocalStorage() {
+    //todo - доделать периоды по месяцам календаря
+    return JSON.parse(localStorage.getItem(keys.calendar) || "[]");
 }

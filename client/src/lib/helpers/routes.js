@@ -7,6 +7,7 @@ import TrainignsGrid from '../components/pages/Trainings/Grid.svelte';
 import TrainignsAdd from '../components/pages/Trainings/Add.svelte';
 import TrainingHistory from '../components/pages/Trainings/History.svelte';
 import TrainingChange from '../components/pages/Trainings/Change.svelte';
+import Calendar from '../components/pages/Calendar/Calendar.svelte';
 import ExercisesAddNew from '../components/pages/Exercises/Add.svelte';
 import ExercisesChange from '../components/pages/Exercises/Change.svelte';
 import ExercisesHistory from '../components/pages/Exercises/History/Grid.svelte';
@@ -17,8 +18,9 @@ import WeightList from '../components/pages/Weight/Grid.svelte';
 import WeightAdd from '../components/pages/Weight/Add.svelte';
 import WeightChange from '../components/pages/Weight/Change.svelte';
 import SocialMain from '../components/pages/Social/Main.svelte';
-import trainingsIcon from '/images/icons/navbarIcons/calendar.png';
-import exercisesIcon from '/images/icons/navbarIcons/checklist.png';
+import trainingsIcon from '/images/icons/navbarIcons/checklist.png';
+import calendarIcon from '/images/icons/navbarIcons/calendar.png';
+import exercisesIcon from '/images/icons/navbarIcons/kettlebell.png';
 import weightIcon from '/images/icons/navbarIcons/weight-scale.png';
 import socialIcon from '/images/icons/navbarIcons/network.png';
 import MainPage from '../components/pages/MainPage/mainPage.svelte';
@@ -46,6 +48,13 @@ const routes = {
         component: TrainignsAdd,
         images: {
             icon: trainingsIcon,
+        }
+    },
+    calendar:{
+        name: "111",//_ => _('trainingsName'),
+        component: Calendar,
+        images: {
+            icon: calendarIcon,
         }
     },
     exercises:{
@@ -171,7 +180,7 @@ const routes = {
 
 export default routes;
 
-export let currentRoute = writable(routes.trainingsGrid);
+export let currentRoute = writable(routes.calendar);
 export let currentRouteData = writable(null);
 
 export let previosRoutes = writable([]);

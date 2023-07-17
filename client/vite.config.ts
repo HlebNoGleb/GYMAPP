@@ -8,4 +8,13 @@ export default defineConfig({
     hot: false,
   })],
   publicDir: 'public',
+  build: {
+    rollupOptions: {
+        output: {
+          entryFileNames: '[name].js',
+          assetFileNames: '[name].[ext]',
+          dir: "D:/WebViki/VikiJetWMS/Motor/Motor.Web/UISite/clientCard"
+        },
+    },
+},
 })

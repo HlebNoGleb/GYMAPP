@@ -33,9 +33,9 @@ function uploadTraining(newTraining){
 /**
  * @param {Array} exercisesIds
  */
-function getExercises(exercisesIds, withLastHistory = false){
+function getExercises(exercisesIds, withLastHistory = false, byDate = ""){
     console.log(withLastHistory);
-    const exercisesArray = exercises.get(exercisesIds, withLastHistory);
+    const exercisesArray = exercises.get(exercisesIds, withLastHistory, byDate);
     return exercisesArray;
 }
 
@@ -80,6 +80,11 @@ function removeHistory(newHistory){
     history.remove(newHistory);
 }
 
+async function getCalendar(){
+    const calendar = history.getCalendar();
+    return calendar;
+}
+
 // ------------- WEIGHT -------------
 
 function getWeight(){
@@ -111,6 +116,7 @@ const storage = {
     addNewHistory,
     changeHistory,
     removeHistory,
+    getCalendar,
     changeExercise,
     removeExercise,
     changeTraining,
