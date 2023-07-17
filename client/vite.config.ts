@@ -13,7 +13,6 @@ export default defineConfig({
         output: {
           entryFileNames: '[name].js',
           assetFileNames: '[name].[ext]',
-          dir: "D:/WebViki/VikiJetWMS/Motor/Motor.Web/UISite/clientCard"
         },
     },
 },
