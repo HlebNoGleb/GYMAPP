@@ -30,6 +30,8 @@
 
 <ButtonBack/>
 <button class="btn btn-primary" on:click={saveExercises}>Сохранить</button>
+<button type="button" class="btn btn-outline-primary" on:click={() => changeRoute(routes.trainingReceive)}><i class="bi bi-upload"></i></button>
+
 
 <div class="mb-3 mt-3">
     <label for="exampleInputEmail1" class="form-label">Название тренировки</label>

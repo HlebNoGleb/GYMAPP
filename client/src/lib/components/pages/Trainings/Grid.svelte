@@ -1,5 +1,7 @@
 <!-- trainings main page -->
 <script>
+// @ts-nocheck
+
     import { _ } from 'svelte-i18n';
     import storage from "../../../helpers/storage/storage";
     import TrainingCard from './Card.svelte';
@@ -7,8 +9,6 @@
     import routes, { changeRoute } from '../../../helpers/routes';
 
     let trainingPromise = storage.getTrainings();
-
-    console.log(trainingPromise);
 
     const updateTrainings = () => {
         trainingPromise = storage.getTrainings();
@@ -59,7 +59,7 @@
             {/each}
         </div>
     {/if}
-    <button type="button" class="mt-3 btn btn-primary" on:click={() => changeRoute(routes.trainingsAdd)}>{$_('trainings.add')}</button>
+    <button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.trainingsAdd)}>+</button>
 {:catch error}
 	<p>Oh no: {error}</p>
 {/await}

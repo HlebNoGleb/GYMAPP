@@ -1,12 +1,14 @@
 <script>
 // @ts-nocheck
     import { _ } from 'svelte-i18n';
+    import { onMount } from 'svelte';
     import routes, { currentRouteData, changeRoute } from "../../../../helpers/routes";
     import dateTimeHelper from "../../../../helpers/dateTime";
     import storage from "../../../../helpers/storage/storage";
     import ButtonBack from '../../../common/buttonBack.svelte';
     import ContentLoader from 'svelte-content-loader';
     import historyHelper from '../../../../helpers/historyHelper';
+    import arrayHelper from '../../../../helpers/array';
     let exerciseData = $currentRouteData;
 
     let exerciseHistoryPromise = storage.getExerciseHistory(exerciseData.id);
@@ -46,9 +48,7 @@
             </div>
         </div>
     {:then histories}
-        {#if histories && histories.length == 0}
-            <p>no history</p>
-        {:else}
+        {#if arrayHelper.hasData(histories)}
             <button class="btn btn-primary mb-2" on:click={() => changeRoute(routes.exerciseHistoryProgress, histories)}>Прогресс</button>
             <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3">
                 {#each histories as history}
@@ -64,6 +64,8 @@
                 </div>
                 {/each}
             </div>
+        {:else}
+            <p>no history</p>
         {/if}
     {:catch error}
         <p>Oh no: {error}</p>

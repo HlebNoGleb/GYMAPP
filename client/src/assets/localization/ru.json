@@ -6,21 +6,23 @@
     "continue": "Продолжить",
     "ButtonBack": "Назад",
     "trainings": {
-        "trainingsText": "Текст тренировок",
+        "trainingsText": "Мои тренировки",
         "trainingsName": "Мои тренировки",
         "noTrainings": "У вас нет тренировок",
         "add": "Добавить новую тренировку",
         "addTitle": "Добавление новой тренировки",
+        "changeTitle": "Изменение тренировки",
+        "share": "Поделиться",
         "lastDate": "Последняя тренировка",
-        "start":"Начать",
-        "details":"Детали",
+        "start":"Перейти",
+        "details":"Изменить",
         "more":"Еще",
         "change":"Изменить",
         "showExercises":"Упражнения",
         "loading":"Загружаем ваши тренировки"
     },
     "exercises": {
-        "exercisesText": "Текст упражнений",
+        "exercisesText": "Упражнения",
         "exercisesName": "Мои упражнения",
         "noExercises": "Вы еще не добавили упражнения в тренировку"
     }

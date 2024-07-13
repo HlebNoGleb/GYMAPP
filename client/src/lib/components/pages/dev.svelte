@@ -1,5 +1,8 @@
 <script lang="ts">
-    import Localizator from "../common/localizator.svelte";
+    import CreateCalendar from "../common/createCalendar.svelte";
+import ExportLocalData from "../common/exportLocalData.svelte";
+    import ImportLocalData from "../common/importLocalData.svelte";
+import Localizator from "../common/localizator.svelte";
     import ThemeChanger from "../common/themeChanger.svelte";
 
 
@@ -18,6 +21,9 @@
             <div class="modal-body">
                 <Localizator />
                 <ThemeChanger />
+                <ExportLocalData />
+                <ImportLocalData />
+                <CreateCalendar />
                 <button type="button" class="btn btn-primary" on:click={clearHelloScreenStorage}>Clear hello screen storage</button>
             </div>
         </div>

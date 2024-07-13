@@ -8,4 +8,12 @@ export default defineConfig({
     hot: false,
   })],
   publicDir: 'public',
+  build: {
+    rollupOptions: {
+        output: {
+          entryFileNames: '[name].js',
+          assetFileNames: '[name].[ext]',
+        },
+    },
+},
 })

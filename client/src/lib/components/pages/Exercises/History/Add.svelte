@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
     import { _ } from 'svelte-i18n';
     import { currentRouteData } from "../../../../helpers/routes";
     import ButtonBack from '../../../common/buttonBack.svelte';
@@ -38,6 +38,10 @@
 <div class="mb-3">
     <label for="sets" class="form-label">Подходы</label>
     <input type="number" bind:value={newHistory.sets} class="form-control" id="sets" placeholder="1">
+</div>
+<div class="mb-3">
+    <label for="sets" class="form-label">Дата и время</label>
+    <input type="datetime-local" bind:value={date} class="form-control" id="date" placeholder="1">
 </div>
 <div class="mb-3">
     <label for="note" class="form-label">Описание упражнения</label>

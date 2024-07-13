@@ -6,24 +6,26 @@
 
     let exerciseHistory = $currentRouteData;
 
+    console.log(exerciseHistory);
+
     let labels = exerciseHistory.reduce((acc, cur) => {
-        let label = new Date(cur.date * 1000).toLocaleDateString();
-        cur.podhods.forEach(set => {
-            acc.push(label);
+        cur.data.forEach(() => {
+            const date = new Date(cur.date).toLocaleDateString();
+            acc.push(date);
         });
         return acc;
     }, []);
 
     const weights = exerciseHistory.reduce((acc, cur) => {
-        cur.podhods.forEach(set => {
-            acc.push(set.weight);
+        cur.data.forEach(history => {
+            acc.push(history.weight);
         });
         return acc;
     }, []);
 
     const counts = exerciseHistory.reduce((acc, cur) => {
-        cur.podhods.forEach(set => {
-            acc.push(set.count);
+        cur.data.forEach(history => {
+            acc.push(history.count);
         });
         return acc;
     }, []);
@@ -41,6 +43,8 @@
             }
         ]
   };
+
+  console.log(data);
   let chartRef;
   const onExport = () => chartRef.exportChart();
 </script>
