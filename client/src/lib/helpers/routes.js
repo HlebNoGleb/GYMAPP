@@ -37,14 +37,14 @@ const routes = {
         }
     },
     trainingsGrid:{
-        name: "TrainignsGrid",//_ => _('trainingsName'),
+        name: "111",//_ => _('trainingsName'),
         component: TrainignsGrid,
         images: {
             icon: trainingsIcon,
         }
     },
     trainingsAdd:{
-        name: "TrainignsAdd",//_ => _('trainingsName'),
+        name: "111",//_ => _('trainingsName'),
         component: TrainignsAdd,
         images: {
             icon: trainingsIcon,
@@ -58,14 +58,14 @@ const routes = {
         }
     },
     exercises:{
-        name: "ExercisesList",
+        name: "222",
         component: ExercisesList,
         images: {
             icon: exercisesIcon,
         }
     },
     trainingHistory:{
-        name: "TrainingHistory",
+        name: "444",
         component: TrainingHistory,
         images: {
             icon: trainingsIcon,
@@ -93,7 +93,7 @@ const routes = {
         }
     },
     exercisesAddNew:{
-        name: "ExercisesAddNew",
+        name: "444",
         component: ExercisesAddNew,
         images: {
             icon: trainingsIcon,
@@ -107,42 +107,42 @@ const routes = {
         }
     },
     exerciseHistory:{
-        name: "ExercisesHistory",
+        name: "444",
         component: ExercisesHistory,
         images: {
             icon: trainingsIcon,
         }
     },
     exerciseHistoryAddNew:{
-        name: "ExerciseHistoryAddNew",
+        name: "444",
         component: ExerciseHistoryAddNew,
         images: {
             icon: trainingsIcon,
         }
     },
     exerciseHistoryChange:{
-        name: "ExerciseHistoryChange",
+        name: "444",
         component: ExerciseHistoryChange,
         images: {
             icon: trainingsIcon,
         }
     },
     exerciseHistoryProgress:{
-        name: "ExerciseHistoryProgress",
+        name: "444",
         component: ExerciseHistoryProgress,
         images: {
             icon: trainingsIcon,
         }
     },
     weightList:{
-        name: "WeightList",
+        name: "444",
         component: WeightList,
         images: {
             icon: weightIcon,
         }
     },
     weightAdd:{
-        name: "WeightAdd",
+        name: "444",
         component: WeightAdd,
         images: {
             icon: weightIcon,
@@ -156,21 +156,21 @@ const routes = {
         }
     },
     socialMain:{
-        name: "SocialMain",
+        name: "444",
         component: SocialMain,
         images: {
             icon: socialIcon,
         }
     },
     authSignIn:{
-        name: "AuthorizationSignIn",
+        name: "444",
         component: AuthorizationSignIn,
         images: {
             icon: socialIcon,
         }
     },
     authSignUp:{
-        name: "AuthorizationSignUp",
+        name: "444",
         component: AuthorizationSignUp,
         images: {
             icon: socialIcon,

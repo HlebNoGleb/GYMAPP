@@ -24,7 +24,8 @@
     }
 
     const updateExercises = async (event) => {
-        let date = event?.detail ?? new Date().toJSON();
+        let date = event?.detail ?? new Date().toJSON().split('T')[0];
+        console.log(date);
         exercisesIds = await getExercisesIds(date);
         exercisesPromise = exercisesIds.length > 0 ? storage.getExercises(exercisesIds, false, date) : Promise.resolve([])
     }

@@ -1,24 +1,32 @@
 <script>
     import { _ } from 'svelte-i18n';
-    import { currentRouteData } from "../../../../helpers/routes";
     import ButtonBack from '../../../common/buttonBack.svelte';
-    import storage from '../../../../helpers/storage/storage';
+    import { currentRouteData } from "../../../../helpers/routes";
+    import storage from "../../../../helpers/storage/storage";
 
     let exerciseId = $currentRouteData;
+    console.log(exerciseId);
+
+    let date = new Date().toISOString().slice(0, 16);
 
     let newHistory = {
-        count: 1,
-        weight: 1,
+        exerciseId: exerciseId,
+        date: null,
+        weight: '',
+        count: '',
         sets: 1,
         note: '',
-        exerciseId: exerciseId,
-        date: new Date().getTime()
     }
 
     function handleSubmit() {
         if (newHistory && newHistory.weight && newHistory.count){
-            storage.addNewExerciseHistory(newHistory);
-            alert(`saved`);
+            if (date){
+                newHistory.date = new Date(date).getTime();
+            } else {
+                newHistory.date = new Date().getTime()
+            }
+            storage.addNewHistory(newHistory);
+            alert("Добавлено")
         } else {
             alert("что-то не записал")
         }

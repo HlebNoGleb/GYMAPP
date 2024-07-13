@@ -96,6 +96,8 @@ async function getHistoryFromLocalStorage(exercisesId, onlyLastHistory = false, 
             return sortedHistory;
         }
 
+        // debugger
+
         if (onlyLastHistory){
             return [sortedHistory[sortedHistory.length - 1]]
         }

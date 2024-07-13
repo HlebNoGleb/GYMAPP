@@ -6,9 +6,7 @@
     import arrayHelper from '../../../helpers/array';
     export let exerciseData;
 
-    function viewHistory(history) {
-        return history ? history.map(item => `<span class='badge bg-secondary m-1'>${historyHelper.calcCount(item.count)} x ${historyHelper.calcWeight(item.weight)}</span>`).join("") : "";
-    }
+    console.log(exerciseData)
 </script>
 
 <div class="card h-100">
@@ -16,7 +14,7 @@
         <h5 class="card-title">{exerciseData.name}</h5>
         {#if arrayHelper.hasData(exerciseData.lastHistory)}
             {#each exerciseData.lastHistory as lastHistory}
-                {new Date(lastHistory.date).toLocaleDateString()} - {dateTimeHelper.getDayName(lastHistory.date)}
+                <!-- {new Date(lastHistory.date).toLocaleDateString()} - {dateTimeHelper.getDayName(lastHistory.date)} -->
                 <div class="d-flex flex-wrap my-2" style="gap: 0.2rem;">
                     {#each lastHistory.data as data}
                         <span class='badge rounded-pill text-bg-primary'>
@@ -31,9 +29,7 @@
             <button class="btn btn-outline-primary" on:click={() => changeRoute(routes.exercisesChange, exerciseData)}>Изменить</button>
         </div>
     </div>
-    {#if exerciseData.lastDateTime}
-        <div class="card-footer text-muted">
-            {dateTimeHelper.calcAgo(exerciseData.lastDateTime)}
-        </div>
-    {/if }
+    <!-- <div class="card-footer text-muted">
+        {dateTimeHelper.calcAgo(exerciseData.lastDateTime)}
+    </div> -->
 </div>
