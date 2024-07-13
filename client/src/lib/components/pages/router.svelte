@@ -5,6 +5,7 @@
 </script>
 
 <div class="container">
+    <h6>{$currentRoute.name}</h6>
     <svelte:component this={$currentRoute.component} data={$currentRouteData}/>
 </div>
 

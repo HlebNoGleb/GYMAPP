@@ -30,147 +30,147 @@ import Receive from '../components/pages/Trainings/Receive.svelte';
 
 const routes = {
     mainPage:{
-        name: "111",//_ => _('trainingsName'),
+        name: "MainPage",//_ => _('trainingsName'),
         component: MainPage,
         images: {
             icon: trainingsIcon,
         }
     },
     trainingsGrid:{
-        name: "111",//_ => _('trainingsName'),
+        name: "TrainignsGrid",//_ => _('trainingsName'),
         component: TrainignsGrid,
         images: {
             icon: trainingsIcon,
         }
     },
     trainingsAdd:{
-        name: "111",//_ => _('trainingsName'),
+        name: "TrainignsAdd",//_ => _('trainingsName'),
         component: TrainignsAdd,
         images: {
             icon: trainingsIcon,
         }
     },
     calendar:{
-        name: "111",//_ => _('trainingsName'),
+        name: "Calendar",//_ => _('trainingsName'),
         component: Calendar,
         images: {
             icon: calendarIcon,
         }
     },
     exercises:{
-        name: "222",
+        name: "ExercisesList",
         component: ExercisesList,
         images: {
             icon: exercisesIcon,
         }
     },
     trainingHistory:{
-        name: "444",
+        name: "TrainingHistory",
         component: TrainingHistory,
         images: {
             icon: trainingsIcon,
         }
     },
     trainingChange:{
-        name: "444",
+        name: "TrainingChange",
         component: TrainingChange,
         images: {
             icon: trainingsIcon,
         }
     },
     trainingShare:{
-        name: "444",
+        name: "Share",
         component: Share,
         images: {
             icon: ShareIcon,
         }
     },
     trainingReceive:{
-        name: "444",
+        name: "Receive",
         component: Receive,
         images: {
             icon: ShareIcon,
         }
     },
     exercisesAddNew:{
-        name: "444",
+        name: "ExercisesAddNew",
         component: ExercisesAddNew,
         images: {
             icon: trainingsIcon,
         }
     },
     exercisesChange:{
-        name: "444",
+        name: "ExercisesChange",
         component: ExercisesChange,
         images: {
             icon: trainingsIcon,
         }
     },
     exerciseHistory:{
-        name: "444",
+        name: "ExercisesHistory",
         component: ExercisesHistory,
         images: {
             icon: trainingsIcon,
         }
     },
     exerciseHistoryAddNew:{
-        name: "444",
+        name: "ExerciseHistoryAddNew",
         component: ExerciseHistoryAddNew,
         images: {
             icon: trainingsIcon,
         }
     },
     exerciseHistoryChange:{
-        name: "444",
+        name: "ExerciseHistoryChange",
         component: ExerciseHistoryChange,
         images: {
             icon: trainingsIcon,
         }
     },
     exerciseHistoryProgress:{
-        name: "444",
+        name: "ExerciseHistoryProgress",
         component: ExerciseHistoryProgress,
         images: {
             icon: trainingsIcon,
         }
     },
     weightList:{
-        name: "444",
+        name: "WeightList",
         component: WeightList,
         images: {
             icon: weightIcon,
         }
     },
     weightAdd:{
-        name: "444",
+        name: "WeightAdd",
         component: WeightAdd,
         images: {
             icon: weightIcon,
         }
     },
     weightChange:{
-        name: "444",
+        name: "WeightChange",
         component: WeightChange,
         images: {
             icon: weightIcon,
         }
     },
     socialMain:{
-        name: "444",
+        name: "SocialMain",
         component: SocialMain,
         images: {
             icon: socialIcon,
         }
     },
     authSignIn:{
-        name: "444",
+        name: "AuthorizationSignIn",
         component: AuthorizationSignIn,
         images: {
             icon: socialIcon,
         }
     },
     authSignUp:{
-        name: "444",
+        name: "AuthorizationSignUp",
         component: AuthorizationSignUp,
         images: {
             icon: socialIcon,
