@@ -6,7 +6,7 @@
     export let exerciseData;
 
     function viewHistory(history) {
-        return history.map(item => `<span class='badge bg-secondary m-1'>${historyHelper.calcCount(item.count)} x ${historyHelper.calcWeight(item.weight)}</span>`).join("");
+        return history ? history.map(item => `<span class='badge bg-secondary m-1'>${historyHelper.calcCount(item.count)} x ${historyHelper.calcWeight(item.weight)}</span>`).join("") : "";
     }
 </script>
 
@@ -16,9 +16,11 @@
         <div class="card-text">{@html viewHistory(exerciseData.lastHistory)}</div>
         <button class="btn btn-primary" on:click={() => changeRoute(routes.exerciseHistory, exerciseData)}>Перейти</button>
     </div>
-    <div class="card-footer text-muted">
-        {dateTimeHelper.calcAgo(exerciseData.lastDateTime)}
-    </div>
+    {#if exerciseData.lastDateTime}
+        <div class="card-footer text-muted">
+            {dateTimeHelper.calcAgo(exerciseData.lastDateTime)}
+        </div>
+    {/if }
 </div>
 
 <style>

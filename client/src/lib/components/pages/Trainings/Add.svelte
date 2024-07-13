@@ -4,7 +4,8 @@
     import storage from '../../../helpers/storage/storage';
     import routes, { changeRoute, goBack } from '../../../helpers/routes';
 
-    let exercisesPromise = storage.getExercises();
+    let exercisesPromise = storage.getExercisesForAdd();
+    console.log(exercisesPromise);
     let newTrainingName = '';
 
     let selection = [];
@@ -19,7 +20,7 @@
             alert("Добавлено")
             goBack();
         } else {
-            alert("что-то не записал")
+            alert("Не задано название тренировки или не добавлены упражнения")
         }
 	}
 
@@ -39,28 +40,32 @@
 {#await exercisesPromise}
     <p>loading...</p>
 {:then exercises}
-    {#each exercises as exercise}
-    <div class="list-group" >
-        <div class="accordion-item mb-2">
-            <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" id="exercise-{exercise.id}" value={exercise.id} bind:group={selection}>
-                <label class="form-check-label stretched-link" for="exercise-{exercise.id}">{exercise.name}</label>
+    {#if exercises && exercises.length > 0}
+        {#each exercises as exercise}
+        <div class="list-group" >
+            <div class="accordion-item mb-2">
+                <li class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" id="exercise-{exercise.id}" value={exercise.id} bind:group={selection}>
+                    <label class="form-check-label stretched-link" for="exercise-{exercise.id}">{exercise.name}</label>
+                    {#if exercise.description}
+                        <div class="position-absolute check-info" data-bs-toggle="collapse" data-bs-target="#collapse-{exercise.id}">
+                            <span class="badge bg-secondary">Check info</span>
+                        </div>
+                    {/if}
+                </li>
                 {#if exercise.description}
-                    <div class="position-absolute check-info" data-bs-toggle="collapse" data-bs-target="#collapse-{exercise.id}">
-                        <span class="badge bg-secondary">Check info</span>
+                    <div id="collapse-{exercise.id}" class="accordion-collapse collapse">
+                        <div class="accordion-body p-2">
+                            <strong>{@html exercise.description}</strong>
+                        </div>
                     </div>
                 {/if}
-            </li>
-            {#if exercise.description}
-                <div id="collapse-{exercise.id}" class="accordion-collapse collapse">
-                    <div class="accordion-body p-2">
-                        <strong>{@html exercise.description}</strong>
-                    </div>
-                </div>
-            {/if}
+            </div>
         </div>
-    </div>
-    {/each}
+        {/each}
+    {:else}
+        <p>нет добавленных упражнений</p>
+    {/if}
 {/await}
 
 <button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exercisesAddNew, null)}>+</button>

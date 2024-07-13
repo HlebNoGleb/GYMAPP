@@ -11,10 +11,8 @@
 
     let exerciseHistoryPromise = storage.getExerciseHistory(exerciseData.id);
 
-    console.log(exerciseHistoryPromise);
-
     const updateExercises = () => {
-        exerciseHistoryPromise = storage.getTrainingExercise(exerciseData.id);
+        exerciseHistoryPromise = storage.getExerciseHistory(exerciseData.id);
     }
 </script>
 
@@ -60,9 +58,7 @@
                             {new Date(history.date).toLocaleDateString()}
                         </div>
                         <ul class="list-group list-group-flush">
-                            {#each history.podhods as set}
-                                <button on:click={() => changeRoute(routes.exerciseHistoryChange, set)} class="list-group-item list-group-item-action">{historyHelper.calcWeight(set.weight)} x {historyHelper.calcCount(set.count)}</button>
-                            {/each}
+                            <button on:click={() => changeRoute(routes.exerciseHistoryChange, history)} class="list-group-item list-group-item-action">{history.count} - {history.weight} - {history.sets}</button>
                         </ul>
                     </div>
                 </div>
@@ -74,8 +70,4 @@
     {/await}
 </div>
 
-<button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exerciseHistoryAddNew, null)}>+</button>
-
-<style>
-
-</style>
+<button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exerciseHistoryAddNew, exerciseData.id)}>+</button>
