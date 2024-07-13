@@ -4,7 +4,7 @@ import random from "../../random";
 import exercises from "../Exercises/exercises";
 import arrayHelper from "../../array";
 
-interface Training {
+interface iTraining {
     id: string
     userId?: string,
     name: string,
@@ -35,15 +35,15 @@ export default trainings
 
 function get(){
     if (config.useServer){
-        return getTrainingsFromServer();
+        return [];
     } else {
         return getTrainingsFromLocalStorage();//getTrainingsLocalStorage();
     }
 }
 /**
-@param {Training} newTraining
+@param {iTraining} newTraining
 **/
-function add(newTraining: Training){
+function add(newTraining: iTraining){
     console.log(newTraining);
     if (config.useServer){
         return null;

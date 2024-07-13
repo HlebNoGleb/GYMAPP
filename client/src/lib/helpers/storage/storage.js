@@ -1,3 +1,12 @@
+import config from "../configs/config";
+import trainingsJson from "../../testData/trainings.json"
+import trainingExercisesJson from "../../testData/trainingExercises.json"
+import oneExerciseHistory from "../../testData/oneExerciseHistory.json"
+import weight from "../../testData/weight.json"
+
+import trainings from "./Trainings/trainings";
+import exercises from "./Exercises/exercises";
+import history from "./History/history";
 import weights from "../storage/Weights/weights"
 import trainings from "../storage/Trainings/trainings";
 import exercises from "../storage/Exercises/exercises";
@@ -36,6 +45,15 @@ function uploadTraining(newTraining){
 function getExercises(exercisesIds, withLastHistory = false, byDate = ""){
     console.log(withLastHistory);
     const exercisesArray = exercises.get(exercisesIds, withLastHistory, byDate);
+function getExercisesForAdd(){
+    const exercisesArray = exercises.get();
+    return exercisesArray;
+}
+
+function getTrainingExerciseByIds(ids){
+    const exercisesArray = exercises.get(ids);
+    const exercisesHistory = history.getSome(ids);
+
     return exercisesArray;
 }
 
@@ -74,6 +92,13 @@ function addNewHistory(newHistory){
 function changeHistory(newHistory){
     history.change(newHistory);
 }
+/**
+ * @param {Array} ids
+ */
+function getExercisesHistory(ids){
+    const historyArray = history.getSome(ids);
+    return historyArray;
+}
 
 
 function removeHistory(newHistory){
@@ -101,28 +126,20 @@ function changeWeight(newWeight){
 
 function removeWeight(newWeight){
     weights.remove(newWeight);
+/**
+ * @param {Array} id
+ */
+function getExerciseHistory(id){
+    const historyArray = history.getOne(id);
+    return historyArray;
+}
+
+function addNewExerciseHistory(newHistory){
+    history.add(newHistory);
 }
 
 const storage = {
-    getTrainings,
-    getExercises,
-    getWeight,
-    addNewWeight,
-    changeWeight,
-    removeWeight,
-    addNewExercise,
-    addNewTraining,
-    getHistory,
-    addNewHistory,
-    changeHistory,
-    removeHistory,
-    getCalendar,
-    changeExercise,
-    removeExercise,
-    changeTraining,
-    removeTraining,
-    uploadExercise,
-    uploadTraining
+    getTrainings, getExercises, getTrainingExercise, getExerciseHistory, getWeight, addNewExercise, addNewTraining//saveTrainings
 }
 
 export default storage;

@@ -11,7 +11,7 @@ enum exerciseType {
     Time,
 }
 
-interface exercise {
+interface iexercise {
     id: string,
     userId? : string,
     name: string,
@@ -40,18 +40,18 @@ function get(exercisesIds, withLastHistory = false, byDate = ""){
     if (config.useServer){
         return null;
     } else {
-        return getExercisesFromLocalStorage(exercisesIds, withLastHistory, byDate);
+        return getExercisesFromLocalStorage();
     }
 }
 
 /**
-@param {exercise} exercise
+@param {iexercise} exercise
 **/
-function add(exercise: exercise){
+function add(exercise: iexercise){
     if (config.useServer){
         return null;
     } else {
-        return addNewExerciseToLocalStorage(exercise);
+        return addNewUserExerciseToLocalStorage(exercise);
     }
 }
 
@@ -124,11 +124,30 @@ async function getExercisesFromLocalStorage(exercisesIds, withLastHistory = fals
     }
 }
 
+function filterByIds(allExercises, ids) {
+    if (!ids) {
+        return allExercises;
+    }
+
+    return allExercises.filter(x=> ids.includes(x.id));
+}
+
+// function joinUserAndDefaultExercises(exercises:string) {
+//     const defaultExercises : exercise[] = DefaultExercises;
+//     try {
+//         let userExercisesArray : exercise[] = JSON.parse(exercises);
+//         return userExercisesArray ? [].concat(userExercisesArray, /*defaultExercises*/) : [];//defaultExercises;
+//     } catch (error) {
+//         console.error(`Failed to parse objects from localStorage: ${error}`);
+//         return [];//defaultExercises;
+//     }
+// }
+
 /**
-@param {exercise} exercise
+@param {iexercise} exercise
 **/
 
-function addNewExerciseToLocalStorage(exercise){
+function addNewUserExerciseToLocalStorage(exercise){
     try {
         exercise.id = random.generageUniqueId();
         const exercises = localStorage.getItem(keys.userExercises);

@@ -11,7 +11,11 @@ export function calcAgo(date) {
     const diffTime = Math.abs(dateStart - now);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    return `${diffDays} days ago`
+    if (diffDays) {
+        return `${diffDays} days ago`
+    }
+
+    return "";
 }
 
 export function getDayName(date){

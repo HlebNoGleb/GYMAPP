@@ -11,11 +11,10 @@
     import arrayHelper from '../../../../helpers/array';
     let exerciseData = $currentRouteData;
 
-    let exerciseHistoryPromise = storage.getHistory(exerciseData.id);
-    console.log(exerciseHistoryPromise);
+    let exerciseHistoryPromise = storage.getExerciseHistory(exerciseData.id);
 
     const updateExercises = () => {
-        exerciseHistoryPromise = storage.getHistory(exerciseData.id);
+        exerciseHistoryPromise = storage.getExerciseHistory(exerciseData.id);
     }
 </script>
 
@@ -53,18 +52,16 @@
             <button class="btn btn-primary mb-2" on:click={() => changeRoute(routes.exerciseHistoryProgress, histories)}>Прогресс</button>
             <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3">
                 {#each histories as history}
-                    <div class="col">
-                        <div class="card h-100">
-                            <div class="card-header text-muted">
-                                {new Date(history.date).toLocaleDateString()} - {dateTimeHelper.getDayName(history.date)}
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                {#each history.data as data}
-                                    <button on:click={() => changeRoute(routes.exerciseHistoryChange, data)} class="list-group-item list-group-item-action">{historyHelper.calcWeight(data.weight)} x {historyHelper.calcCount(data.count)}</button>
-                                {/each}
-                            </ul>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header text-muted">
+                            {new Date(history.date).toLocaleDateString()}
                         </div>
+                        <ul class="list-group list-group-flush">
+                            <button on:click={() => changeRoute(routes.exerciseHistoryChange, history)} class="list-group-item list-group-item-action">{history.count} - {history.weight} - {history.sets}</button>
+                        </ul>
                     </div>
+                </div>
                 {/each}
             </div>
         {:else}
@@ -76,7 +73,3 @@
 </div>
 
 <button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exerciseHistoryAddNew, exerciseData.id)}>+</button>
-
-<style>
-
-</style>
