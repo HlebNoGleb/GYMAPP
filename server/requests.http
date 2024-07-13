@@ -1,0 +1,53 @@
+GET http://localhost:3000/db/training
+
+###
+GET http://localhost:3001/trainings?ids=[63ffd4db9d418673de2711f9]
+
+###
+GET http://localhost:3001/weights/?id=64063eb360ed94cc0ee30176
+
+###
+POST http://localhost:3001/weights HTTP/1.1
+content-type: application/json
+
+{
+    "date" : 55555,
+    "weight": 312,
+    "measure": 313,
+    "exercises": [
+        {
+            "id": "11111",
+            "exerciseName": "Упражнение 1"
+        },
+        {
+            "id": "22222",
+            "exerciseName": "Упражнение 2"
+        }
+    ]
+}
+
+###
+POST http://localhost:488/api/orders
+{
+    "sid" : "",
+    "id" : "31984",
+    "page" : "1"
+}
+
+###
+POST  http://localhost:3001/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "login" : "motorland.by",
+    "password" : "123456",
+}
+
+###
+POST http://localhost:3001/users/getUser HTTP/1.1
+content-type: application/json
+
+{
+    "test" : 1,
+    "testr2" : 2
+}
