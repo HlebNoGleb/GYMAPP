@@ -6,6 +6,7 @@
     import routes, { changeRoute } from '../../../helpers/routes';
     export let exercisesPromise;
     export let showAddButton = true;
+    export let trainingId = null;
 </script>
 <div class="mb-3 mt-3">
     {#await exercisesPromise}
@@ -46,7 +47,7 @@
             </div>
         {/if}
         {#if showAddButton}
-            <button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exercisesAddNew, null)}>+</button>
+            <button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exercisesAddNew, trainingId)}>+</button>
         {/if}
     {:catch error}
         <p>Oh no: {error}</p>

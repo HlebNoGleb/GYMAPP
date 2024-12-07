@@ -56,6 +56,7 @@
                     <div class="col">
                         <div class="card h-100">
                             <div class="card-header text-muted">
+                                {JSON.stringify(history)}
                                 {new Date(history.date).toLocaleDateString()} - {dateTimeHelper.getDayName(history.date)}
                             </div>
                             <ul class="list-group list-group-flush">

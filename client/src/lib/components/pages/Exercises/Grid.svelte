@@ -8,14 +8,14 @@
     import ExerciseCard from './Card.svelte';
     import Grid2 from './Grid2.svelte';
 
-    let exercisesPromise = storage.getExercises($currentRouteData, true);
     console.log($currentRouteData);
 
-    const updateExercises = () => {
-        exercisesPromise = storage.getExercises($currentRouteData, true);
-    }
+    const exercises = $currentRouteData?.exercises;
+    const trainingId = $currentRouteData?.id;
+
+    let exercisesPromise = storage.getTrainingExercises(trainingId, true);
 </script>
 
 <h1>{$_('exercises.exercisesText')}</h1>
 <ButtonBack/>
-<Grid2 exercisesPromise={exercisesPromise}/>
+<Grid2 exercisesPromise={exercisesPromise} trainingId={trainingId}/>

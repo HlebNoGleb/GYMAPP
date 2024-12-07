@@ -46,12 +46,13 @@ function get(exercisesIds, withLastHistory = false, byDate = ""){
 
 /**
 @param {exercise} exercise
+@param {Number} trainingId
 **/
-function add(exercise: exercise){
+function add(exercise: exercise, trainingId = null){
     if (config.useServer){
         return null;
     } else {
-        return addNewExerciseToLocalStorage(exercise);
+        return addNewExerciseToLocalStorage(exercise, trainingId);
     }
 }
 
@@ -128,13 +129,16 @@ async function getExercisesFromLocalStorage(exercisesIds, withLastHistory = fals
 @param {exercise} exercise
 **/
 
-function addNewExerciseToLocalStorage(exercise){
+function addNewExerciseToLocalStorage(exercise, trainingId = null){
     try {
         exercise.id = random.generageUniqueId();
         const exercises = localStorage.getItem(keys.userExercises);
         const exercisesArray = exercises ? JSON.parse(exercises) : [];
         exercisesArray.push(exercise);
         localStorage.setItem(keys.userExercises, JSON.stringify(exercisesArray));
+        if (trainingId) {
+            trainings.addExerciseToTraining(trainingId, exercise.id);
+        }
     } catch (error) {
         console.error(`Failed to add object to localStorage: ${error}`);
     }

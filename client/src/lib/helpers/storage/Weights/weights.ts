@@ -66,7 +66,7 @@ function addNewWeightToLocalStorage(newWeight){
 }
 
 function changeWeightInLocalStorage(newWeight){
-    debugger;
+    //debugger;
     const id = newWeight.id;
     const weights = localStorage.getItem(keys.weights);
     const weightsArray = weights ? JSON.parse(weights) : [];
@@ -76,7 +76,7 @@ function changeWeightInLocalStorage(newWeight){
 }
 
 function removeWeightFromLocalStorage(newWeight){
-    debugger;
+    //debugger;
     const id = newWeight.id;
     const weights = localStorage.getItem(keys.weights);
     const weightsArray = weights ? JSON.parse(weights) : [];

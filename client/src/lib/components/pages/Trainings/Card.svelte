@@ -24,7 +24,7 @@
             {/if}
         </div>
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <button type="button" class="btn btn-primary" on:click={() => changeRoute(routes.exercises, trainingData.exercises)}>{$_('trainings.start')}</button>
+            <button type="button" class="btn btn-primary" on:click={() => changeRoute(routes.exercises, trainingData)}>{$_('trainings.start')}</button>
             <button type="button" class="btn btn-outline-primary" on:click={() => changeRoute(routes.trainingChange, trainingData)}>{$_('trainings.change')}</button>
             <button type="button" class="btn btn-outline-primary" on:click={() => changeRoute(routes.trainingShare, trainingData)}><i class="bi bi-download"></i></button>
             <!-- <div class="btn-group" role="group">

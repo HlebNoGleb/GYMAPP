@@ -4,8 +4,8 @@ import exercises from "../storage/Exercises/exercises";
 import history from "../storage/Exercises/History/history";
 
 // ------------- TRAININGS -------------
-function getTrainings(){
-    const trainingsArray = trainings.get();
+function getTrainings(trainingIds = [], withExercises = false){
+    const trainingsArray = trainings.get(trainingIds, withExercises);
     return trainingsArray;
 }
 
@@ -39,8 +39,31 @@ function getExercises(exercisesIds, withLastHistory = false, byDate = ""){
     return exercisesArray;
 }
 
-function addNewExercise(newExercise){
-    exercises.add(newExercise);
+async function getTrainingExercises(trainingId, withLastHistory = false, byDate = ""){
+
+    //debugger;
+
+    let trainingIds = [];
+
+    if (trainingId) {
+        trainingIds = [trainingId];
+    }
+
+    const training = await trainings.get(trainingIds);
+
+    console.log(training);
+
+    if (training && training.length > 0){
+        const exercisesIds = training[0].exercises;
+        const exercisesArray = exercises.get(exercisesIds, withLastHistory, byDate);
+        return exercisesArray;
+    }
+
+    return [];
+}
+
+function addNewExercise(newExercise, trainingId = null){
+    exercises.add(newExercise, trainingId);
 }
 
 
@@ -106,6 +129,7 @@ function removeWeight(newWeight){
 const storage = {
     getTrainings,
     getExercises,
+    getTrainingExercises,
     getWeight,
     addNewWeight,
     changeWeight,

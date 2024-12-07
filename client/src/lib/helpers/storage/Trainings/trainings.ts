@@ -28,16 +28,17 @@ const trainings = {
     add,
     change,
     remove,
-    upload
+    upload,
+    addExerciseToTraining
 }
 
 export default trainings
 
-function get(){
+function get(trainingIds: Array<string> = [], withExercises: boolean = false){
     if (config.useServer){
         return getTrainingsFromServer();
     } else {
-        return getTrainingsFromLocalStorage();//getTrainingsLocalStorage();
+        return getTrainingsFromLocalStorage(trainingIds, withExercises);//getTrainingsLocalStorage();
     }
 }
 /**
@@ -107,15 +108,23 @@ async function getTrainingsFromServer(){
 }
 
 
-async function getTrainingsFromLocalStorage() {
+async function getTrainingsFromLocalStorage(trainingIds, withExercises) {
     try {
         await new Promise(resolve => setTimeout(resolve, 200));
         const trainingsStr = localStorage.getItem(keys.trainings);
         let trainings = trainingsStr ? JSON.parse(trainingsStr) : [];
 
-        let trainingsWithExercises = await getTrainingsExercises(trainings);
+        if (trainingIds && arrayHelper.hasData(trainingIds)) {
+            trainings = trainings.filter(x => trainingIds.includes(x.id));
+        }
 
-        return trainingsWithExercises;
+        if (withExercises) {
+            let trainingsWithExercises = await getTrainingsExercises(trainings);
+            return trainingsWithExercises;
+        }
+
+        return trainings;
+
     } catch (error) {
       console.error(`Failed to get objects from localStorage: ${error}`);
       return [];
@@ -187,6 +196,19 @@ function removeTrainingFromLocalStorage(id){
         trainingsArray.splice(trainingRemoveIndex, 1);
         localStorage.setItem(keys.trainings, JSON.stringify(trainingsArray));
     } catch (error) {
+        console.error(`Failed to add object to localStorage: ${error}`);
+    }
+}
+
+function addExerciseToTraining(trainingId, exerciseId){
+    try {
+        const trainings = localStorage.getItem(keys.trainings);
+        const trainingsArray = trainings ? JSON.parse(trainings) : [];
+        const trainingForChangeIndex = trainingsArray.findIndex(x=>x.id === trainingId);
+        trainingsArray[trainingForChangeIndex].exercises.push(exerciseId);
+        localStorage.setItem(keys.trainings, JSON.stringify(trainingsArray));
+    }
+    catch (error) {
         console.error(`Failed to add object to localStorage: ${error}`);
     }
 }

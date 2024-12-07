@@ -1,9 +1,10 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
     import ButtonBack from '../../common/buttonBack.svelte';
-    import routes, { changeRoute, goBack } from '../../../helpers/routes';
+    import routes, { changeRoute, currentRouteData, goBack } from '../../../helpers/routes';
     import exercisesTypes from '../../../testData/exercisesTypes.json';
     import storage from '../../../helpers/storage/storage';
+
 
     let newExercise = {
         name: '',
@@ -12,8 +13,10 @@
     }
 
     function saveExercises() {
+        console.log($currentRouteData);
+
         if (newExercise.type && newExercise.name){
-            storage.addNewExercise(newExercise);
+            storage.addNewExercise(newExercise, $currentRouteData);
             alert("Добавлено")
             // goBack();
         } else {
