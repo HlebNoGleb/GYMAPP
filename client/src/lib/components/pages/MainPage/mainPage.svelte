@@ -32,6 +32,8 @@
             if (lastTraining.exercisesIds && lastTraining.exercisesIds.length > 0) {
                 const exercises = storage.getExercises(lastTraining.exercisesIds, true);
                 resolve(exercises);
+            } else {
+                resolve([]);
             }
         }).then((exercises) => {
             lastTraining.exercises = exercises;
@@ -58,7 +60,9 @@
         <p>Ваш последний вес: {lastWeight}</p>
     {/if}
     {#if lastTraining}
+        {#if lastTraining.date}
         <p>Последняя тренировка: {lastTraining.date}, {getDayName(new Date(lastTraining.date))}</p>
+        {/if}
         <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3">
             {#each lastTraining.exercises as exercise}
                 <div class="col">
