@@ -41,8 +41,6 @@ function getExercises(exercisesIds, withLastHistory = false, byDate = ""){
 
 async function getTrainingExercises(trainingId, withLastHistory = false, byDate = ""){
 
-    //debugger;
-
     let trainingIds = [];
 
     if (trainingId) {
@@ -51,7 +49,7 @@ async function getTrainingExercises(trainingId, withLastHistory = false, byDate 
 
     const training = await trainings.get(trainingIds);
 
-    console.log(training);
+    // console.log(training);
 
     if (training && training.length > 0){
         const exercisesIds = training[0].exercises;

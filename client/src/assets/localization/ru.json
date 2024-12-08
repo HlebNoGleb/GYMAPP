@@ -23,7 +23,10 @@
     },
     "exercises": {
         "exercisesText": "Упражнения",
-        "exercisesName": "Мои упражнения",
-        "noExercises": "Вы еще не добавили упражнения в тренировку"
+        "noExercises": "Вы еще не добавили упражнения в тренировку",
+        "allExercises": "Все упражнения",
+        "trainingExercises": "Упражнения тренировки",
+        "addExercise": "Добавить упражнение",
+        "addExerciseToTraining": "Добавить упражнение в "
     }
 }

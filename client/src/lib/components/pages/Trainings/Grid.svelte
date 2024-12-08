@@ -7,6 +7,7 @@
     import TrainingCard from './Card.svelte';
     import ContentLoader from 'svelte-content-loader';
     import routes, { changeRoute } from '../../../helpers/routes';
+    import ButtonBack from '../../common/buttonBack.svelte';
 
     let trainingPromise = storage.getTrainings();
 
@@ -49,9 +50,11 @@
 {:then trainings}
     {#if trainings && trainings.length == 0}
         <h1>{$_('trainings.noTrainings')}</h1>
+        <ButtonBack/>
     {:else}
         <h1>{$_('trainings.trainingsText')}</h1>
-        <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3">
+        <ButtonBack/>
+        <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3 mt-2">
             {#each trainings as training}
                 <div class="col">
                     <TrainingCard trainingData={training}/>

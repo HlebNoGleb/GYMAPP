@@ -1,14 +1,19 @@
 <script lang="ts">
     import CreateCalendar from "../common/createCalendar.svelte";
-import ExportLocalData from "../common/exportLocalData.svelte";
+    import ExportLocalData from "../common/exportLocalData.svelte";
     import ImportLocalData from "../common/importLocalData.svelte";
-import Localizator from "../common/localizator.svelte";
+    import Localizator from "../common/localizator.svelte";
     import ThemeChanger from "../common/themeChanger.svelte";
-
+    import { devMode } from "../../helpers/routes";
 
     function clearHelloScreenStorage(){
         localStorage.removeItem("skipHelloScreen");
         window.location.reload();
+    }
+
+    function devModeToggle() {
+        console.log($devMode);
+        devMode.set(!$devMode);
     }
 
 </script>
@@ -25,6 +30,7 @@ import Localizator from "../common/localizator.svelte";
                 <ImportLocalData />
                 <CreateCalendar />
                 <button type="button" class="btn btn-primary" on:click={clearHelloScreenStorage}>Clear hello screen storage</button>
+                <button type="button" class="btn btn-primary" on:click={devModeToggle}>DEV MODE</button>
             </div>
         </div>
     </div>

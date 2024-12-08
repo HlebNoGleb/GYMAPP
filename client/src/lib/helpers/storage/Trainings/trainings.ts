@@ -88,7 +88,7 @@ function remove(id: Number){
 
 async function getTrainingsFromServer(){
     const trainingPromise = new Promise(async (resolve, reject) => {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         const response = await fetch("https://jsonplaceholder.typicode.com/users");
         if (response.ok) {
             //const trainings = await response.json();
@@ -110,7 +110,7 @@ async function getTrainingsFromServer(){
 
 async function getTrainingsFromLocalStorage(trainingIds, withExercises) {
     try {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         const trainingsStr = localStorage.getItem(keys.trainings);
         let trainings = trainingsStr ? JSON.parse(trainingsStr) : [];
 

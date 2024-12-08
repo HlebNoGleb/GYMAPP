@@ -84,7 +84,7 @@ function getCalendar(){
  * @param {Number} exercisesId
  */
 async function getHistoryFromLocalStorage(exercisesId, onlyLastHistory = false, byDate = "") {
-    // await new Promise(resolve => setTimeout(resolve, 200));
+    // await new Promise(resolve => setTimeout(resolve, 50));
     try {
         const historyKey = `${keys.history}-${exercisesId}`;
         const historyJson = localStorage.getItem(historyKey);

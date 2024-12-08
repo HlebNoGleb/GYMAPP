@@ -6,7 +6,7 @@
     import arrayHelper from '../../../helpers/array';
     export let exerciseData;
 
-    console.log(exerciseData)
+    // console.log(exerciseData)
 </script>
 
 <div class="card h-100">

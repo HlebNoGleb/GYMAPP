@@ -15,7 +15,6 @@
 
     let exercisesPromise = storage.getTrainingExercises(trainingId, true);
 </script>
-
 <h1>{$_('exercises.exercisesText')}</h1>
 <ButtonBack/>
-<Grid2 exercisesPromise={exercisesPromise} trainingId={trainingId}/>
+<Grid2 exercisesPromise={exercisesPromise} training={$currentRouteData}/>

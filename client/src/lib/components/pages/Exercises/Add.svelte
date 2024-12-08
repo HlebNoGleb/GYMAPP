@@ -5,6 +5,7 @@
     import exercisesTypes from '../../../testData/exercisesTypes.json';
     import storage from '../../../helpers/storage/storage';
 
+    console.log($currentRouteData);
 
     let newExercise = {
         name: '',
@@ -16,7 +17,7 @@
         console.log($currentRouteData);
 
         if (newExercise.type && newExercise.name){
-            storage.addNewExercise(newExercise, $currentRouteData);
+            storage.addNewExercise(newExercise, $currentRouteData?.id);
             alert("Добавлено")
             // goBack();
         } else {
@@ -25,7 +26,11 @@
 	}
 </script>
 
-<h1>Добавление упражнения</h1>
+{#if $currentRouteData?.id}
+    <h1>{$_('exercises.addExerciseToTraining')} {$currentRouteData.name}</h1>
+{:else}
+    <h1>{$_('exercises.addExercise')}</h1>
+{/if}
 
 <div class="mb-3">
     <label for="exerciseName" class="form-label">Название упражнения</label>

@@ -36,7 +36,7 @@ const keys = {
  * @param {Array} exercisesIds
  */
 function get(exercisesIds, withLastHistory = false, byDate = ""){
-    console.log(withLastHistory);
+    // console.log(withLastHistory);
     if (config.useServer){
         return null;
     } else {
@@ -95,7 +95,7 @@ function remove(exercise: exercise){
  * @param {Array} exercisesIds
  */
 async function getExercisesFromLocalStorage(exercisesIds, withLastHistory = false, byDate = "") {
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise(resolve => setTimeout(resolve, 50));
     try {
         const exercisesJson = localStorage.getItem(keys.userExercises);
         const allExercises = arrayHelper.parseFromJson(exercisesJson);
@@ -150,7 +150,7 @@ function addNewExerciseToLocalStorage(exercise, trainingId = null){
 
 async function uploadNewExerciseToLocalStorage(exercise){
     try {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         exercise.id = random.generageUniqueId();
         const exercises = localStorage.getItem(keys.userExercises);
         const exercisesArray = exercises ? JSON.parse(exercises) : [];
@@ -192,7 +192,7 @@ function removeExerciseFromLocalStorage(exercise: exercise): void{
         exercisesArray.splice(exerciseRemoveIndex, 1);
         localStorage.setItem(keys.userExercises, JSON.stringify(exercisesArray));
 
-        //also remove exercise from training
+        //also remove exercise from trainings
         const trainingsKey = trainings.keys.trainings;
         const trainingsString = localStorage.getItem(trainingsKey);
         const trainingsArray = trainingsString ? JSON.parse(trainingsString) : [];

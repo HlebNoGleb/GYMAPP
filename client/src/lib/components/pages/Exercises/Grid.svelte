@@ -8,14 +8,24 @@
     import ExerciseCard from './Card.svelte';
     import Grid2 from './Grid2.svelte';
 
-    console.log($currentRouteData);
-
     const exercises = $currentRouteData?.exercises;
-    const trainingId = $currentRouteData?.id;
+    let trainingId = undefined;
+    let exercisesPromise = undefined;
 
-    let exercisesPromise = storage.getTrainingExercises(trainingId, true);
+
+    currentRouteData.subscribe(val => {
+        trainingId = val?.id;
+        exercisesPromise = trainingId ? storage.getTrainingExercises(trainingId, true) : storage.getExercises([], true);
+    });
+
+    // console.log($currentRouteData);
+    // console.log(trainingId);
+
 </script>
-
-<h1>{$_('exercises.exercisesText')}</h1>
+{#if trainingId}
+    <h1>{$_('exercises.trainingExercises')} {$currentRouteData.name}</h1>
+{:else}
+    <h1>{$_('exercises.allExercises')}</h1>
+{/if}
 <ButtonBack/>
-<Grid2 exercisesPromise={exercisesPromise} trainingId={trainingId}/>
+<Grid2 exercisesPromise={exercisesPromise} training={$currentRouteData}/>

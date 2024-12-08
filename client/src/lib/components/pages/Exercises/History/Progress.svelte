@@ -46,12 +46,15 @@
 
   console.log(data);
   let chartRef;
-  const onExport = () => chartRef.exportChart();
+  const onExport = () => {
+    chartRef.isNavigable = true
+    chartRef.exportChart();
+  }
 </script>
 
 <h1>Прогресс</h1>
 
-<Chart data={data} type="line" bind:this={chartRef} />
+<Chart data={data} type="bar" bind:this={chartRef} />
 <button class="btn btn-primary" on:click={onExport}>
     Export
 </button>

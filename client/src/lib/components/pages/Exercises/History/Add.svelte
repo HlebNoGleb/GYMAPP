@@ -12,14 +12,14 @@
     let newHistory = {
         exerciseId: exerciseId,
         date: null,
-        weight: '',
-        count: '',
+        weight: undefined,
+        count: 1,
         sets: 1,
         note: '',
     }
 
     function handleSubmit() {
-        if (newHistory && newHistory.weight && newHistory.count){
+        if (newHistory && newHistory.weight >= 0 && newHistory.count >= 0){
             if (date){
                 newHistory.date = new Date(date).getTime();
             } else {

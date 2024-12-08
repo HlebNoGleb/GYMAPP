@@ -86,3 +86,11 @@ h1{
     height: 50px;
     width: 50px;
 }
+
+input::placeholder{
+    color: #ccc!important;
+}
+
+.rounded-circle.add-button{
+    box-shadow: 2px 2px 5px #ccc;
+}

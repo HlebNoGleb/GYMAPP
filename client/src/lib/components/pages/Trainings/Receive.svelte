@@ -3,6 +3,7 @@
     import exercises from "../../../helpers/storage/Exercises/exercises";
     import trainings from "../../../helpers/storage/Trainings/trainings";
     import storage from "../../../helpers/storage/storage";
+    import ButtonBack from "../../common/buttonBack.svelte";
     import TrainingCard from './Card.svelte';
 
     let newTraining = null;
@@ -49,3 +50,4 @@
 </script>
 <h1>Загрузить тренировку</h1>
 <input id="file" type="file" on:change={onChange} class="btn btn-primary"/>
+<ButtonBack/>

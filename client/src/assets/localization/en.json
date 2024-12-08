@@ -23,7 +23,10 @@
     },
     "exercises": {
         "exercisesText": "Exercises Text",
-        "exercisesName": "My exercises",
-        "noExercises": "You haven't added exercises to your workout yet"
+        "noExercises": "You haven't added exercises to your workout yet",
+        "allExercises": "All exercises",
+        "trainingExercises": "Training exercises",
+        "addExercise": "Add exercise",
+        "addExerciseToTraining": "Add exercise to "
     }
 }

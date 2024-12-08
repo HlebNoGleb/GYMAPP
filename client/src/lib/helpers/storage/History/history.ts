@@ -45,7 +45,7 @@ function add(newHistory: ihistory){
 }
 
 async function getExercisesHistoryFromLocalStorage(ids: any[]) {
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise(resolve => setTimeout(resolve, 50));
     try {
         let historyKeys = [];
         ids.forEach(id => {
@@ -74,7 +74,7 @@ async function getExercisesHistoryFromLocalStorage(ids: any[]) {
 }
 
 async function getExerciseHistoryFromLocalStorage(id: string) {
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise(resolve => setTimeout(resolve, 50));
     try {
         const key = keys.history + id;
         const historyStr = localStorage.getItem(key);

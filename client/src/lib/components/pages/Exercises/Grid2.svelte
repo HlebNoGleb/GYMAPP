@@ -6,7 +6,7 @@
     import routes, { changeRoute } from '../../../helpers/routes';
     export let exercisesPromise;
     export let showAddButton = true;
-    export let trainingId = null;
+    export let training = null;
 </script>
 <div class="mb-3 mt-3">
     {#await exercisesPromise}
@@ -39,6 +39,7 @@
             <p>no exercises</p>
         {:else}
             <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3">
+                <p>Упражнений: {exercises.length}</p>
                 {#each exercises as exercise}
                 <div class="col">
                     <ExerciseCard exerciseData={exercise}/>
@@ -47,7 +48,7 @@
             </div>
         {/if}
         {#if showAddButton}
-            <button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exercisesAddNew, trainingId)}>+</button>
+            <button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exercisesAddNew, training)}>+</button>
         {/if}
     {:catch error}
         <p>Oh no: {error}</p>

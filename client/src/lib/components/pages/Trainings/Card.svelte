@@ -2,7 +2,7 @@
     import { _ } from 'svelte-i18n';
     import routes, { currentRoute, changeRoute } from "../../../helpers/routes";
     export let trainingData;
-    console.log(trainingData);
+    //console.log(trainingData);
 </script>
 
 <div class="card">

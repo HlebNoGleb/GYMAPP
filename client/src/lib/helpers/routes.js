@@ -2,7 +2,7 @@ import { _ } from 'svelte-i18n';
 import { writable } from 'svelte/store';
 import AuthorizationSignUp from '../components/auth/signUp.svelte';
 import AuthorizationSignIn from '../components/auth/signIn.svelte';
-import ExercisesGrid from '../components/pages/Exercises/TrainingExercisesGrid.svelte';
+import ExercisesGrid from '../components/pages/Exercises/Grid.svelte';
 import TrainignsGrid from '../components/pages/Trainings/Grid.svelte';
 import TrainignsAdd from '../components/pages/Trainings/Add.svelte';
 import TrainingHistory from '../components/pages/Trainings/History.svelte';
@@ -27,6 +27,7 @@ import MainPage from '../components/pages/MainPage/mainPage.svelte';
 import Share from '../components/pages/Trainings/Share.svelte';
 import ShareIcon from '/images/icons/share.png';
 import Receive from '../components/pages/Trainings/Receive.svelte';
+import { newGuid } from './random';
 
 const routes = {
     mainPage:{
@@ -180,57 +181,75 @@ const routes = {
 
 export default routes;
 
-export let currentRoute = writable(routes.calendar);
+export let currentRoute = writable(routes.trainingsGrid);
 export let currentRouteData = writable(null);
 
 export let previosRoutes = writable([]);
 
 export let userStore = writable(null);
 
+export let devMode = writable(false);
 
-export function changeRoute(route, routeData, changeHistory = true) {
+export const useGuidRouter = false;
+
+
+export function changeRoute(newRoute, newRouteData, changeHistory = true) {
     if (changeHistory){
-        setPreviosRoute();
+        setPreviosRoute(newRoute, newRouteData);
+        // newRoute.guid = newGuid();
+        // if (useGuidRouter){
+        //     window.location.hash = newRoute.guid;
+        // }
     }
 
-    currentRoute.set(route);
+    currentRoute.set(newRoute);
 
-    if (routeData) {
-        currentRouteData.set(routeData);
+
+    if (newRouteData) {
+        currentRouteData.set(newRouteData);
     } else {
         currentRouteData.set(null);
     }
+
+    console.log(getPreviousRoutes());
 }
 
 export function goBack(){
     let prev = getPreviousRoutes();
-    let lastRoute = prev[prev.length - 1];  
+    let lastRoute = prev[prev.length - 1];
 
     if (lastRoute){
         changeRoute(lastRoute.route, lastRoute.data, false);
 
         prev.pop();
-        // console.log(prev);
         previosRoutes.set(prev);
     } else {
         changeRoute(routes.trainingsGrid, null, false);
     }
-
-
 }
 
-function setPreviosRoute(){
-    let cur = getCurrentRoute();
-    let curData = getCurrentRouteData();
-    let prev = getPreviousRoutes();
+function setPreviosRoute(newRoute, newRouteData){
+    let curRoute = getCurrentRoute(); // current route before change
+    let curRouteData = getCurrentRouteData();
+    let prev = getPreviousRoutes(); // prev prev routes
+
+    // console.log(curRoute, curData);
+    // console.log(newRoute, newRouteData);
+
+    if (curRoute.name === newRoute.name) {
+        if (curRouteData?.id === newRouteData?.id) {
+            return;
+        }
+    }
+
+    // debugger
 
     let newPrev = {
-        route: cur,
-        data: curData
+        route: curRoute,
+        data: curRouteData
     }
 
     prev.push(newPrev);
-    // console.log(prev);
     previosRoutes.set(prev);
 }
 
