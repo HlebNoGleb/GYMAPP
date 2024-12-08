@@ -1,6 +1,6 @@
 <script>
     import { _ } from 'svelte-i18n';
-    import ButtonBack from '../../../common/buttonBack.svelte';
+    import ButtonBack from '../../../common/buttonsBackForward.svelte';
     import { currentRouteData } from "../../../../helpers/routes";
     import storage from "../../../../helpers/storage/storage";
 

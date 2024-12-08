@@ -7,7 +7,7 @@
     import TrainingCard from './Card.svelte';
     import ContentLoader from 'svelte-content-loader';
     import routes, { changeRoute } from '../../../helpers/routes';
-    import ButtonBack from '../../common/buttonBack.svelte';
+    import ButtonBack from '../../common/buttonsBackForward.svelte';
 
     let trainingPromise = storage.getTrainings();
 

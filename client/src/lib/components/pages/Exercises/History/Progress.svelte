@@ -1,6 +1,6 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
-    import ButtonBack from '../../../common/buttonBack.svelte';
+    import ButtonBack from '../../../common/buttonsBackForward.svelte';
     import routes, { currentRouteData, changeRoute } from "../../../../helpers/routes";
     import Chart from 'svelte-frappe-charts';
 
@@ -54,7 +54,7 @@
 
 <h1>Прогресс</h1>
 
-<Chart data={data} type="bar" bind:this={chartRef} />
+<Chart data={data} type="line" isNavigable={true} bind:this={chartRef} />
 <button class="btn btn-primary" on:click={onExport}>
     Export
 </button>

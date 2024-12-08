@@ -1,6 +1,6 @@
 <script>
     import { _ } from 'svelte-i18n';
-    import routes, { currentRoute, currentRouteData, previosRoutes, changeRoute, useGuidRouter } from "../../helpers/routes";
+    import routes, { currentRoute, currentRouteData, previosRoutes, changeRoute, changeState } from "../../helpers/routes";
     import Navbar from '../common/navbar.svelte';
     import { devMode as devModeStore } from '../../helpers/routes';
 
@@ -10,25 +10,6 @@
         devMode = val;
         console.log(devMode);
     });
-
-    function changeRouteByHash() {
-
-        if (!useGuidRouter) {
-            return;
-        }
-        // const routeGuid = window.location.hash.substring(1);
-
-        // if (!routeGuid) {
-        //     changeRoute(routes.trainingsGrid, null, false);
-        //     return;
-        // }
-
-        // let route = $previosRoutes.find(x => x.route.guid === routeGuid);
-
-        // if (route) {
-        //     changeRoute(route.route, route.data, false);
-        // }
-    }
 
 </script>
 
@@ -42,7 +23,9 @@
 
 <Navbar/>
 
-<svelte:window on:hashchange={() => {changeRouteByHash()}}/>
+<svelte:window on:popstate={() => {changeState()}} />
+
+
 
 <style>
     .container{

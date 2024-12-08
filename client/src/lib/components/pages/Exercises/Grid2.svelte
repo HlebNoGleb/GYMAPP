@@ -1,6 +1,6 @@
 <script>
     import { _ } from 'svelte-i18n';
-    import ButtonBack from '../../common/buttonBack.svelte';
+    import ButtonBack from '../../common/buttonsBackForward.svelte';
     import ContentLoader from 'svelte-content-loader';
     import ExerciseCard from './Card.svelte';
     import routes, { changeRoute } from '../../../helpers/routes';
@@ -38,8 +38,8 @@
         {#if exercises && exercises.length == 0}
             <p>no exercises</p>
         {:else}
+            <p>Упражнений: {exercises.length}</p>
             <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3">
-                <p>Упражнений: {exercises.length}</p>
                 {#each exercises as exercise}
                 <div class="col">
                     <ExerciseCard exerciseData={exercise}/>

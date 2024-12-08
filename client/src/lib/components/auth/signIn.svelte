@@ -1,6 +1,6 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
-    import ButtonBack from '../common/buttonBack.svelte';
+    import ButtonBack from '../common/buttonsBackForward.svelte';
     import { writable } from 'svelte/store';
     import { userStore, currentRoute, currentRouteData } from "../../helpers/routes";
 
@@ -36,7 +36,7 @@
             }
         });
         var data = await userResponse.json();
-        
+
         return userResponse.ok ? data : null;
     }
 
@@ -70,12 +70,12 @@
     <div class="mb-3">
         <label for="authEmailInput" class="form-label">Email</label>
         <input type="email" bind:value={email} class="form-control" id="authEmailInput" aria-describedby="emailHelp">
-    
+
         <label for="authPasswordInput" class="form-label">Password</label>
         <input type="password" bind:value={password} class="form-control" id="authPasswordInput" aria-describedby="emailHelp">
 
         <button class="mt-3 w-50 btn btn-lg btn-primary" type="submit">Login</button>
-        
+
     </div>
 </form>
 

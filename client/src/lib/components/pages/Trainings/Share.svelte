@@ -1,5 +1,5 @@
 <script>
-    import ButtonBack from '../../common/buttonBack.svelte';
+    import ButtonBack from '../../common/buttonsBackForward.svelte';
     import { currentRouteData } from "../../../helpers/routes";
 
     let trainingData = $currentRouteData;

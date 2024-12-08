@@ -5,7 +5,7 @@
     import routes, { currentRouteData, changeRoute } from "../../../../helpers/routes";
     import dateTimeHelper from "../../../../helpers/dateTime";
     import storage from "../../../../helpers/storage/storage";
-    import ButtonBack from '../../../common/buttonBack.svelte';
+    import ButtonBack from '../../../common/buttonsBackForward.svelte';
     import ContentLoader from 'svelte-content-loader';
     import historyHelper from '../../../../helpers/historyHelper';
     import arrayHelper from '../../../../helpers/array';

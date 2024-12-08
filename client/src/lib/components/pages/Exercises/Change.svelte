@@ -1,6 +1,6 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
-    import ButtonBack from '../../common/buttonBack.svelte';
+    import ButtonBack from '../../common/buttonsBackForward.svelte';
     import routes, { changeRoute, goBack, currentRouteData } from '../../../helpers/routes';
     import exercisesTypes from '../../../testData/exercisesTypes.json';
     import storage from '../../../helpers/storage/storage';

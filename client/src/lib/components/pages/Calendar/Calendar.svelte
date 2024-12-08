@@ -3,7 +3,7 @@
 
     import { onMount } from "svelte";
     import storage from "../../../helpers/storage/storage";
-    import ButtonBack from "../../common/buttonBack.svelte";
+    import ButtonBack from "../../common/buttonsBackForward.svelte";
     import DatePicker from "../../common/datePicker.svelte";
     import Grid2 from "../Exercises/Grid2.svelte";
 

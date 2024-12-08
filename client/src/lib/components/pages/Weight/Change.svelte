@@ -2,7 +2,7 @@
     import { _ } from 'svelte-i18n';
     import routes, { currentRouteData, goBack } from '../../../helpers/routes';
     import storage from '../../../helpers/storage/storage';
-    import ButtonBack from '../../common/buttonBack.svelte';
+    import ButtonBack from '../../common/buttonsBackForward.svelte';
 
     let currentWeight = $currentRouteData;
     let date = new Date(currentWeight.date).toISOString().slice(0, 16);

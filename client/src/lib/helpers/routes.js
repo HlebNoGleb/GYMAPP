@@ -1,5 +1,5 @@
 import { _ } from 'svelte-i18n';
-import { writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 import AuthorizationSignUp from '../components/auth/signUp.svelte';
 import AuthorizationSignIn from '../components/auth/signIn.svelte';
 import ExercisesGrid from '../components/pages/Exercises/Grid.svelte';
@@ -190,31 +190,97 @@ export let userStore = writable(null);
 
 export let devMode = writable(false);
 
-export const useGuidRouter = false;
+export const useStateRouter = true;
+
+let routeIndex = writable(0);
 
 
 export function changeRoute(newRoute, newRouteData, changeHistory = true) {
+    // debugger;
     if (changeHistory){
         setPreviosRoute(newRoute, newRouteData);
-        // newRoute.guid = newGuid();
-        // if (useGuidRouter){
-        //     window.location.hash = newRoute.guid;
-        // }
     }
 
     currentRoute.set(newRoute);
 
-
     if (newRouteData) {
         currentRouteData.set(newRouteData);
     } else {
-        currentRouteData.set(null);
+        currentRouteData.set(undefined);
     }
 
     console.log(getPreviousRoutes());
 }
 
+export function changeState() {
+
+    if (!useStateRouter) {
+        return;
+    }
+
+    const routeGuid = window.location.hash.substring(1);
+    const previosRoutes = getPreviousRoutes();
+
+    // debugger
+    if (previosRoutes.length == 0) {
+        const length = window.history.length;
+        window.history.go(-length);
+        window.location.replace("/");
+        return;
+    }
+
+    let route = previosRoutes.find(x => x.guid == routeGuid);
+
+    if (route) {
+        changeRoute(route.route, route.data, false);
+    }
+}
+
+function setPreviosRoute(newRoute, newRouteData){
+    let curRoute = getCurrentRoute(); // current route before change
+    let curRouteData = getCurrentRouteData();
+    let prev = getPreviousRoutes(); // prev prev routes
+
+    if (curRoute.name === newRoute.name) {
+        if (JSON.stringify(curRouteData) === JSON.stringify(newRouteData)) {
+            return;
+        }
+    }
+
+    // debugger;
+
+    let newPrev = {
+        route: curRoute,
+        data: curRouteData,
+    }
+
+    if (useStateRouter) {
+        newPrev.guid = get(routeIndex);
+        routeIndex.update(n => n + 1);
+        window.history.pushState(null, null, `#${get(routeIndex)}`);
+    }
+
+    if (prev.length > 20) {
+        prev.shift();
+    }
+
+    prev.push(newPrev);
+    previosRoutes.set(prev);
+}
+
+export function goForward(){
+    if (useStateRouter) {
+        window.history.forward();
+        return;
+    }
+}
+
 export function goBack(){
+    if (useStateRouter) {
+        window.history.back();
+        return;
+    }
+
     let prev = getPreviousRoutes();
     let lastRoute = prev[prev.length - 1];
 
@@ -228,30 +294,7 @@ export function goBack(){
     }
 }
 
-function setPreviosRoute(newRoute, newRouteData){
-    let curRoute = getCurrentRoute(); // current route before change
-    let curRouteData = getCurrentRouteData();
-    let prev = getPreviousRoutes(); // prev prev routes
 
-    // console.log(curRoute, curData);
-    // console.log(newRoute, newRouteData);
-
-    if (curRoute.name === newRoute.name) {
-        if (curRouteData?.id === newRouteData?.id) {
-            return;
-        }
-    }
-
-    // debugger
-
-    let newPrev = {
-        route: curRoute,
-        data: curRouteData
-    }
-
-    prev.push(newPrev);
-    previosRoutes.set(prev);
-}
 
 function getPreviousRoutes(){
     let prev = [];
@@ -274,7 +317,7 @@ function getCurrentRoute(){
 }
 
 function getCurrentRouteData(){
-    let curData = null;
+    let curData = undefined;
 
     currentRouteData.subscribe(val => {
         curData = val;
