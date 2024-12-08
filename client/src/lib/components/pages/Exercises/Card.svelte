@@ -5,6 +5,7 @@
     import dateTimeHelper from '../../../helpers/dateTime';
     import arrayHelper from '../../../helpers/array';
     export let exerciseData;
+    export let showButtons = true;
 
     // console.log(exerciseData)
 </script>
@@ -24,10 +25,12 @@
                 </div>
             {/each}
         {/if}
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <button class="btn btn-primary" on:click={() => changeRoute(routes.exerciseHistory, exerciseData)}>Перейти</button>
-            <button class="btn btn-outline-primary" on:click={() => changeRoute(routes.exercisesChange, exerciseData)}>Изменить</button>
-        </div>
+        {#if showButtons}
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                <button class="btn btn-primary" on:click={() => changeRoute(routes.exerciseHistory, exerciseData)}>Перейти</button>
+                <button class="btn btn-outline-primary" on:click={() => changeRoute(routes.exercisesChange, exerciseData)}>Изменить</button>
+            </div>
+        {/if}
     </div>
     <!-- <div class="card-footer text-muted">
         {dateTimeHelper.calcAgo(exerciseData.lastDateTime)}

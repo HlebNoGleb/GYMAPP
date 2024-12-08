@@ -153,7 +153,7 @@ function addNewHistoryToLocalStorage(newHistory){
             localStorage.setItem(historyKey, JSON.stringify(historyArray));
         });
 
-        updateCalendar(newHistory);
+        addHistoryToCalendar(newHistory);
 
     } catch (error) {
         console.error(`Failed to add object to localStorage: ${error}`);
@@ -185,7 +185,11 @@ function removeHistoryFromLocalStorage(newHistory) {
     localStorage.setItem(historyKey, JSON.stringify(historyArray));
 }
 
-function updateCalendar(newHistory) {
+function removeHistoryFromCalendar(history) {
+    console.log(history);
+}
+
+function addHistoryToCalendar(newHistory) {
     let calendarDate = new Date(newHistory.date).toJSON().split("T")[0];
     let calendarArray = JSON.parse(localStorage.getItem(keys.calendar) || "[]");
     let currentCalendarDay = calendarArray.find(x => x.date == calendarDate);
@@ -204,6 +208,8 @@ function updateCalendar(newHistory) {
 
     localStorage.setItem(keys.calendar, JSON.stringify(calendarArray));
 }
+
+
 
 function getCalendarExercisesFromLocalStorage() {
     //todo - доделать периоды по месяцам календаря
