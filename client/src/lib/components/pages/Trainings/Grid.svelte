@@ -1,5 +1,5 @@
 <!-- trainings main page -->
-<script>
+<script lang="ts">
 // @ts-nocheck
 
     import { _ } from 'svelte-i18n';
@@ -9,10 +9,10 @@
     import routes, { changeRoute } from '../../../helpers/routes';
     import ButtonBack from '../../common/buttonsBackForward.svelte';
 
-    let trainingPromise = storage.getTrainings();
+    let trainingPromise = storage.getTrainings([], true);
 
     const updateTrainings = () => {
-        trainingPromise = storage.getTrainings();
+        trainingPromise = storage.getTrainings([], true);
     }
 </script>
 

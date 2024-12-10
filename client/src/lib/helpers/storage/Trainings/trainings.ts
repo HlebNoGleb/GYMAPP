@@ -152,6 +152,7 @@ function addNewTrainingToLocalStorage(newTraining){
         newTraining.id = random.generageUniqueId();
         newTraining.dates = {createDate: new Date().getTime()}
         console.log(newTraining);
+        delete newTraining.exerciseData;
         const trainings = localStorage.getItem(keys.trainings);
         const trainingsArray = trainings ? JSON.parse(trainings) : [];
         trainingsArray.push(newTraining);
@@ -164,6 +165,7 @@ function addNewTrainingToLocalStorage(newTraining){
 function uploadNewTrainingToLocalStorage(newTraining){
     try {
         newTraining.id = random.generageUniqueId();
+        delete newTraining.exerciseData;
         newTraining.dates = {createDate: new Date().getTime()}
         const trainings = localStorage.getItem(keys.trainings);
         const trainingsArray = trainings ? JSON.parse(trainings) : [];
@@ -178,6 +180,7 @@ function uploadNewTrainingToLocalStorage(newTraining){
 function changeTrainingInLocalStorage(training){
     try {
         const id = training.id;
+        delete training.exerciseData;
         const trainings = localStorage.getItem(keys.trainings);
         const trainingsArray = trainings ? JSON.parse(trainings) : [];
         const trainingForChangeIndex = trainingsArray.findIndex(x=>x.id === id);
