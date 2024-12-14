@@ -4,7 +4,7 @@ import random from "../../../random";
 import arrayHelper from "../../../array";
 import {keys as exercisesKeys} from "../exercises";
 
-export interface IHistory {
+export interface IBaseHistory {
     id: string,
     userId : string,
     exerciseId: number,
@@ -12,20 +12,22 @@ export interface IHistory {
     note: string,
 }
 
-export interface IhistoryRepetitionWeight extends IHistory {
+export interface IhistoryRepetitionWeight extends IBaseHistory {
     weight: number,
     count: number,
     sets: number
 }
 
-export interface IhistoryTimeDistance extends IHistory {
+export interface IhistoryTimeDistance extends IBaseHistory {
     distance: number,
     time: number
 }
 
-export interface IhistoryTime extends IHistory {
+export interface IhistoryTime extends IBaseHistory {
     time: number
 }
+
+export type IHistory = IhistoryRepetitionWeight | IhistoryTimeDistance | IhistoryTime;
 
 const history = {
     get, add, change, remove, getDots

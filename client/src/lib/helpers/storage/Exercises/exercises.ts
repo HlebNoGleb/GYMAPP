@@ -6,9 +6,9 @@ import trainings from "../Trainings/trainings";
 import history from "./History/history";
 
 export enum ExerciseType {
-    repetition_weight = "0",
-    time_distance = "1",
-    time = "2"
+    repetition_weight = "1",
+    time_distance = "2",
+    time = "3"
 }
 
 export interface INewExercise {

@@ -3,14 +3,13 @@
     import ButtonBack from '../../../common/buttonsBackForward.svelte';
     import { currentRouteData } from "../../../../helpers/routes";
     import storage from "../../../../helpers/storage/storage";
-    import { type IHistory, type IhistoryRepetitionWeight, type IhistoryTimeDistance, type IhistoryTime } from '../../../../helpers/storage/Exercises/History/history';
+    import { type IHistory } from '../../../../helpers/storage/Exercises/History/history';
+    import { ExerciseType } from '../../../../helpers/storage/Exercises/exercises';
 
     let exerciseId = $currentRouteData.exercise.id;
-    console.log(exerciseId);
+    console.log($currentRouteData.exercise.type);
 
     let date = new Date().toISOString().slice(0, 16);
-
-    type CombinedHistory = IHistory & (IhistoryRepetitionWeight | IhistoryTimeDistance | IhistoryTime);
 
     let newHistory:IHistory = {
         exerciseId: exerciseId,
@@ -40,6 +39,7 @@
 
 <h1>Добавление истории {$currentRouteData.exercise.name}</h1>
 
+{#if $currentRouteData.exercise.type == ExerciseType.repetition_weight}
 <div class="mb-3">
     <label for="weight" class="form-label">Вес</label>
     <input type="number" bind:value={newHistory.weight} class="form-control" id="weight" placeholder="1">
@@ -52,6 +52,24 @@
     <label for="sets" class="form-label">Подходы</label>
     <input type="number" bind:value={newHistory.sets} class="form-control" id="sets" placeholder="1">
 </div>
+{:else if $currentRouteData.exercise.type == ExerciseType.time_distance}
+    <div class="mb-3">
+        <label for="time" class="form-label">Время</label>
+        <input type="number" bind:value={newHistory.time} class="form-control" id="time" placeholder="1">
+        <div class="form-text">В минутах</div>
+    </div>
+    <div class="mb-3">
+        <label for="distance" class="form-label">Дистанция</label>
+        <input type="number" bind:value={newHistory.distance} class="form-control" id="distance" placeholder="1">
+        <div class="form-text">В километрах</div>
+    </div>
+{:else if $currentRouteData.exercise.type == ExerciseType.time}
+<div class="mb-3">
+    <label for="time" class="form-label">Время</label>
+    <input type="number" bind:value={newHistory.time} class="form-control" id="time" placeholder="1">
+    <div class="form-text">В минутах</div>
+</div>
+{/if}
 <div class="mb-3">
     <label for="sets" class="form-label">Дата и время</label>
     <input type="datetime-local" bind:value={date} class="form-control" id="date" placeholder="1">
