@@ -7,24 +7,24 @@
     export let exerciseData;
     export let showButtons = true;
 
-    // console.log(exerciseData)
+    console.log(exerciseData)
 </script>
 
 <div class="card h-100">
     <div class="card-body">
         <h5 class="card-title">{exerciseData.name}</h5>
-        {#if arrayHelper.hasData(exerciseData.lastHistory)}
-            {#each exerciseData.lastHistory as lastHistory}
-                <!-- {new Date(lastHistory.date).toLocaleDateString()} - {dateTimeHelper.getDayName(lastHistory.date)} -->
+            <!-- {#if exerciseData.history.data.length > 0} -->
+            {#each exerciseData.history as historyItem}
                 <div class="d-flex flex-wrap my-2" style="gap: 0.2rem;">
-                    {#each lastHistory.data as data}
+                    {#each historyItem.data as data}
                         <span class='badge rounded-pill text-bg-primary'>
                             {historyHelper.calcCount(data.count)} x {historyHelper.calcWeight(data.weight)}
                         </span>
                     {/each}
                 </div>
             {/each}
-        {/if}
+
+            <!-- {/if} -->
         {#if showButtons}
             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                 <button class="btn btn-primary" on:click={() => changeRoute(routes.exerciseHistory, exerciseData)}>Перейти</button>

@@ -3,7 +3,7 @@
  * @param {Number} date
  */
 export function calcAgo(date) {
-    if (!date){
+    if (!date) {
         return ""
     }
     let dateStart = new Date(date);
@@ -14,19 +14,22 @@ export function calcAgo(date) {
     return `${diffDays} days ago`
 }
 
-export function getDayName(date){
+export function getDayName(date) {
     const dateObj = new Date(date);
-    const options = { weekday: 'long'}; // или 'short' для короткого названия
+    const options = {
+        weekday: 'long'
+    }; // или 'short' для короткого названия
     return new Intl.DateTimeFormat('ru-RU', options).format(dateObj);
 }
 
 const dateTimeHelper = {
-    calcAgo, getDayName
+    calcAgo,
+    getDayName
 }
 
 export default dateTimeHelper
 
-export function getCalendar(date){
+export function getCalendar(date) {
     let year = date.getFullYear();
     let month = date.getMonth();
 
@@ -73,68 +76,123 @@ export function getCalendar(date){
     return [...prevMonthDateArray, ...currentMonthDateArray, ...nextMonthDateArray];
 }
 
-function createDay(date, currentMonth = false){
-let day = {date:date, data: []}
-let today = isToday(date);
+function createDay(date, currentMonth = false) {
+    let day = {
+        date: date,
+    }
+    let today = isToday(date);
 
-if (today){
-    day.today = true;
+    if (today) {
+        day.today = true;
+    }
+
+    if (currentMonth) {
+        day.currentMonth = true;
+    }
+
+    return day;
 }
 
-if (currentMonth){
-    day.currentMonth = true;
+export function isToday(date) {
+    return date.toJSON() == new Date(new Date().setHours(0, 0, 0, 0)).toJSON()
 }
 
-return day;
-}
-
-export function isToday(date){
-return date.toJSON() == new Date(new Date().setHours(0,0,0,0)).toJSON()
-}
-
-export let dayLocaleOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-export let monthLocaleOptions = {year: 'numeric', month: 'long' };
+export let dayLocaleOptions = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+};
+export let monthLocaleOptions = {
+    year: 'numeric',
+    month: 'long'
+};
 export let dayLabels = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
 export let getMonthList = () => {
-let months = [
-    {value: 0, label: "Январь"},
-    {value: 1, label: "Февраль"},
-    {value: 2, label: "Март"},
-    {value: 3, label: "Апрель"},
-    {value: 4, label: "Май"},
-    {value: 5, label: "Июнь"},
-    {value: 6, label: "Июль"},
-    {value: 7, label: "Август"},
-    {value: 8, label: "Сентябрь"},
-    {value: 9, label: "Октябрь"},
-    {value: 10, label: "Ноябрь"},
-    {value: 11, label: "Декабрь"}
-];
+    let months = [{
+            value: 0,
+            label: "Январь"
+        },
+        {
+            value: 1,
+            label: "Февраль"
+        },
+        {
+            value: 2,
+            label: "Март"
+        },
+        {
+            value: 3,
+            label: "Апрель"
+        },
+        {
+            value: 4,
+            label: "Май"
+        },
+        {
+            value: 5,
+            label: "Июнь"
+        },
+        {
+            value: 6,
+            label: "Июль"
+        },
+        {
+            value: 7,
+            label: "Август"
+        },
+        {
+            value: 8,
+            label: "Сентябрь"
+        },
+        {
+            value: 9,
+            label: "Октябрь"
+        },
+        {
+            value: 10,
+            label: "Ноябрь"
+        },
+        {
+            value: 11,
+            label: "Декабрь"
+        }
+    ];
 
-months = months.map(month => {
-    if (month.value === new Date().getMonth()) {
-        return {...month, current: true};
-    }
+    months = months.map(month => {
+        if (month.value === new Date().getMonth()) {
+            return {
+                ...month,
+                current: true
+            };
+        }
 
-    return month;
-});
+        return month;
+    });
 
-return months;
+    return months;
 }
+
 export let getYearsList = () => {
-let yearList = [];
-for (let index = 2000; index < 2050; index++) {
-    yearList.push({value: index, label: index});
-}
-
-yearList = yearList.map(year => {
-    if (year.value === new Date().getFullYear()) {
-        return {...year, current: true};
+    let yearList = [];
+    for (let index = 2000; index < 2050; index++) {
+        yearList.push({
+            value: index,
+            label: index
+        });
     }
 
-    return year;
-});
+    yearList = yearList.map(year => {
+        if (year.value === new Date().getFullYear()) {
+            return {
+                ...year,
+                current: true
+            };
+        }
+
+        return year;
+    });
 
 
-return yearList;
+    return yearList;
 }

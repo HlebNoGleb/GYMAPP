@@ -1,21 +1,26 @@
-<script>
+<script lang="ts">
     import { _ } from 'svelte-i18n';
     import ButtonBack from '../../../common/buttonsBackForward.svelte';
     import { currentRouteData } from "../../../../helpers/routes";
     import storage from "../../../../helpers/storage/storage";
+    import { type IHistory, type IhistoryRepetitionWeight, type IhistoryTimeDistance, type IhistoryTime } from '../../../../helpers/storage/Exercises/History/history';
 
-    let exerciseId = $currentRouteData;
+    let exerciseId = $currentRouteData.exercise.id;
     console.log(exerciseId);
 
     let date = new Date().toISOString().slice(0, 16);
 
-    let newHistory = {
+    type CombinedHistory = IHistory & (IhistoryRepetitionWeight | IhistoryTimeDistance | IhistoryTime);
+
+    let newHistory:IHistory = {
         exerciseId: exerciseId,
         date: null,
         weight: undefined,
         count: 1,
         sets: 1,
         note: '',
+        id: '',
+        userId: ''
     }
 
     function handleSubmit() {
@@ -33,7 +38,7 @@
 	}
 </script>
 
-<h1>Добавление истории</h1>
+<h1>Добавление истории {$currentRouteData.exercise.name}</h1>
 
 <div class="mb-3">
     <label for="weight" class="form-label">Вес</label>

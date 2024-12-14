@@ -6,7 +6,7 @@
     import storage from '../../../../helpers/storage/storage';
     import ButtonBack from '../../../common/buttonsBackForward.svelte';
 
-    let newHistory = $currentRouteData;
+    let newHistory = $currentRouteData.history;
     let date = new Date(newHistory.date).toISOString().slice(0, 16);
 
     function changeHistory() {
@@ -32,7 +32,7 @@
 	}
 </script>
 
-<h1>Изменение истории</h1>
+<h1>Изменение истории {$currentRouteData.exercise.name}</h1>
 
 <div class="mb-3">
     <label for="weight" class="form-label">Вес</label>

@@ -61,7 +61,7 @@
                             </div>
                             <ul class="list-group list-group-flush">
                                 {#each history.data as data}
-                                    <button on:click={() => changeRoute(routes.exerciseHistoryChange, data)} class="list-group-item list-group-item-action">{historyHelper.calcWeight(data.weight)} x {historyHelper.calcCount(data.count)}</button>
+                                    <button on:click={() => changeRoute(routes.exerciseHistoryChange, {exercise: exerciseData, history: data})} class="list-group-item list-group-item-action">{historyHelper.calcWeight(data.weight)} x {historyHelper.calcCount(data.count)}</button>
                                 {/each}
                             </ul>
                         </div>
@@ -76,7 +76,7 @@
     {/await}
 </div>
 
-<button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exerciseHistoryAddNew, exerciseData.id)}>+</button>
+<button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exerciseHistoryAddNew, {exercise: exerciseData, history: undefined})}>+</button>
 
 <style>
 

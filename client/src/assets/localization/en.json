@@ -23,6 +23,11 @@
         "loading":"Loading your trainings"
     },
     "exercises": {
+        "types": {
+            "repetition_weight": "Repetition + weight",
+            "time_distance": "Time + distance",
+            "time": "Time"
+        },
         "exercisesText": "Exercises Text",
         "noExercises": "You haven't added exercises to your workout yet",
         "allExercises": "All exercises",

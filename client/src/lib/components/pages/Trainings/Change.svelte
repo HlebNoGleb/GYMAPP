@@ -73,7 +73,7 @@
     {/each}
 {/await}
 
-<button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exercisesAddNew, null)}>+</button>
+<button class="btn btn-primary rounded-circle add-button" on:click={() => changeRoute(routes.exercisesAddNew, undefined)}>+</button>
 
 <style>
     .check-info{

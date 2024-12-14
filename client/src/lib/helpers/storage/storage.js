@@ -33,9 +33,8 @@ function uploadTraining(newTraining){
 /**
  * @param {Array} exercisesIds
  */
-function getExercises(exercisesIds, withLastHistory = false, byDate = ""){
-    console.log(withLastHistory);
-    const exercisesArray = exercises.get(exercisesIds, withLastHistory, byDate);
+function getExercises(exercisesIds, withLastHistory = false, byDate = "", onlyWithHistory = false){
+    const exercisesArray = exercises.get({ids: exercisesIds, withLastHistory: withLastHistory, byDate: byDate, onlyWithHistory: onlyWithHistory});
     return exercisesArray;
 }
 
@@ -49,11 +48,9 @@ async function getTrainingExercises(trainingId, withLastHistory = false, byDate 
 
     const training = await trainings.get(trainingIds);
 
-    // console.log(training);
-
     if (training && training.length > 0){
         const exercisesIds = training[0].exercises;
-        const exercisesArray = exercises.get(exercisesIds, withLastHistory, byDate);
+        const exercisesArray = exercises.get({ids: exercisesIds, withLastHistory: withLastHistory, byDate: byDate, onlyWithHistory: false});
         return exercisesArray;
     }
 
@@ -124,6 +121,10 @@ function removeWeight(newWeight){
     weights.remove(newWeight);
 }
 
+function getDots(dateFrom, dateTo) {
+    return history.getDots(dateFrom, dateTo);
+}
+
 const storage = {
     getTrainings,
     getExercises,
@@ -144,7 +145,8 @@ const storage = {
     changeTraining,
     removeTraining,
     uploadExercise,
-    uploadTraining
+    uploadTraining,
+    getDots,
 }
 
 export default storage;

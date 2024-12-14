@@ -23,6 +23,11 @@
         "loading":"Загружаем ваши тренировки"
     },
     "exercises": {
+        "types": {
+            "repetition_weight": "Повторения + вес",
+            "time_distance": "Время + дистанция",
+            "time": "Время"
+        },
         "exercisesText": "Упражнения",
         "noExercises": "Вы еще не добавили упражнения в тренировку",
         "allExercises": "Все упражнения",

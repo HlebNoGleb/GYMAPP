@@ -137,7 +137,7 @@ async function getTrainingsExercises(trainings){
         const exercisesIds = training.exercises;
         console.log(exercisesIds);
         if (arrayHelper.hasData(exercisesIds)) {
-            let data = await exercises.get(exercisesIds);
+            let data = await exercises.get({ids: exercisesIds, withLastHistory: true, byDate: false, onlyWithHistory: true});
             training.exerciseData = data;
         }
 

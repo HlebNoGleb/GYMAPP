@@ -4,13 +4,17 @@
     import routes, { changeRoute, currentRouteData, goBack } from '../../../helpers/routes';
     import exercisesTypes from '../../../testData/exercisesTypes.json';
     import storage from '../../../helpers/storage/storage';
+    import { type INewExercise, ExerciseType } from '../../../helpers/storage/Exercises/exercises';
 
-    console.log($currentRouteData);
-
-    let newExercise = {
+    let newExercise:INewExercise = {
+        userId: undefined,
         name: '',
         description: '',
-        type: exercisesTypes[0].id
+        type: ExerciseType.repetition_weight
+    }
+
+    $: {
+        console.log(newExercise)
     }
 
     function saveExercises() {
@@ -38,9 +42,9 @@
 </div>
 <div class="mb-3">
     <select class="form-select" bind:value={newExercise.type}>
-		{#each exercisesTypes as type}
-			<option value={type.id}>
-				{type.name}
+		{#each Object.values(ExerciseType).filter((x) => !isNaN(Number(x))) as type}
+			<option value={type}>
+				{$_('exercises.types.' + Object.keys(ExerciseType).filter(x => ExerciseType[x] == type))}
 			</option>
 		{/each}
 	</select>

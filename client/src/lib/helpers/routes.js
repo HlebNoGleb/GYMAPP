@@ -181,8 +181,8 @@ const routes = {
 
 export default routes;
 
-export let currentRoute = writable(routes.mainPage);
-export let currentRouteData = writable(null);
+export let currentRoute = writable(routes.trainingsGrid);
+export let currentRouteData = writable(undefined);
 
 export let previosRoutes = writable([]);
 
@@ -214,12 +214,14 @@ export function changeRoute(newRoute, newRouteData, changeHistory = true) {
 
 export function changeState() {
 
+    // debugger
     if (!useStateRouter) {
         return;
     }
 
     const routeGuid = window.location.hash.substring(1);
     const previosRoutes = getPreviousRoutes();
+
 
     // debugger
     if (previosRoutes.length == 0) {
@@ -290,7 +292,7 @@ export function goBack(){
         prev.pop();
         previosRoutes.set(prev);
     } else {
-        changeRoute(routes.trainingsGrid, null, false);
+        changeRoute(routes.mainPage, undefined, false);
     }
 }
 
