@@ -181,7 +181,7 @@ const routes = {
 
 export default routes;
 
-export let currentRoute = writable(routes.trainingsGrid);
+export let currentRoute = writable(routes.mainPage);
 export let currentRouteData = writable(undefined);
 
 export let previosRoutes = writable([]);

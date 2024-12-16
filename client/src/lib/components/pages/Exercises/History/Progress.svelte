@@ -3,60 +3,99 @@
     import ButtonBack from '../../../common/buttonsBackForward.svelte';
     import routes, { currentRouteData, changeRoute } from "../../../../helpers/routes";
     import Chart from 'svelte-frappe-charts';
+    import { onMount } from 'svelte';
+    import { ExerciseType } from '../../../../helpers/storage/Exercises/exercises';
 
-    let exerciseHistory = $currentRouteData;
+    let exerciseData = $currentRouteData;
 
-    console.log(exerciseHistory);
+    console.log(exerciseData)
 
-    let labels = exerciseHistory.reduce((acc, cur) => {
+    let labels = exerciseData.history.reduce((acc, cur) => {
         cur.data.forEach(() => {
-            const date = new Date(cur.date).toLocaleDateString();
+            const date = new Date(cur.date);
             acc.push(date);
         });
         return acc;
     }, []);
 
-    const weights = exerciseHistory.reduce((acc, cur) => {
+    const weights = exerciseData.history.reduce((acc, cur) => {
         cur.data.forEach(history => {
             acc.push(history.weight);
         });
         return acc;
     }, []);
 
-    const counts = exerciseHistory.reduce((acc, cur) => {
+    const counts = exerciseData.history.reduce((acc, cur) => {
         cur.data.forEach(history => {
             acc.push(history.count);
         });
         return acc;
     }, []);
 
-    let data = {
-        labels: labels,
-        datasets: [
-            {
-                name: "kg",
-                values: weights,
-            },
-            {
-                name: "count",
-                values: counts,
-            }
-        ]
-  };
+    const time = exerciseData.history.reduce((acc, cur) => {
+        cur.data.forEach(history => {
+            acc.push(history.time);
+        });
+        return acc;
+    }, []);
 
-  console.log(data);
-  let chartRef;
-  const onExport = () => {
-    chartRef.isNavigable = true
-    chartRef.exportChart();
+    const distance = exerciseData.history.reduce((acc, cur) => {
+        cur.data.forEach(history => {
+            acc.push(history.distance);
+        });
+        return acc;
+    }, []);
+
+  let columns = [
+      ["x" ].concat(labels),
+  ];
+
+  if (exerciseData.exercise.type == ExerciseType.repetition_weight) {
+    columns.push(["Подходы"].concat(counts));
+    columns.push(["Вес"].concat(weights));
   }
+
+  if (exerciseData.exercise.type == ExerciseType.time_distance) {
+    columns.push(["Время"].concat(time));
+    columns.push(["Дистанция"].concat(distance));
+  }
+
+  if (exerciseData.exercise.type == ExerciseType.time) {
+    columns.push(["Время"].concat(time));
+
+  }
+
+  console.log(columns);
+
+  onMount(() => {
+        var chart = c3.generate({
+        bindto: '#chart',
+        zoom: {
+            enabled: true
+        },
+        data: {
+            x: 'x',
+            columns: columns
+        },
+        axis: {
+            x: {
+                type: 'timeseries',
+                localtime: false,
+                tick: {
+                    format: function (x) {
+                        return x.toLocaleDateString();
+                    }
+                }
+            }
+        }
+    });
+  })
 </script>
 
 <h1>Прогресс</h1>
 
-<Chart data={data} type="line" isNavigable={true} bind:this={chartRef} />
-<button class="btn btn-primary" on:click={onExport}>
-    Export
-</button>
+
+<div id="chart"></div>
+
 
 <ButtonBack/>

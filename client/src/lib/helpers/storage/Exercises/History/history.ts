@@ -2,7 +2,7 @@ import config from "../../../configs/config";
 import DefaultExercises from '../../../../testData/exercisesDefault.json';
 import random from "../../../random";
 import arrayHelper from "../../../array";
-import {keys as exercisesKeys} from "../exercises";
+import {keys as exercisesKeys, ExerciseType} from "../exercises";
 
 export interface IBaseHistory {
     id: string,
@@ -10,6 +10,7 @@ export interface IBaseHistory {
     exerciseId: number,
     date: number,
     note: string,
+    type: ExerciseType
 }
 
 export interface IhistoryRepetitionWeight extends IBaseHistory {
@@ -29,8 +30,113 @@ export interface IhistoryTime extends IBaseHistory {
 
 export type IHistory = IhistoryRepetitionWeight | IhistoryTimeDistance | IhistoryTime;
 
+
+class HistoryRepetitionWeight implements IhistoryRepetitionWeight {
+    id: string;
+    userId : string;
+    exerciseId: number;
+    date: number;
+    note: string;
+    weight: number;
+    count: number;
+    sets: number;
+    type: ExerciseType;
+
+    constructor() {
+        this.weight = undefined;
+        this.count = undefined;
+        this.sets = undefined;
+        this.note = "";
+        this.type = ExerciseType.repetition_weight
+    }
+}
+
+class HistoryTimeDistance implements IhistoryTimeDistance {
+    id: string;
+    userId : string;
+    exerciseId: number;
+    date: number;
+    note: string;
+    distance: number;
+    time: number;
+    type: ExerciseType;
+
+
+    constructor() {
+        this.distance = undefined;
+        this.time = undefined;
+        this.note = "";
+        this.type = ExerciseType.time_distance
+    }
+}
+
+class HistoryTime implements IhistoryTime {
+    time: number;
+    id: string;
+    userId: string;
+    exerciseId: number;
+    date: number;
+    note: string;
+    type: ExerciseType;
+
+    constructor() {
+        this.time = undefined;
+        this.note = "";
+        this.type = ExerciseType.time
+    }
+}
+
+export class HistoryModel implements IBaseHistory {
+    id: string;
+    userId : string;
+    exerciseId: number;
+    date: number;
+    note: string;
+    type: ExerciseType;
+
+    static create(type: ExerciseType) {
+        if (type == ExerciseType.repetition_weight) {
+            return new HistoryRepetitionWeight();
+        }
+
+        if (type == ExerciseType.time_distance) {
+            return new HistoryTimeDistance();
+        }
+
+        if (type == ExerciseType.time) {
+            return new HistoryTime();
+        }
+    }
+
+    static validate(history: IHistory, type: ExerciseType) {
+        if (type == ExerciseType.repetition_weight) {
+            if (history.weight != null && history.count != null && history.sets != null) {
+                return history.weight >= 0 && history.count >= 0 && history.sets >= 0;
+            }
+
+            return false
+        }
+
+        if (type == ExerciseType.time_distance) {
+            if (history.distance != null && history.time != null) {
+                return history.distance >= 0 && history.time >= 0;
+            }
+
+            return false
+        }
+
+        if (type == ExerciseType.time) {
+            if (history.time != null) {
+                return history.time >= 0;
+            }
+
+            return false
+        }
+    }
+}
+
 const history = {
-    get, add, change, remove, getDots
+    get, add, change, remove, getDots, getHistoriesByXMonths
 };
 
 export default history;
@@ -92,11 +198,19 @@ function getDots(dateFrom, dateTo) {
     }
 }
 
+function getHistoriesByXMonths(months) {
+    if (config.useServer){
+        return null;
+    } else {
+        return getHistoriesByXMonthsFromLocalstorage(months);
+    }
+}
+
 
 /**
  * @param {Number} exercisesId
  */
-async function getHistoryFromLocalStorage(exercisesId, onlyLastHistory = false, byDate = "") {
+async function getHistoryFromLocalStorage(exercisesId, onlyLastHistory = false, byDate = 0) {
     // await new Promise(resolve => setTimeout(resolve, 50));
     try {
         const historyKey = `${keys.history}-${exercisesId}`;
@@ -114,12 +228,12 @@ async function getHistoryFromLocalStorage(exercisesId, onlyLastHistory = false, 
         // debugger
 
         if (byDate){
-            let data = sortedHistory.find(x => x.date == byDate);
+            let data = sortedHistory.find(x => new Date(x.date).setHours(0, 0, 0, 0) == byDate);
             return data ? [data] : []
         }
 
         if (onlyLastHistory){
-            let data = sortedHistory[sortedHistory.length - 1];
+            let data = sortedHistory[0];
             return data ? [data] : []
         }
 
@@ -132,12 +246,13 @@ async function getHistoryFromLocalStorage(exercisesId, onlyLastHistory = false, 
 }
 
 async function sortHistoryByDate(history: IHistory[]) {
+
     const result = history.reduce(function(acc, obj) {
 
-        const datetime = new Date(obj.date).setHours(0, 0, 0, 0);
+        const datetime = obj.date;
 
         var found = acc.find(function(item) {
-            return item.date === datetime;
+            return new Date(item.date).setHours(0, 0, 0, 0) === new Date(datetime).setHours(0, 0, 0, 0);
         });
 
         if (found) {
@@ -149,6 +264,10 @@ async function sortHistoryByDate(history: IHistory[]) {
         return acc;
     }, []);
 
+    result.sort(function(a, b) {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+
     return result;
 }
 
@@ -158,22 +277,30 @@ async function sortHistoryByDate(history: IHistory[]) {
 
 function addNewHistoryToLocalStorage(newHistory: IHistory){
     try {
-        const setsArray = Array(newHistory.sets).fill(1)
-        setsArray.forEach(set => {
-            newHistory.id = random.generageUniqueId();
-            newHistory.sets = 1;
-            const historyKey = `${keys.history}-${newHistory.exerciseId}`;
-            const historyString = localStorage.getItem(historyKey);
-            const historyArray = historyString ? JSON.parse(historyString) : [];
-            historyArray.push(newHistory);
-            localStorage.setItem(historyKey, JSON.stringify(historyArray));
-        });
+        if (newHistory.sets != undefined) {
+            const setsArray = Array(newHistory.sets).fill(1)
+            setsArray.forEach(set => {
+                newHistory.sets = 1;
+                addOneHistoryToLocalStorage(newHistory);
+            });
 
-        // addHistoryToCalendar(newHistory);
+            return;
+        }
+
+        addOneHistoryToLocalStorage(newHistory);
 
     } catch (error) {
         console.error(`Failed to add object to localStorage: ${error}`);
     }
+}
+
+function addOneHistoryToLocalStorage(newHistory: IHistory) {
+    newHistory.id = random.generageUniqueId();
+    const historyKey = `${keys.history}-${newHistory.exerciseId}`;
+    const historyString = localStorage.getItem(historyKey);
+    const historyArray = historyString ? JSON.parse(historyString) : [];
+    historyArray.push(newHistory);
+    localStorage.setItem(historyKey, JSON.stringify(historyArray));
 }
 
 /**
@@ -241,4 +368,89 @@ async function getDotsFromLocalstorage(dateFrom, dateTo) {
         console.error(`Failed to get objects from localStorage: ${error}`);
         return [];
     }
+}
+
+async function getHistoriesByXMonthsFromLocalstorage(numberOfMonths) {
+    try {
+
+
+        if (numberOfMonths == -1) {
+            const firstHistory = await getFirstHistoryFromLocalStorage();
+            numberOfMonths = getMonthsSinceDate(new Date(firstHistory.date)) + 1;
+        }
+
+        let histories = [];
+        for (let i = 0; i < numberOfMonths; i++) {
+            const date = new Date(new Date(new Date(new Date().setMonth(new Date().getMonth() - (i))).setDate(1)).setHours(0, 0, 0, 0));
+            histories.push({year: date.getFullYear(), month: date.getMonth(), data: []});
+        }
+
+        const exercises = localStorage.getItem(exercisesKeys.userExercises);
+        const exercisesArray = exercises ? JSON.parse(exercises) : [];
+
+        const exercisesIds = exercisesArray.map(x=>x.id);
+
+        for (let i = 0; i < exercisesIds.length; i++) {
+            const id = exercisesIds[i];
+
+            const exerciseHistory = await getHistoryFromLocalStorage(id, false);
+
+            if (!exerciseHistory) {
+                continue;
+            }
+
+            exerciseHistory.forEach(history => {
+                const historyYear = new Date(history.date).getFullYear();
+                const historyMonth = new Date(history.date).getMonth();
+                const historyIndex = histories.findIndex(x=>x.year === historyYear && x.month === historyMonth);
+                if (historyIndex !== -1) {
+                    histories[historyIndex].data.push(history)
+                }
+            });
+        }
+
+        return histories;
+
+
+    } catch (error) {
+
+    }
+}
+
+function getMonthsSinceDate(startDate) {
+    const currentDate = new Date();
+    const yearsDifference = currentDate.getFullYear() - startDate.getFullYear();
+    const monthsDifference = currentDate.getMonth() - startDate.getMonth();
+
+    return yearsDifference * 12 + monthsDifference;
+    }
+
+async function getFirstHistoryFromLocalStorage() {
+
+    const exercises = localStorage.getItem(exercisesKeys.userExercises);
+    const exercisesArray = exercises ? JSON.parse(exercises) : [];
+
+    const exercisesIds = exercisesArray.map(x=>x.id);
+
+    let firstHistory = undefined;
+
+    for (let i = 0; i < exercisesIds.length; i++) {
+        const id = exercisesIds[i];
+
+        const exerciseHistory = await getHistoryFromLocalStorage(id, false);
+
+        if (!exerciseHistory) {
+            continue;
+        }
+
+        exerciseHistory.forEach(history => {
+            const historyDate = new Date(history.date).getTime();
+            if (!firstHistory || historyDate < firstHistory.date) {
+                firstHistory = history;
+            }
+        });
+
+    }
+
+    return firstHistory;
 }

@@ -6,6 +6,12 @@
     "continue": "Продолжить",
     "ButtonBack": "Назад",
     "ButtonNext": "Далее",
+    "consts": {
+        "kg_small": "кг",
+        "reps_small": "повт.",
+        "meters_small": "м.",
+        "seconds_small": "сек."
+    },
     "trainings": {
         "trainingsText": "Мои тренировки",
         "trainingsName": "Мои тренировки",

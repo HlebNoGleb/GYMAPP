@@ -28,7 +28,7 @@
             let dots = await dotsEvent(fullMonthArray[0].date, fullMonthArray[fullMonthArray.length - 1].date);
             if (dots && dots.length > 0) {
                 dots.forEach(dot => {
-                    fullMonthArray.find(x => x.date.setHours(0, 0, 0, 0) == dot).hasData = true
+                    fullMonthArray.find(x => x.date.setHours(0, 0, 0, 0) == new Date(dot).setHours(0, 0, 0, 0)).hasData = true
                 });
 
                 fullMonthArray = fullMonthArray;
@@ -99,13 +99,14 @@
                 </span>
             {/each}
         </div>
-        <button class="btn btn-primary" on:click={() => setDate(new Date())}>Сегодня</button>
+        <button class="btn btn-primary mt-2" on:click={() => setDate(new Date())}>Сегодня</button>
     </div>
 
     <style>
         .date-picker{
             display: flex;
             flex-direction: column;
+            width: fit-content;
         }
         .date-picker-controls{
             display: grid;

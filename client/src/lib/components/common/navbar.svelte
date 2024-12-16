@@ -11,7 +11,7 @@
             <button type="button" style="background-image: url('{routes.exercises.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.exercises)}></button>
             <button type="button" style="background-image: url('{routes.calendar.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.calendar)}></button>
             <button type="button" style="background-image: url('{routes.weightList.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.weightList)}></button>
-            <!-- <button type="button" style="background-image: url('{routes.mainPage.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-2" on:click={() => changeRoute(routes.mainPage)}></button> -->
+            <button type="button" style="background-image: url('{routes.mainPage.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-2" on:click={() => changeRoute(routes.mainPage)}></button>
         </div>
     </div>
 </nav>

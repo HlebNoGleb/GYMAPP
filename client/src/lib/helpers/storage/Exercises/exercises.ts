@@ -120,6 +120,8 @@ async function getExercisesFromLocalStorage(params: IExerciseGetParams) {
 
             filteredExercises = await getExercisesHistory(params.withLastHistory, params.byDate, filteredExercises);
 
+            // console.log(filteredExercises)
+
             if (params.onlyWithHistory) {
                 filteredExercises = filteredExercises.filter(obj => arrayHelper.hasData(obj.history));
             }

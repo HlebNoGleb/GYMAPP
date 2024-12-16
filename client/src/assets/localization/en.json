@@ -6,6 +6,12 @@
     "continue": "Continue",
     "ButtonBack": "Back",
     "ButtonNext": "Next",
+    "consts": {
+        "kg_small": "kg",
+        "reps_small": "reps",
+        "meters_small": "m",
+        "seconds_small": "s"
+    },
     "trainings": {
         "trainingsText": "Trainings Text",
         "trainingsName": "My trainings",

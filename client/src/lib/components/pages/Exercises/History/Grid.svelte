@@ -50,7 +50,7 @@
         </div>
     {:then histories}
         {#if arrayHelper.hasData(histories)}
-            <button class="btn btn-primary mb-2" on:click={() => changeRoute(routes.exerciseHistoryProgress, histories)}>Прогресс</button>
+            <button class="btn btn-primary mb-2" on:click={() => changeRoute(routes.exerciseHistoryProgress, {exercise: exerciseData, history: histories})}>Прогресс</button>
             <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3">
                 {#each histories as history}
                     <div class="col">
@@ -61,7 +61,11 @@
                             </div>
                             <ul class="list-group list-group-flush">
                                 {#each history.data as data}
-                                    <button on:click={() => changeRoute(routes.exerciseHistoryChange, {exercise: exerciseData, history: data})} class="list-group-item list-group-item-action">{historyHelper.calcWeight(data.weight)} x {historyHelper.calcCount(data.count)}</button>
+                                    <button on:click={() => changeRoute(routes.exerciseHistoryChange, {exercise: exerciseData, history: data})} class="list-group-item list-group-item-action" style="display: flex; gap: 0.2rem;">
+                                        {#each historyHelper.getHistoryObject(data) as historyObj, index}
+                                            <span> {historyObj.data} {$_(`consts.${historyObj.unit}`)} </span>
+                                        {/each}
+                                    </button>
                                 {/each}
                             </ul>
                         </div>

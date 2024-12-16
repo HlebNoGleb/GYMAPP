@@ -3,32 +3,24 @@
     import ButtonBack from '../../../common/buttonsBackForward.svelte';
     import { currentRouteData } from "../../../../helpers/routes";
     import storage from "../../../../helpers/storage/storage";
-    import { type IHistory } from '../../../../helpers/storage/Exercises/History/history';
+    import { HistoryModel } from '../../../../helpers/storage/Exercises/History/history';
     import { ExerciseType } from '../../../../helpers/storage/Exercises/exercises';
 
     let exerciseId = $currentRouteData.exercise.id;
     console.log($currentRouteData.exercise.type);
 
-    let date = new Date().toISOString().slice(0, 16);
+    let date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16);
 
-    let newHistory:IHistory = {
-        exerciseId: exerciseId,
-        date: null,
-        weight: undefined,
-        count: 1,
-        sets: 1,
-        note: '',
-        id: '',
-        userId: ''
-    }
+    let newHistory = HistoryModel.create($currentRouteData.exercise.type);
+
+    console.log(newHistory);
+
 
     function handleSubmit() {
-        if (newHistory && newHistory.weight >= 0 && newHistory.count >= 0){
-            if (date){
-                newHistory.date = new Date(date).getTime();
-            } else {
-                newHistory.date = new Date().getTime()
-            }
+        console.log(newHistory);
+        if (HistoryModel.validate(newHistory, $currentRouteData.exercise.type)){
+            newHistory.date = new Date(date).getTime() ?? new Date().getTime();
+            newHistory.exerciseId = exerciseId;
             storage.addNewHistory(newHistory);
             alert("Добавлено")
         } else {

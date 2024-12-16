@@ -98,9 +98,8 @@ function removeHistory(newHistory){
     history.remove(newHistory);
 }
 
-async function getCalendar(){
-    const calendar = history.getCalendar();
-    return calendar;
+function getHistoriesByXMonths(months){
+    return history.getHistoriesByXMonths(months);
 }
 
 // ------------- WEIGHT -------------
@@ -139,7 +138,6 @@ const storage = {
     addNewHistory,
     changeHistory,
     removeHistory,
-    getCalendar,
     changeExercise,
     removeExercise,
     changeTraining,
@@ -147,6 +145,7 @@ const storage = {
     uploadExercise,
     uploadTraining,
     getDots,
+    getHistoriesByXMonths
 }
 
 export default storage;

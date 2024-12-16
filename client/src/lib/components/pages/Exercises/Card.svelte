@@ -1,13 +1,16 @@
 <script lang="ts">
-    import { _ } from 'svelte-i18n';
+    import { _,  } from 'svelte-i18n';
     import routes, { currentRoute, changeRoute } from "../../../helpers/routes";
     import historyHelper from '../../../helpers/historyHelper';
     import dateTimeHelper from '../../../helpers/dateTime';
     import arrayHelper from '../../../helpers/array';
+    import { ExerciseType } from '../../../helpers/storage/Exercises/exercises';
+    import { get } from 'svelte/store';
     export let exerciseData;
     export let showButtons = true;
 
     console.log(exerciseData)
+
 </script>
 
 <div class="card h-100">
@@ -17,8 +20,11 @@
             {#each exerciseData.history as historyItem}
                 <div class="d-flex flex-wrap my-2" style="gap: 0.2rem;">
                     {#each historyItem.data as data}
-                        <span class='badge rounded-pill text-bg-primary'>
-                            {historyHelper.calcCount(data.count)} x {historyHelper.calcWeight(data.weight)}
+                        <span class='badge rounded-pill text-bg-primary' style="display: flex; gap: 0.2rem;">
+                            <!-- {historyHelper.calcCount(data.count)} x {historyHelper.calcWeight(data.weight)} -->
+                            {#each historyHelper.getHistoryObject(data) as historyObj, index}
+                                <span> {historyObj.data} {$_(`consts.${historyObj.unit}`)} </span>
+                            {/each}
                         </span>
                     {/each}
                 </div>

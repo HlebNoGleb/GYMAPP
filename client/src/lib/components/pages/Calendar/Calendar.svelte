@@ -8,7 +8,7 @@
     import Grid2 from "../Exercises/Grid2.svelte";
 
     let date = new Date();
-    date = new Date(date.setDate(date.getDate() - 2)).setHours(0, 0, 0, 0);
+    date = new Date(date.setDate(date.getDate())).setHours(0, 0, 0, 0);
     let exercisesPromise = storage.getExercises([], false, date, true);
 
     // onMount(() => {
@@ -22,7 +22,6 @@
 
     async function getDots(dateFrom, dateTo) {
         let dots = await storage.getDots(dateFrom, dateTo);
-        console.log(dots);
         return dots;
     }
 
@@ -31,5 +30,7 @@
 <h1>Calendar</h1>
 <ButtonBack />
 
-<DatePicker on:setDate={updateExercises} dotsEvent={getDots}/>
+<div class="my-2">
+    <DatePicker on:setDate={updateExercises} dotsEvent={getDots}/>
+</div>
 <Grid2 exercisesPromise={exercisesPromise} showAddButton={false}/>
