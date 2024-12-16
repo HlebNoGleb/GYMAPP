@@ -5,10 +5,10 @@
     import { ExerciseType } from "./lib/helpers/storage/Exercises/exercises";
 
     onMount(() => {
-        const fixedHistory = localStorage.getItem("fixedHistory");
-        if (!fixedHistory) {
+        // const fixedHistory = localStorage.getItem("fixedHistory");
+        // if (!fixedHistory) {
             fixHistory();
-        }
+        // }
     })
 
     function fixHistory() {
@@ -36,7 +36,7 @@
             }
         })
 
-        localStorage.setItem("fixedHistory", "true");
+        // localStorage.setItem("fixedHistory", "true");
     }
 </script>
 <Dev />

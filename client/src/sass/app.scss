@@ -1,21 +1,116 @@
 $primary: #04ba71;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
-:root{
+:root {
     --main-color: #04ba71;
     --sub-color: #fff;
-}
-.btn-primary {
+    --blue-color: #287094;
+    --gray-color: #d4d4ce;
+    --white-color: #f6f6f6;
+    --dark-color: #023246;
+  }
+
+  .btn-primary {
     --bs-btn-color: #fff;
     --bs-btn-active-color: #fff;
     --bs-btn-hover-color: #fff;
-}
+  }
 
-.btn-outline-primary{
+  .btn-outline-primary {
     --bs-btn-active-color: #fff;
     --bs-btn-hover-color: #fff;
-}
+  }
 
-.text-bg-primary{
-    color: #fff!important;
-}
+  .text-bg-primary {
+    color: #fff !important;
+  }
+
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  body, html, #app{
+    width: 100%;
+    height: 100%;
+  }
+
+  body.dark-theme{
+    --body-background: var(--dark-color);
+    --h1-color: var(--white-color);
+  }
+
+  body.light-theme{
+   --body-background: var(--white-color);
+   --h1-color: var(--dark-color);
+  }
+
+  body.dark-theme .invert{
+    --body-background: var(--white-color);
+   --h1-color: var(--dark-color);
+  }
+
+  body.light-theme .invert{
+    --body-background: var(--dark-color);
+    --h1-color: var(--white-color);
+  }
+
+  body{
+    width: 100%;
+    height: 100%;
+    background: var(--body-background);
+  }
+
+  h1{
+    color: var(--h1-color)
+  }
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    border: none;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .add-button{
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1030;
+    height: 50px;
+    width: 50px;
+  }
+
+  input::placeholder{
+    color: #ccc!important;
+  }
+
+  .rounded-circle.add-button{
+    box-shadow: 2px 2px 5px #ccc;
+  }
