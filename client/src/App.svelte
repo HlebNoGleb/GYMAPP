@@ -7,7 +7,7 @@
     onMount(() => {
         // const fixedHistory = localStorage.getItem("fixedHistory");
         // if (!fixedHistory) {
-            // fixHistory();
+            fixHistory();
         // }
     })
 
