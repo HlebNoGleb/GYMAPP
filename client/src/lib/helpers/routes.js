@@ -181,7 +181,7 @@ const routes = {
 
 export default routes;
 
-export let currentRoute = writable(routes.mainPage);
+export let currentRoute = writable(routes.trainingsGrid);
 export let currentRouteData = writable(undefined);
 
 export let previosRoutes = writable([]);
@@ -209,7 +209,7 @@ export function changeRoute(newRoute, newRouteData, changeHistory = true) {
         currentRouteData.set(undefined);
     }
 
-    console.log(getPreviousRoutes());
+    //console.log(getPreviousRoutes());
 }
 
 export function changeState() {

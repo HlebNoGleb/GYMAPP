@@ -7,17 +7,17 @@
     import { ExerciseType } from '../../../../helpers/storage/Exercises/exercises';
 
     let exerciseId = $currentRouteData.exercise.id;
-    console.log($currentRouteData.exercise.type);
+    //console.log($currentRouteData.exercise.type);
 
     let date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16);
 
     let newHistory = HistoryModel.create($currentRouteData.exercise.type);
 
-    console.log(newHistory);
+    //console.log(newHistory);
 
 
     function handleSubmit() {
-        console.log(newHistory);
+        //console.log(newHistory);
         if (HistoryModel.validate(newHistory, $currentRouteData.exercise.type)){
             newHistory.date = new Date(date).getTime() ?? new Date().getTime();
             newHistory.exerciseId = exerciseId;

@@ -12,7 +12,7 @@
             await getDots();
         })
 
-        console.log(fullMonthArray);
+        //console.log(fullMonthArray);
 
         let yearList = getYearsList();
         let monthList = getMonthList();

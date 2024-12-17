@@ -6,7 +6,7 @@
 
 {#if $previosRoutes.length > 0}
     <button class="btn btn-primary" on:click={goBack}>{$_('ButtonBack')}</button>
-    {#if useStateRouter}
+    <!-- {#if useStateRouter}
         <button class="btn btn-primary" on:click={goForward}>{$_('ButtonNext')}</button>
-    {/if}
+    {/if} -->
 {/if}

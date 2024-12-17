@@ -8,7 +8,7 @@
     import ExerciseCard from './Card.svelte';
     import Grid2 from './Grid2.svelte';
 
-    console.log($currentRouteData);
+    //console.log($currentRouteData);
 
     const exercises = $currentRouteData?.exercises;
     const trainingId = $currentRouteData?.id;

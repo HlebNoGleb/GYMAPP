@@ -3,7 +3,7 @@
     import { currentRouteData } from "../../../helpers/routes";
 
     let trainingData = $currentRouteData;
-    console.log(trainingData);
+    //console.log(trainingData);
 
     let downloadData = null;
 

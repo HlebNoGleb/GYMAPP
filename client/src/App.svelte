@@ -7,14 +7,14 @@
     onMount(() => {
         // const fixedHistory = localStorage.getItem("fixedHistory");
         // if (!fixedHistory) {
-            fixHistory();
+            // fixHistory();
         // }
     })
 
     function fixHistory() {
-        console.log({...localStorage});
+        //console.log({...localStorage});
         Object.keys(localStorage).forEach(item => {
-            console.log(item);
+            //console.log(item);
             if (item.startsWith("history")) {
                 let historyString = localStorage.getItem(item);
                 let historyArray = historyString ? JSON.parse(historyString) : null;

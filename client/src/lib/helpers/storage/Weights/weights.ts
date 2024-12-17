@@ -48,7 +48,7 @@ async function getWeightsFromLocalStorage() {
         const objects = localStorage.getItem(keys.weights);
         return objects ? JSON.parse(objects) : [];
     } catch (error) {
-        console.log('Error occured');
+        console.error('Error occured');
         return [];
     }
 }

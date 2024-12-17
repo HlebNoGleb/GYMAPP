@@ -6,9 +6,13 @@
 
     let devMode = false;
 
+    currentRoute.subscribe(val => {
+        console.log(val);
+    });
+
     devModeStore.subscribe(val => {
         devMode = val;
-        console.log(devMode);
+        //console.log(devMode);
     });
 
 </script>
@@ -18,6 +22,7 @@
         <h6>{$currentRoute.name}</h6>
         <code lang="json">{JSON.stringify($currentRouteData)}</code>
     {/if}
+
     <svelte:component this={$currentRoute.component} data={$currentRouteData}/>
 </div>
 

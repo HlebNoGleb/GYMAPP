@@ -8,7 +8,7 @@
     import ExerciseCard from '../Exercises/Card.svelte';
 
     let exercisesPromise = storage.getTrainingExerciseByIds($currentRouteData);
-    console.log($currentRouteData);
+    //console.log($currentRouteData);
 
     const updateExercises = () => {
         exercisesPromise = storage.getTrainingExerciseByIds($currentRouteData);

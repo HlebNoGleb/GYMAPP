@@ -99,7 +99,7 @@ async function addnewExercisesHistoryFromLocalStorage(newHistory){
     try {
         newHistory.id = random.generageUniqueId();
         const exerciseHistory = await getExerciseHistoryFromLocalStorage(newHistory.exerciseId);
-        console.log(exerciseHistory)
+        //console.log(exerciseHistory)
         exerciseHistory.push(newHistory);
         localStorage.setItem(keys.history + newHistory.exerciseId, JSON.stringify(exerciseHistory));
     } catch (error) {

@@ -12,7 +12,7 @@ export function parseFromJson(json) {
     try {
         return JSON.parse(json) ?? [];
     } catch (error) {
-        console.log("json parse fail");
+        console.error("json parse fail");
         return [];
     }
 }

@@ -45,7 +45,7 @@ function get(trainingIds: Array<string> = [], withExercises: boolean = false){
 @param {Training} newTraining
 **/
 function add(newTraining: Training){
-    console.log(newTraining);
+    //console.log(newTraining);
     if (config.useServer){
         return null;
     } else {
@@ -57,7 +57,7 @@ function add(newTraining: Training){
 @param {Training} newTraining
 **/
 function upload(newTraining: Training){
-    console.log(newTraining);
+    //console.log(newTraining);
     if (config.useServer){
         return null;
     } else {
@@ -69,7 +69,7 @@ function upload(newTraining: Training){
 @param {Training} training
 **/
 function change(training: Training){
-    console.log(training);
+    //console.log(training);
     if (config.useServer){
         return null;
     } else {
@@ -135,7 +135,7 @@ async function getTrainingsExercises(trainings){
     const trainingWithExercises = [];
     for (const training of trainings) { // foreach not work with async/await
         const exercisesIds = training.exercises;
-        console.log(exercisesIds);
+        //console.log(exercisesIds);
         if (arrayHelper.hasData(exercisesIds)) {
             let data = await exercises.get({ids: exercisesIds, withLastHistory: true, byDate: false, onlyWithHistory: true});
             training.exerciseData = data;
@@ -151,7 +151,7 @@ function addNewTrainingToLocalStorage(newTraining){
     try {
         newTraining.id = random.generageUniqueId();
         newTraining.dates = {createDate: new Date().getTime()}
-        console.log(newTraining);
+        //console.log(newTraining);
         delete newTraining.exerciseData;
         const trainings = localStorage.getItem(keys.trainings);
         const trainingsArray = trainings ? JSON.parse(trainings) : [];

@@ -7,7 +7,7 @@
     }
 
     function onReaderLoad(event){
-        console.log(event.target.result);
+        //console.log(event.target.result);
         var obj = JSON.parse(event.target.result);
         importDataToLocalStorage(obj);
     }

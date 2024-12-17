@@ -12,7 +12,7 @@
     let exerciseData = $currentRouteData;
 
     let exerciseHistoryPromise = storage.getHistory(exerciseData.id);
-    console.log(exerciseHistoryPromise);
+    //console.log(exerciseHistoryPromise);
 
     const updateExercises = () => {
         exerciseHistoryPromise = storage.getHistory(exerciseData.id);

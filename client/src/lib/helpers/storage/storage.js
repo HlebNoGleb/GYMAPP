@@ -10,12 +10,12 @@ function getTrainings(trainingIds = [], withExercises = false){
 }
 
 function addNewTraining(newTraining){
-    console.log(newTraining);
+    //console.log(newTraining);
     trainings.add(newTraining);
 }
 
 function changeTraining(training){
-    console.log(training);
+    //console.log(training);
     trainings.change(training);
 }
 

@@ -9,6 +9,8 @@
     import { ExerciseType } from '../../../helpers/storage/Exercises/exercises';
     import gaming from '../../../../assets/data/gaming.json';
 
+    import test from '../../../../assets/data/test.json';
+
 
     let chartNode = undefined;
 
@@ -45,12 +47,13 @@
         }
     }
 
-    const historyPromise = storage.getHistoriesByXMonths(-1).then(data => {
+    const historyPromise = storage.getHistoriesByXMonths(30).then(data => {
         data.forEach((montsHistories, index) => {
-            console.log()
+            //console.log()
             historyData.weightsByMonth.push({
                 year: montsHistories.year,
                 month: montsHistories.month,
+                day: montsHistories.day,
                 weightsSum: 0,
                 weightsCount: 0
             });
@@ -71,10 +74,10 @@
         });
 
 
-        console.log(historyData.weightsSum);
+        //console.log(historyData.weightsSum);
 
         const filtered = gaming.filter(item => item.weight < historyData.weightsSum);
-        console.log(filtered)
+        //console.log(filtered)
         filtered.sort((a, b) => b.weight - a.weight);
         const previousLevel = filtered[1];
 
@@ -96,27 +99,35 @@
 
         historyData.gaming.nextLevel.weight = nextLevel.weight;
 
-        console.log(historyData)
+        // console.log(historyData)
+        // historyData.weightsByMonth = test;
 
         let columns = [
-            ["x" ].concat(historyData.weightsByMonth.map(item => new Date(item.year, item.month))),
+            ["x" ].concat(historyData.weightsByMonth.map(item => new Date(item.year, item.month, item.day))),
         ];
 
-        columns.push(["Подходы"].concat(historyData.weightsByMonth.map(item => item.weightsCount)));
+        columns.push(["Повторения"].concat(historyData.weightsByMonth.map(item => item.weightsCount)));
         columns.push(["Вес"].concat(historyData.weightsByMonth.map(item => item.weightsSum)));
 
-        console.log(columns);
+        //console.log(columns);
 
-        console.log(chartNode);
+        //console.log(chartNode);
+
+        let currentZoom = [new Date(new Date().setDate(new Date().getDate() - 10)), new Date()];
 
         var chart = c3.generate({
                 bindto: '#chart1',
                 zoom: {
-                    enabled: true
+                    enabled: true,
+                    // disableDefaultBehavior: true,
                 },
                 data: {
                     x: 'x',
-                    columns: columns
+                    columns: columns,
+                    colors: {
+                        "Повторения": 'var(--main-color)',
+                        "Вес": 'var(--main-color)'
+                    },
                 },
                 axis: {
                     x: {
@@ -124,14 +135,16 @@
                         localtime: false,
                         tick: {
                             format: function (x) {
-                                return `${new Date(x).getMonth() + 1}.${new Date(x).getFullYear()}`;
+                                // return `${new Date(x).getMonth() + 1}.${new Date(x).getFullYear()}`;
+                                 return new Date(x).toDateString();
                             }
                         }
                     }
                 }
             });
 
-        console.log(chart)
+        var startDate = new Date(); startDate.setDate(startDate.getDate() - 10); chart.zoom([startDate, new Date()]);
+        // console.log([new Date(new Date().setDate(new Date().getDate() - 10)), new Date()])
     });
 
 
@@ -163,15 +176,15 @@
 
 
     <!-- or because no jokes at all. after jokes delete or and ? :  -->
-    {#if historyData.gaming.currentLevel.subject.subject[$locale] || historyData.gaming.currentLevel.subject.joke[$locale]}
+    <!-- {#if historyData.gaming.currentLevel.subject.subject[$locale] || historyData.gaming.currentLevel.subject.joke[$locale]}
         <p>
             {historyData.gaming.currentLevel.subject.joke[$locale] ? historyData.gaming.currentLevel.subject.joke[$locale] : `Вы подняли  ${historyData.gaming.currentLevel.subject.subject[$locale]}`}
         </p>
-    {/if}
+    {/if} -->
 
-    {#if historyData.gaming.nextLevel.weight == Infinity}
+    <!-- {#if historyData.gaming.nextLevel.weight == Infinity}
         <p>Новые уровни скоро появятся</p>
-    {/if}
+    {/if} -->
 
     {#if historyData.gaming.nextLevel.weight > 0 && historyData.gaming.nextLevel.weight < Infinity}
         <div class="progress" style="height: 30px;">

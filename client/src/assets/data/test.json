@@ -1,0 +1,842 @@
+[
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 17,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 16,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 15,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 14,
+        "weightsSum": 458,
+        "weightsCount": 130
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 13,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 12,
+        "weightsSum": 183,
+        "weightsCount": 112
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 11,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 10,
+        "weightsSum": 258,
+        "weightsCount": 146
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 9,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 8,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 7,
+        "weightsSum": 372.5,
+        "weightsCount": 168
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 6,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 5,
+        "weightsSum": 493.75,
+        "weightsCount": 129
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 4,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 3,
+        "weightsSum": 319,
+        "weightsCount": 153
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 2,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 11,
+        "day": 1,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 30,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 29,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 28,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 27,
+        "weightsSum": 451.75,
+        "weightsCount": 189
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 26,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 25,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 24,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 23,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 22,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 21,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 20,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 19,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2024,
+        "month": 10,
+        "day": 18,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 17,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 16,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 15,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 14,
+        "weightsSum": 458,
+        "weightsCount": 130
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 13,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 12,
+        "weightsSum": 183,
+        "weightsCount": 112
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 11,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 10,
+        "weightsSum": 258,
+        "weightsCount": 146
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 9,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 8,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 7,
+        "weightsSum": 372.5,
+        "weightsCount": 168
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 6,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 5,
+        "weightsSum": 493.75,
+        "weightsCount": 129
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 4,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 3,
+        "weightsSum": 319,
+        "weightsCount": 153
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 2,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 11,
+        "day": 1,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 30,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 29,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 28,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 27,
+        "weightsSum": 451.75,
+        "weightsCount": 189
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 26,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 25,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 24,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 23,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 22,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 21,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 20,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 19,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2023,
+        "month": 10,
+        "day": 18,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 17,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 16,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 15,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 14,
+        "weightsSum": 458,
+        "weightsCount": 130
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 13,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 12,
+        "weightsSum": 183,
+        "weightsCount": 112
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 11,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 10,
+        "weightsSum": 258,
+        "weightsCount": 146
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 9,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 8,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 7,
+        "weightsSum": 372.5,
+        "weightsCount": 168
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 6,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 5,
+        "weightsSum": 493.75,
+        "weightsCount": 129
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 4,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 3,
+        "weightsSum": 319,
+        "weightsCount": 153
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 2,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 11,
+        "day": 1,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 30,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 29,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 28,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 27,
+        "weightsSum": 451.75,
+        "weightsCount": 189
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 26,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 25,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 24,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 23,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 22,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 21,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 20,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 19,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2022,
+        "month": 10,
+        "day": 18,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 17,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 16,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 15,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 14,
+        "weightsSum": 458,
+        "weightsCount": 130
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 13,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 12,
+        "weightsSum": 183,
+        "weightsCount": 112
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 11,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 10,
+        "weightsSum": 258,
+        "weightsCount": 146
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 9,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 8,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 7,
+        "weightsSum": 372.5,
+        "weightsCount": 168
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 6,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 5,
+        "weightsSum": 493.75,
+        "weightsCount": 129
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 4,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 3,
+        "weightsSum": 319,
+        "weightsCount": 153
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 2,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 11,
+        "day": 1,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 30,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 29,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 28,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 27,
+        "weightsSum": 451.75,
+        "weightsCount": 189
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 26,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 25,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 24,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 23,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 22,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 21,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 20,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 19,
+        "weightsSum": 0,
+        "weightsCount": 0
+    },
+    {
+        "year": 2021,
+        "month": 10,
+        "day": 18,
+        "weightsSum": 0,
+        "weightsCount": 0
+    }
+]

@@ -6,7 +6,7 @@
     export let data;
 
     let trainingsHistory = {...TrainingHistory};
-    console.log(trainingsHistory);
+    //console.log(trainingsHistory);
 </script>
 
 <h1>{data}</h1>

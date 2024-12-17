@@ -8,7 +8,7 @@
     export let showAddButton = true;
     export let training = null;
 
-    console.log(exercisesPromise);
+    //console.log(exercisesPromise);
 </script>
 <div class="mb-3 mt-3">
     {#await exercisesPromise}

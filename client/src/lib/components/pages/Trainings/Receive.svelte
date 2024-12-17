@@ -15,7 +15,7 @@
     }
 
     function onReaderLoad(event){
-        console.log(event.target.result);
+        //console.log(event.target.result);
         var obj = JSON.parse(event.target.result);
         importDataToLocalStorage(obj);
     }
@@ -31,13 +31,13 @@
             uploadExercises.push(uploadedExercise);
         }
 
-        console.log(uploadExercises);
+        //console.log(uploadExercises);
 
         let newTraining = {...data};
         delete newTraining.exerciseData;
         newTraining.exercises = [];
 
-        console.log(newTraining);
+        //console.log(newTraining);
 
         uploadExercises.forEach(exercise => {
             newTraining.exercises.push(exercise.id);

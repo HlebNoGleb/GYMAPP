@@ -8,7 +8,7 @@
 
     let exerciseData = $currentRouteData;
 
-    console.log(exerciseData)
+    //console.log(exerciseData)
 
     let labels = exerciseData.history.reduce((acc, cur) => {
         cur.data.forEach(() => {
@@ -62,10 +62,9 @@
 
   if (exerciseData.exercise.type == ExerciseType.time) {
     columns.push(["Время"].concat(time));
-
   }
 
-  console.log(columns);
+  //console.log(columns);
 
   onMount(() => {
         var chart = c3.generate({

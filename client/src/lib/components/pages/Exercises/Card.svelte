@@ -9,7 +9,7 @@
     export let exerciseData;
     export let showButtons = true;
 
-    console.log(exerciseData)
+    //console.log(exerciseData)
 
 </script>
 

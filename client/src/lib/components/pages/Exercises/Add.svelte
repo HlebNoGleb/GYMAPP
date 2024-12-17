@@ -14,11 +14,11 @@
     }
 
     $: {
-        console.log(newExercise)
+        //console.log(newExercise)
     }
 
     function saveExercises() {
-        console.log($currentRouteData);
+        //console.log($currentRouteData);
 
         if (newExercise.type && newExercise.name){
             storage.addNewExercise(newExercise, $currentRouteData?.id);

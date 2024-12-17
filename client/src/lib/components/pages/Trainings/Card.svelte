@@ -5,7 +5,7 @@
     //console.log(trainingData);
 </script>
 
-<div class="card">
+<div class="card" >
     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
         {trainingData.exercises.length}
     </span>

@@ -45,7 +45,7 @@ class HistoryRepetitionWeight implements IhistoryRepetitionWeight {
     constructor() {
         this.weight = undefined;
         this.count = undefined;
-        this.sets = undefined;
+        this.sets = 1;
         this.note = "";
         this.type = ExerciseType.repetition_weight
     }
@@ -372,8 +372,6 @@ async function getDotsFromLocalstorage(dateFrom, dateTo) {
 
 async function getHistoriesByXMonthsFromLocalstorage(numberOfMonths) {
     try {
-
-
         if (numberOfMonths == -1) {
             const firstHistory = await getFirstHistoryFromLocalStorage();
             numberOfMonths = getMonthsSinceDate(new Date(firstHistory.date)) + 1;
@@ -381,9 +379,13 @@ async function getHistoriesByXMonthsFromLocalstorage(numberOfMonths) {
 
         let histories = [];
         for (let i = 0; i < numberOfMonths; i++) {
-            const date = new Date(new Date(new Date(new Date().setMonth(new Date().getMonth() - (i))).setDate(1)).setHours(0, 0, 0, 0));
-            histories.push({year: date.getFullYear(), month: date.getMonth(), data: []});
+            const date = new Date();
+            date.setDate(date.getDate() - i); // убрать, если надо помесячно
+            // const date = new Date(new Date(new Date(new Date().setMonth(new Date().getMonth() - (i))).setDate(1)).setHours(0, 0, 0, 0));
+            histories.push({year: date.getFullYear(), month: date.getMonth(), day: date.getDate(), data: []});
         }
+
+        // console.log(histories);
 
         const exercises = localStorage.getItem(exercisesKeys.userExercises);
         const exercisesArray = exercises ? JSON.parse(exercises) : [];
@@ -402,7 +404,8 @@ async function getHistoriesByXMonthsFromLocalstorage(numberOfMonths) {
             exerciseHistory.forEach(history => {
                 const historyYear = new Date(history.date).getFullYear();
                 const historyMonth = new Date(history.date).getMonth();
-                const historyIndex = histories.findIndex(x=>x.year === historyYear && x.month === historyMonth);
+                const historyDay = new Date(history.date).getDate(); // убрать, если надо помесячно
+                const historyIndex = histories.findIndex(x=>x.year === historyYear && x.month === historyMonth && x.day === historyDay);
                 if (historyIndex !== -1) {
                     histories[historyIndex].data.push(history)
                 }

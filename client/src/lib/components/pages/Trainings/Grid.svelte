@@ -50,7 +50,7 @@
 {:then trainings}
     {#if trainings && trainings.length == 0}
         <h1>{$_('trainings.noTrainings')}</h1>
-        <ButtonBack/>
+        <!-- <ButtonBack/> -->
     {:else}
         <h1>{$_('trainings.trainingsText')}</h1>
         <ButtonBack/>

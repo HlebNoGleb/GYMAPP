@@ -5,7 +5,7 @@
     import routes, { changeRoute, goBack, currentRouteData } from '../../../helpers/routes';
 
 
-    console.log($currentRouteData);
+    //console.log($currentRouteData);
 
     let exercisesPromise = storage.getExercises([]);
     let trainingName = $currentRouteData.name;

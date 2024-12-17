@@ -12,7 +12,7 @@
     }
 
     function devModeToggle() {
-        console.log($devMode);
+        //console.log($devMode);
         devMode.set(!$devMode);
     }
 
