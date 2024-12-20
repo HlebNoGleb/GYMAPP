@@ -1,6 +1,6 @@
 <script>
 // @ts-nocheck
-    import { _ } from 'svelte-i18n';
+    import { _, locale } from 'svelte-i18n';
     import { onMount } from 'svelte';
     import routes, { currentRouteData, changeRoute } from "../../../../helpers/routes";
     import dateTimeHelper from "../../../../helpers/dateTime";
@@ -19,7 +19,7 @@
     }
 </script>
 
-<h1>{exerciseData.name}</h1>
+<h1>{exerciseData.default ? exerciseData.name[$locale] : exerciseData.name}</h1>
 <ButtonBack/>
 
 <div class="mb-3 mt-3">

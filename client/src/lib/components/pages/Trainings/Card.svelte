@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { _ } from 'svelte-i18n';
+    import { _, locale } from 'svelte-i18n';
     import routes, { currentRoute, changeRoute } from "../../../helpers/routes";
     export let trainingData;
     //console.log(trainingData);
@@ -10,7 +10,7 @@
         {trainingData.exercises.length}
     </span>
     <div class="card-body">
-        <h5 class="card-title">{trainingData.name}</h5>
+        <h5 class="card-title">{trainingData.default ? trainingData.name[$locale] : trainingData.name}</h5>
         <!-- {#if trainingData.dates && trainingData.dates.lastTrainingDate}
             <p class="card-text">{$_('trainings.lastDate')}: {new Date(trainingData.dates.lastTrainingDate).toLocaleDateString()}</p>
         {:else}
@@ -19,14 +19,16 @@
         <div class="d-flex flex-wrap my-2" style="gap: 0.2rem;">
             {#if trainingData.exerciseData}
                 {#each trainingData.exerciseData as exercise}
-                    <span class="badge rounded-pill text-bg-primary">{exercise.name}</span>
+                    <span class="badge rounded-pill text-bg-primary">{exercise.default ? exercise.name[$locale] : exercise.name}</span>
                 {/each}
             {/if}
         </div>
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
             <button type="button" class="btn btn-primary" on:click={() => changeRoute(routes.exercises, trainingData)}>{$_('trainings.start')}</button>
+            {#if !trainingData.default}
             <button type="button" class="btn btn-outline-primary" on:click={() => changeRoute(routes.trainingChange, trainingData)}>{$_('trainings.change')}</button>
             <button type="button" class="btn btn-outline-primary" on:click={() => changeRoute(routes.trainingShare, trainingData)}><i class="bi bi-download"></i></button>
+            {/if}
             <!-- <div class="btn-group" role="group">
                 <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 {$_('trainings.more')}

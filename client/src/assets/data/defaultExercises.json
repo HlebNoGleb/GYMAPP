@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "default": true,
+        "name": {
+            "ru": "Упражнение 1",
+            "en": "Exercise 1"
+        },
+        "type": 1,
+        "description": {
+            "ru": "Описание упражнения 1",
+            "en": "some text about this exercise thats mean how to do it"
+        },
+        "data": {
+
+        }
+    },
+    {
+        "id": 2,
+        "default": true,
+        "name": {
+            "ru": "Упражнение 2",
+            "en": "Exercise 2"
+        },
+        "type": 1,
+        "description": {
+            "ru": "Описание упражнения 2",
+            "en": "some text about this exercise thats mean how to do it"
+        },
+        "data": {
+
+        }
+    },
+    {
+        "id": 3,
+        "default": true,
+        "name": {
+            "ru": "Упражнение 3",
+            "en": "Exercise 3"
+        },
+        "type": 1,
+        "description": {
+            "ru": "Описание упражнения 3",
+            "en": "some text about this exercise thats mean how to do it"
+        },
+        "data": {
+
+        }
+    }
+]

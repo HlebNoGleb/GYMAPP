@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { _,  } from 'svelte-i18n';
+    import { _, locale } from 'svelte-i18n';
     import routes, { currentRoute, changeRoute } from "../../../helpers/routes";
     import historyHelper from '../../../helpers/historyHelper';
     import dateTimeHelper from '../../../helpers/dateTime';
@@ -15,7 +15,7 @@
 
 <div class="card h-100">
     <div class="card-body">
-        <h5 class="card-title">{exerciseData.name}</h5>
+        <h5 class="card-title">{exerciseData.default ? exerciseData.name[$locale] : exerciseData.name}</h5>
             <!-- {#if exerciseData.history.data.length > 0} -->
             {#each exerciseData.history as historyItem}
                 <div class="d-flex flex-wrap my-2" style="gap: 0.2rem;">
@@ -34,7 +34,9 @@
         {#if showButtons}
             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                 <button class="btn btn-primary" on:click={() => changeRoute(routes.exerciseHistory, exerciseData)}>Перейти</button>
-                <button class="btn btn-outline-primary" on:click={() => changeRoute(routes.exercisesChange, exerciseData)}>Изменить</button>
+                {#if !exerciseData.default}
+                    <button class="btn btn-outline-primary" on:click={() => changeRoute(routes.exercisesChange, exerciseData)}>Изменить</button>
+                {/if}
             </div>
         {/if}
     </div>

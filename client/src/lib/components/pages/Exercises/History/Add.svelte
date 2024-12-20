@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { _ } from 'svelte-i18n';
+    import { _, locale } from 'svelte-i18n';
     import ButtonBack from '../../../common/buttonsBackForward.svelte';
     import { currentRouteData } from "../../../../helpers/routes";
     import storage from "../../../../helpers/storage/storage";
@@ -29,7 +29,7 @@
 	}
 </script>
 
-<h1>Добавление истории {$currentRouteData.exercise.name}</h1>
+<h1>Добавление истории {$currentRouteData.exercise.default ? $currentRouteData.exercise.name[$locale] : $currentRouteData.exercise.name}</h1>
 
 {#if $currentRouteData.exercise.type == ExerciseType.repetition_weight}
 <div class="mb-3">

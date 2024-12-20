@@ -1,5 +1,5 @@
 import config from "../../configs/config";
-import DefaultExercises from '../../../testData/exercisesDefault.json';
+import defaultExercises from '../../../../assets/data/defaultExercises.json';
 import random from "../../random";
 import arrayHelper from "../../array";
 import trainings from "../Trainings/trainings";
@@ -114,7 +114,10 @@ async function getExercisesFromLocalStorage(params: IExerciseGetParams) {
     await new Promise(resolve => setTimeout(resolve, 50));
     try {
         const exercisesJson = localStorage.getItem(keys.userExercises);
+        const defaultExercisesJson = defaultExercises;
         let allExercises = arrayHelper.parseFromJson(exercisesJson);
+        allExercises = allExercises.concat(defaultExercisesJson);
+
         if (arrayHelper.hasData(params.ids)) {
             let filteredExercises = allExercises.filter(obj => params.ids.includes(obj.id));
 

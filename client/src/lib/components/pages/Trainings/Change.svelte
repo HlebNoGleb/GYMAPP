@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { _ } from 'svelte-i18n';
+    import { _, locale } from 'svelte-i18n';
     import ButtonBack from '../../common/buttonsBackForward.svelte';
     import storage from '../../../helpers/storage/storage';
     import routes, { changeRoute, goBack, currentRouteData } from '../../../helpers/routes';
@@ -54,17 +54,17 @@
         <div class="accordion-item mb-2">
             <li class="list-group-item">
                 <input class="form-check-input me-1" type="checkbox" id="exercise-{exercise.id}" value={exercise.id} bind:group={selection}>
-                <label class="form-check-label stretched-link" for="exercise-{exercise.id}">{exercise.name}</label>
-                {#if exercise.description}
+                <label class="form-check-label stretched-link" for="exercise-{exercise.id}">{exercise.default ? exercise.name[$locale] : exercise.name}</label>
+                {#if (exercise.default && exercise.description[$locale]) || exercise.description}
                     <div class="position-absolute check-info" data-bs-toggle="collapse" data-bs-target="#collapse-{exercise.id}">
                         <span class="badge bg-secondary">Check info</span>
                     </div>
                 {/if}
             </li>
-            {#if exercise.description}
+            {#if (exercise.default && exercise.description[$locale]) || exercise.description}
                 <div id="collapse-{exercise.id}" class="accordion-collapse collapse">
                     <div class="accordion-body p-2">
-                        <strong>{@html exercise.description}</strong>
+                        <strong>{@html exercise.default ? exercise.description[$locale] : exercise.description}</strong>
                     </div>
                 </div>
             {/if}

@@ -1,7 +1,7 @@
 <script>
 // @ts-nocheck
 
-    import { _ } from 'svelte-i18n';
+    import { _, locale } from 'svelte-i18n';
     import routes, { currentRouteData, goBack } from '../../../../helpers/routes';
     import storage from '../../../../helpers/storage/storage';
     import ButtonBack from '../../../common/buttonsBackForward.svelte';
@@ -31,7 +31,7 @@
 	}
 </script>
 
-<h1>Изменение истории {$currentRouteData.exercise.name}</h1>
+<h1>Изменение истории {$currentRouteData.exercise.default ? $currentRouteData.exercise.name[$locale] : $currentRouteData.exercise.name}</h1>
 
 {#if $currentRouteData.exercise.type == ExerciseType.repetition_weight}
 <div class="mb-3">

@@ -14,6 +14,8 @@
     const updateTrainings = () => {
         trainingPromise = storage.getTrainings([], true);
     }
+
+    console.log(trainingPromise);
 </script>
 
 {#await trainingPromise}
@@ -54,8 +56,17 @@
     {:else}
         <h1>{$_('trainings.trainingsText')}</h1>
         <ButtonBack/>
-        <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3 mt-2">
-            {#each trainings as training}
+        <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3 my-2">
+            {#each trainings.filter(x=>!x.default) as training}
+                <div class="col">
+                    <TrainingCard trainingData={training}/>
+                </div>
+            {/each}
+        </div>
+
+        <h1>{$_('trainings.defaultTrainings')}</h1>
+        <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3 my-2">
+            {#each trainings.filter(x=>x.default) as training}
                 <div class="col">
                     <TrainingCard trainingData={training}/>
                 </div>

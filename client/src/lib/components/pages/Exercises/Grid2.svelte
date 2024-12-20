@@ -42,11 +42,24 @@
         {:else}
             <p>Упражнений: {exercises.length}</p>
             <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3">
-                {#each exercises as exercise}
-                <div class="col">
-                    <ExerciseCard exerciseData={exercise}/>
-                </div>
-                {/each}
+                {#if training}
+                    {#each exercises as exercise}
+                        <div class="col">
+                            <ExerciseCard exerciseData={exercise}/>
+                        </div>
+                    {/each}
+                {:else}
+                    {#each exercises.filter(x=>!x.default) as exercise}
+                        <div class="col">
+                            <ExerciseCard exerciseData={exercise}/>
+                        </div>
+                    {/each}
+                    {#each exercises.filter(x=>x.default) as exercise}
+                        <div class="col">
+                            <ExerciseCard exerciseData={exercise}/>
+                        </div>
+                    {/each}
+                {/if}
             </div>
         {/if}
         {#if showAddButton}

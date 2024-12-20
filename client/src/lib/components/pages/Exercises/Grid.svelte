@@ -1,5 +1,5 @@
 <script>
-    import { _ } from 'svelte-i18n';
+    import { _, locale } from 'svelte-i18n';
     import routes, { currentRoute, currentRouteData, changeRoute } from "../../../helpers/routes";
     import storage from "../../../helpers/storage/storage";
     import dateTimeHelper from "../../../helpers/dateTime";
@@ -23,7 +23,7 @@
 
 </script>
 {#if trainingId}
-    <h1>{$_('exercises.trainingExercises')} {$currentRouteData.name}</h1>
+    <h1>{$_('exercises.trainingExercises')} {$currentRouteData.default ? $currentRouteData.name[$locale] : $currentRouteData.name}</h1>
 {:else}
     <h1>{$_('exercises.allExercises')}</h1>
 {/if}

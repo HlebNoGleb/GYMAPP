@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { _ } from 'svelte-i18n';
+    import { _, locale } from 'svelte-i18n';
     import ButtonBack from '../../common/buttonsBackForward.svelte';
     import routes, { changeRoute, goBack, currentRouteData } from '../../../helpers/routes';
     import exercisesTypes from '../../../testData/exercisesTypes.json';

@@ -15,6 +15,7 @@
     "trainings": {
         "trainingsText": "Trainings Text",
         "trainingsName": "My trainings",
+        "defaultTrainings": "Default trainings",
         "noTrainings": "No trainings",
         "add": "Add new training",
         "addTitle": "Adding new training",

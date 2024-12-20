@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "default": true,
+        "name": {
+            "ru": "Тренировка 1",
+            "en": "Training 1"
+        },
+        "description":{
+            "ru": "Описание тренировки 1",
+            "en": "some text about this training thats mean how to do it"
+        },
+        "dates": {
+            "createDate": 1732731094533
+        },
+        "exercises": [1,2]
+    },
+    {
+        "id": 2,
+        "default": true,
+        "name": {
+            "ru": "Тренировка 2",
+            "en": "Training 2"
+        },
+        "description":{
+            "ru": "Описание тренировки 2",
+            "en": "some text about this training thats mean how to do it"
+        },
+        "dates": {
+            "createDate": 1732731094533
+        },
+        "exercises": [1,3]
+    }
+]

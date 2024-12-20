@@ -15,6 +15,7 @@
     "trainings": {
         "trainingsText": "Мои тренировки",
         "trainingsName": "Мои тренировки",
+        "defaultTrainings": "Подборки тренировок",
         "noTrainings": "У вас нет тренировок",
         "add": "Добавить новую тренировку",
         "addTitle": "Добавление новой тренировки",

@@ -3,6 +3,7 @@ import trainingsJson from "../../../testData/trainings.json"
 import random from "../../random";
 import exercises from "../Exercises/exercises";
 import arrayHelper from "../../array";
+import defaultTrainings from "../../../../assets/data/defaultTrainings.json";
 
 interface Training {
     id: string
@@ -113,6 +114,9 @@ async function getTrainingsFromLocalStorage(trainingIds, withExercises) {
         await new Promise(resolve => setTimeout(resolve, 50));
         const trainingsStr = localStorage.getItem(keys.trainings);
         let trainings = trainingsStr ? JSON.parse(trainingsStr) : [];
+        let defaultTrainingsJson = defaultTrainings;
+
+        trainings = trainings.concat(defaultTrainingsJson);
 
         if (trainingIds && arrayHelper.hasData(trainingIds)) {
             trainings = trainings.filter(x => trainingIds.includes(x.id));
@@ -137,7 +141,7 @@ async function getTrainingsExercises(trainings){
         const exercisesIds = training.exercises;
         //console.log(exercisesIds);
         if (arrayHelper.hasData(exercisesIds)) {
-            let data = await exercises.get({ids: exercisesIds, withLastHistory: true, byDate: false, onlyWithHistory: true});
+            let data = await exercises.get({ids: exercisesIds, withLastHistory: true, byDate: false, onlyWithHistory: false});
             training.exerciseData = data;
         }
 

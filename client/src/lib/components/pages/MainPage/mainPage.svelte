@@ -119,13 +119,13 @@
                 bindto: '#chart1',
                 zoom: {
                     enabled: true,
+                    // rescale: true,
                     // disableDefaultBehavior: true,
                 },
                 data: {
                     x: 'x',
                     columns: columns,
                     colors: {
-                        "Повторения": 'var(--main-color)',
                         "Вес": 'var(--main-color)'
                     },
                 },
@@ -136,14 +136,16 @@
                         tick: {
                             format: function (x) {
                                 // return `${new Date(x).getMonth() + 1}.${new Date(x).getFullYear()}`;
-                                 return new Date(x).toDateString();
+                                 return new Date(x).toLocaleDateString();
                             }
                         }
                     }
                 }
             });
 
-        var startDate = new Date(); startDate.setDate(startDate.getDate() - 10); chart.zoom([startDate, new Date()]);
+        var startDate = new Date();
+        startDate.setDate(startDate.getDate() - 10);
+        chart.zoom([startDate, new Date()]);
         // console.log([new Date(new Date().setDate(new Date().getDate() - 10)), new Date()])
     });
 
@@ -182,9 +184,9 @@
         </p>
     {/if} -->
 
-    <!-- {#if historyData.gaming.nextLevel.weight == Infinity}
+    {#if historyData.gaming.nextLevel.weight == Infinity}
         <p>Новые уровни скоро появятся</p>
-    {/if} -->
+    {/if}
 
     {#if historyData.gaming.nextLevel.weight > 0 && historyData.gaming.nextLevel.weight < Infinity}
         <div class="progress" style="height: 30px;">
