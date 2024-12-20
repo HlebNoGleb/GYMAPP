@@ -4,9 +4,10 @@
 
 </script>
 
-{#if $previosRoutes.length > 0}
+<!-- {#if $previosRoutes.length > 0} -->
     <button class="btn btn-primary" on:click={goBack}>{$_('ButtonBack')}</button>
+    <button class="btn btn-primary" on:click={goForward}>{$_('ButtonNext')}</button>
     <!-- {#if useStateRouter}
         <button class="btn btn-primary" on:click={goForward}>{$_('ButtonNext')}</button>
     {/if} -->
-{/if}
+<!-- {/if} -->

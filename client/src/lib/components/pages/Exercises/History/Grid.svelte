@@ -48,9 +48,10 @@
                 </ContentLoader>
             </div>
         </div>
-    {:then histories}
-        {#if arrayHelper.hasData(histories)}
+        {:then histories}
             <button class="btn btn-primary mb-2" on:click={() => changeRoute(routes.exerciseHistoryProgress, {exercise: exerciseData, history: histories})}>Прогресс</button>
+        {#if arrayHelper.hasData(histories)}
+
             <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3">
                 {#each histories as history}
                     <div class="col">

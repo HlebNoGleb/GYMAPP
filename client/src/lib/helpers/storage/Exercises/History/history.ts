@@ -10,7 +10,7 @@ export interface IBaseHistory {
     exerciseId: number,
     date: number,
     note: string,
-    type: ExerciseType
+    type: ExerciseType,
 }
 
 export interface IhistoryRepetitionWeight extends IBaseHistory {
@@ -49,6 +49,7 @@ class HistoryRepetitionWeight implements IhistoryRepetitionWeight {
         this.note = "";
         this.type = ExerciseType.repetition_weight
     }
+
 }
 
 class HistoryTimeDistance implements IhistoryTimeDistance {

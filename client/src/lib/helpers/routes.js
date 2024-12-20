@@ -181,7 +181,11 @@ const routes = {
 
 export default routes;
 
+// set first route as default
 export let currentRoute = writable(routes.trainingsGrid);
+window.history.replaceState(undefined, "", `#${routes.trainingsGrid.name}`);
+
+
 export let currentRouteData = writable(undefined);
 
 export let previosRoutes = writable([]);
@@ -197,9 +201,11 @@ let routeIndex = writable(0);
 
 export function changeRoute(newRoute, newRouteData, changeHistory = true) {
     // debugger;
-    if (changeHistory){
-        setPreviosRoute(newRoute, newRouteData);
-    }
+    // if (changeHistory){
+    //     setPreviosRoute(newRoute, newRouteData);
+    // }
+
+    console.log(window.history);
 
     currentRoute.set(newRoute);
 
@@ -209,34 +215,59 @@ export function changeRoute(newRoute, newRouteData, changeHistory = true) {
         currentRouteData.set(undefined);
     }
 
+    if (useStateRouter){
+        if (changeHistory) {
+            window.history.pushState(newRouteData, "", `#${newRoute.name}`);
+        } else {
+            window.history.replaceState(newRouteData, "", `#${newRoute.name}`);
+        }
+    }
+
+    console.log(window.history);
+
+
     //console.log(getPreviousRoutes());
 }
 
-export function changeState() {
+export function changeState(routeName, data = undefined) {
+    let newRoute = undefined;
 
-    // debugger
-    if (!useStateRouter) {
-        return;
-    }
+    Object.entries(routes).find(route => {
+        if (route[1].name === routeName) {
+            newRoute = route[1];
+            return true;
+        }
+    });
 
-    const routeGuid = window.location.hash.substring(1);
-    const previosRoutes = getPreviousRoutes();
-
-
-    // debugger
-    if (previosRoutes.length == 0) {
-        const length = window.history.length;
-        window.history.go(-length);
-        window.location.replace("/");
-        return;
-    }
-
-    let route = previosRoutes.find(x => x.guid == routeGuid);
-
-    if (route) {
-        changeRoute(route.route, route.data, false);
-    }
+    console.log(newRoute);
+    changeRoute(newRoute, data, false);
 }
+
+// export function changeState() {
+
+//     // debugger
+//     if (!useStateRouter) {
+//         return;
+//     }
+
+//     const routeGuid = window.location.hash.substring(1);
+//     const previosRoutes = getPreviousRoutes();
+
+
+//     // debugger
+//     if (previosRoutes.length == 0) {
+//         const length = window.history.length;
+//         window.history.go(-length);
+//         window.location.replace("/");
+//         return;
+//     }
+
+//     let route = previosRoutes.find(x => x.guid == routeGuid);
+
+//     if (route) {
+//         changeRoute(route.route, route.data, false);
+//     }
+// }
 
 function setPreviosRoute(newRoute, newRouteData){
     let curRoute = getCurrentRoute(); // current route before change

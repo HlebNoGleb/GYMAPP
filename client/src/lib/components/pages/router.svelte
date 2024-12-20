@@ -28,7 +28,7 @@
 
 <Navbar/>
 
-<svelte:window on:popstate={() => {changeState()}} />
+<svelte:window on:popstate={(e) => {console.log(e); changeState(window.location.hash.slice(1, window.location.hash.length), e.state)}} />
 
 
 

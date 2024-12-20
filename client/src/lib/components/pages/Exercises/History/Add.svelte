@@ -30,6 +30,7 @@
 </script>
 
 <h1>Добавление истории {$currentRouteData.exercise.default ? $currentRouteData.exercise.name[$locale] : $currentRouteData.exercise.name}</h1>
+<ButtonBack/>
 
 {#if $currentRouteData.exercise.type == ExerciseType.repetition_weight}
 <div class="mb-3">
@@ -71,7 +72,5 @@
     <textarea bind:value={newHistory.note} class="form-control" id="note" placeholder="Изи-пизи, можно повышать"></textarea>
     <div class="form-text">Опционально</div>
 </div>
-
-<ButtonBack/>
 
 <button class="btn btn-primary" on:click={handleSubmit}>Добавить</button>
