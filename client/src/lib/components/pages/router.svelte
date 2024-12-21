@@ -1,6 +1,6 @@
 <script>
     import { _ } from 'svelte-i18n';
-    import routes, { currentRoute, currentRouteData, previosRoutes, changeRoute, changeState } from "../../helpers/routes";
+    import { currentRoute, currentRouteData, changeState } from "../../helpers/routes";
     import Navbar from '../common/navbar.svelte';
     import { devMode as devModeStore } from '../../helpers/routes';
 
@@ -14,7 +14,6 @@
         devMode = val;
         //console.log(devMode);
     });
-
 </script>
 
 <div class="container">
@@ -22,7 +21,6 @@
         <h6>{$currentRoute.name}</h6>
         <code lang="json">{JSON.stringify($currentRouteData)}</code>
     {/if}
-
     <svelte:component this={$currentRoute.component} data={$currentRouteData}/>
 </div>
 

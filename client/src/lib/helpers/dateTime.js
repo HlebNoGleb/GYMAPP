@@ -250,4 +250,4 @@ export class IntervalTimer {
     }
 }
 
-export let currentTimer = writable();
+export let currentTimer = writable(0);

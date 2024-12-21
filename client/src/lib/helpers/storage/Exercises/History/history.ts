@@ -21,11 +21,10 @@ export interface IhistoryRepetitionWeight extends IBaseHistory {
 
 export interface IhistoryTimeDistance extends IBaseHistory {
     distance: number,
-    time: number
 }
 
 export interface IhistoryTime extends IBaseHistory {
-    time: number
+
 }
 
 export type IHistory = IhistoryRepetitionWeight | IhistoryTimeDistance | IhistoryTime;
@@ -59,13 +58,11 @@ class HistoryTimeDistance implements IhistoryTimeDistance {
     date: number;
     note: string;
     distance: number;
-    time: number;
     type: ExerciseType;
 
 
     constructor() {
         this.distance = undefined;
-        this.time = undefined;
         this.note = "";
         this.type = ExerciseType.time_distance
     }
@@ -81,7 +78,6 @@ class HistoryTime implements IhistoryTime {
     type: ExerciseType;
 
     constructor() {
-        this.time = undefined;
         this.note = "";
         this.type = ExerciseType.time
     }

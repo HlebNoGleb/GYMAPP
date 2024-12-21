@@ -45,26 +45,22 @@
 </div>
 {:else if $currentRouteData.exercise.type == ExerciseType.time_distance}
     <div class="mb-3">
-        <label for="time" class="form-label">Время</label>
-        <input type="number" bind:value={newHistory.time} class="form-control" id="time" placeholder="1">
-        <div class="form-text">В минутах</div>
-    </div>
-    <div class="mb-3">
         <label for="distance" class="form-label">Дистанция</label>
         <input type="number" bind:value={newHistory.distance} class="form-control" id="distance" placeholder="1">
         <div class="form-text">В километрах</div>
     </div>
-{:else if $currentRouteData.exercise.type == ExerciseType.time}
-<div class="mb-3">
-    <label for="time" class="form-label">Время</label>
-    <input type="number" bind:value={newHistory.time} class="form-control" id="time" placeholder="1">
-    <div class="form-text">В минутах</div>
-</div>
 {/if}
+<div class="mb-3">
+    <label for="timer" class="form-label">Время</label>
+    <input type="time" step="1" bind:value={newHistory.timer} class="form-control" id="timer" placeholder="1">
+</div>
 <div class="mb-3">
     <label for="sets" class="form-label">Дата и время</label>
     <input type="datetime-local" bind:value={date} class="form-control" id="date" placeholder="1">
 </div>
+<!-- {#if newHistory.timer} -->
+
+<!-- {/if} -->
 <div class="mb-3">
     <label for="note" class="form-label">Описание упражнения</label>
     <textarea bind:value={newHistory.note} class="form-control" id="note" placeholder="Изи-пизи, можно повышать"></textarea>

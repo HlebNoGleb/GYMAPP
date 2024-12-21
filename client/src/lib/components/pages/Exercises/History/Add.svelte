@@ -7,6 +7,7 @@
     import { ExerciseType } from '../../../../helpers/storage/Exercises/exercises';
     import { IntervalTimer, currentTimer } from '../../../../helpers/dateTime';
     import { get, writable } from 'svelte/store';
+    import { onDestroy } from 'svelte';
 
     let exerciseId = $currentRouteData.exercise.id;
     //console.log($currentRouteData.exercise.type);
@@ -15,7 +16,7 @@
 
     let newHistory = HistoryModel.create($currentRouteData.exercise.type);
 
-    //console.log(newHistory);
+    console.log($currentRouteData);
 
 
     function handleSubmit() {
@@ -24,7 +25,9 @@
             newHistory.date = new Date(date).getTime() ?? new Date().getTime();
             newHistory.exerciseId = exerciseId;
             storage.addNewHistory(newHistory);
-            alert("Добавлено")
+            alert("Добавлено");
+            localStorage.removeItem(`timer-${exerciseId}`);
+            runTimer(TimerState.clear);
         } else {
             alert("что-то не записал")
         }
@@ -38,30 +41,30 @@
     }
 
 
-    // debugger
     let currentTimerStart = localStorage.getItem(`timer-${exerciseId}`);
     let currentTimerTime = (new Date().getTime() - Number(currentTimerStart ?? new Date().getTime())) / 1000;
-
-    console.log(currentTimerStart, currentTimerTime);
 
     currentTimer.set(currentTimerTime);
 
     let timerState = currentTimerStart ? TimerState.resume : TimerState.clear;
 
-    console.log(get(currentTimer));
-
     let interval = new IntervalTimer(() => {
-        console.log(get(currentTimer));
         currentTimer.update(value => value + 1);
         newHistory.timer = new Date(get(currentTimer) * 1000).toISOString().slice(11, 19);
     }, 1000);
 
+    onDestroy(() => {
+        if (timerState == TimerState.pause || timerState == TimerState.clear) {
+            localStorage.removeItem(`timer-${exerciseId}`);
+        }
+
+        interval.clear();
+    })
+
     runTimer(timerState);
 
-    console.log(interval)
 
     function runTimer(state) {
-        console.log(state)
         switch (state) {
             case TimerState.start:
                 timerState = TimerState.start;
@@ -84,7 +87,7 @@
                 timerState = TimerState.clear;
                 interval.clear();
                 currentTimer.set(0);
-                newHistory.timer = new Date(get(currentTimer) * 1000).toISOString().slice(11, 19);
+                newHistory.timer = undefined
                 localStorage.removeItem(`timer-${exerciseId}`);
                 break;
         }
@@ -109,29 +112,14 @@
 </div>
 {:else if $currentRouteData.exercise.type == ExerciseType.time_distance}
     <div class="mb-3">
-        <label for="time" class="form-label">Время</label>
-        <input type="number" bind:value={newHistory.time} class="form-control" id="time" placeholder="1">
-        <div class="form-text">В минутах</div>
-    </div>
-    <div class="mb-3">
         <label for="distance" class="form-label">Дистанция</label>
         <input type="number" bind:value={newHistory.distance} class="form-control" id="distance" placeholder="1">
         <div class="form-text">В километрах</div>
     </div>
-{:else if $currentRouteData.exercise.type == ExerciseType.time}
-<div class="mb-3">
-    <label for="time" class="form-label">Время</label>
-    <input type="number" bind:value={newHistory.time} class="form-control" id="time" placeholder="1">
-    <div class="form-text">В минутах</div>
-</div>
 {/if}
-<div class="mb-3">
-    <label for="date" class="form-label">Дата и время</label>
-    <input type="datetime-local" bind:value={date} class="form-control" id="date" placeholder="1">
-</div>
 <div class="row mb-3 g-2">
     <div class="col-auto flex-fill">
-        <label for="timer" class="form-label">Таймер</label>
+        <label for="timer" class="form-label">Время</label>
         <input type="time" step="1" bind:value={newHistory.timer} class="form-control" id="timer" placeholder="1">
     </div>
     <div class="d-flex col-auto align-items-end justify-content-end">
@@ -145,6 +133,10 @@
             <button class="btn btn-primary" on:click={() => runTimer(TimerState.clear)}><i class="fa fa-stop"></i></button>
         {/if}
     </div>
+</div>
+<div class="mb-3">
+    <label for="date" class="form-label">Дата и время</label>
+    <input type="datetime-local" bind:value={date} class="form-control" id="date" placeholder="1">
 </div>
 
 <div class="mb-3">
