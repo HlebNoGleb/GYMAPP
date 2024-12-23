@@ -25,6 +25,14 @@ dist-ssr
 
 # .Net minimal API
 
-server_2.0/GYMAPP/GYMAPP/bin/*
-server_2.0/GYMAPP/GYMAPP/obj/*
-server_2.0/GYMAPP/_ReSharper.Cashes/*
+.idea/.idea.ReviewsAI.dir/.idea/.gitignore
+.idea/.idea.ReviewsAI.dir/.idea/encodings.xml
+ReviewAIBackend/_ReSharper.Caches/
+.idea/
+.vs/
+bin/
+obj/
+_ReSharper.*
+.DS_Store
+Logs/
+ssl/

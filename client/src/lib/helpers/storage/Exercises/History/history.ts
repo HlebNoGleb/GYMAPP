@@ -11,6 +11,7 @@ export interface IBaseHistory {
     date: number,
     note: string,
     type: ExerciseType,
+    timer? : string
 }
 
 export interface IhistoryRepetitionWeight extends IBaseHistory {

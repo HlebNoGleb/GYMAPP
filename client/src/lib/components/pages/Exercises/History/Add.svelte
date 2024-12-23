@@ -50,7 +50,8 @@
 
     let interval = new IntervalTimer(() => {
         currentTimer.update(value => value + 1);
-        newHistory.timer = new Date(get(currentTimer) * 1000).toISOString().slice(11, 19);
+        newHistory.timer = get(currentTimer);
+        // newHistory.timer = new Date(get(currentTimer) * 1000).toISOString().slice(11, 19);
     }, 1000);
 
     onDestroy(() => {
@@ -69,7 +70,8 @@
             case TimerState.start:
                 timerState = TimerState.start;
                 interval.start();
-                newHistory.timer = new Date(get(currentTimer) * 1000).toISOString().slice(11, 19);
+                newHistory.timer = get(currentTimer);
+                // newHistory.timer = new Date(get(currentTimer) * 1000).toISOString().slice(11, 19);
                 localStorage.setItem(`timer-${exerciseId}`, new Date().getTime().toString());
                 break;
             case TimerState.pause:
@@ -81,7 +83,8 @@
                 timerState = TimerState.resume;
                 interval.pause();
                 interval.resume();
-                newHistory.timer = new Date(get(currentTimer) * 1000).toISOString().slice(11, 19);
+                newHistory.timer = get(currentTimer);
+                // newHistory.timer = new Date(get(currentTimer) * 1000).toISOString().slice(11, 19);
                 break;
             case TimerState.clear:
                 timerState = TimerState.clear;
@@ -92,6 +95,7 @@
                 break;
         }
     }
+
 </script>
 
 <h1>Добавление истории {$currentRouteData.exercise.default ? $currentRouteData.exercise.name[$locale] : $currentRouteData.exercise.name}</h1>
@@ -114,15 +118,17 @@
     <div class="mb-3">
         <label for="distance" class="form-label">Дистанция</label>
         <input type="number" bind:value={newHistory.distance} class="form-control" id="distance" placeholder="1">
-        <div class="form-text">В километрах</div>
+        <div class="form-text">В метрах</div>
     </div>
 {/if}
 <div class="row mb-3 g-2">
     <div class="col-auto flex-fill">
         <label for="timer" class="form-label">Время</label>
-        <input type="time" step="1" bind:value={newHistory.timer} class="form-control" id="timer" placeholder="1">
+        <input placeholder="1" type="number" bind:value={newHistory.timer} class="form-control" id="timer">
+        <div class="form-text">В секундах</div>
     </div>
     <div class="d-flex col-auto align-items-end justify-content-end">
+        <div class="col">
         {#if timerState == TimerState.clear}
             <button class="btn btn-primary" on:click={() => runTimer(TimerState.start)}><i class="fa fa-play"></i></button>
         {:else if timerState == TimerState.start || timerState == TimerState.resume}
@@ -132,6 +138,9 @@
             <button class="btn btn-primary me-1" on:click={() => runTimer(TimerState.resume)}><i class="fa fa-play"></i></button>
             <button class="btn btn-primary" on:click={() => runTimer(TimerState.clear)}><i class="fa fa-stop"></i></button>
         {/if}
+        <div class="form-text">&nbsp;</div>
+    </div>
+
     </div>
 </div>
 <div class="mb-3">
