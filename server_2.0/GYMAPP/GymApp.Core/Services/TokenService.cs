@@ -8,20 +8,13 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace GymApp.Core.Services;
 
-public class TokenService
+public class TokenService(IConfiguration configuration)
 {
-    private readonly IConfiguration _configuration;
-
-    public TokenService(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
-
     public string GenerateToken(User user)
     {
-        var jwtSettings = _configuration.GetSection("Jwt");
+        var jwtSettings = configuration.GetSection("Jwt");
         var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings["Key"]));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var claims = new[]
         {
@@ -36,7 +29,7 @@ public class TokenService
             audience: jwtSettings["Audience"],
             claims: claims,
             expires: DateTime.Now.AddMinutes(double.Parse(jwtSettings["ExpiryMinutes"])),
-            signingCredentials: creds
+            signingCredentials: credentials
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);

@@ -19,9 +19,12 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
             .FirstOrDefaultAsync(u => u.Email == email && u.Password == password); // Замените на хэшированный пароль
     }
 
-    public async Task AddAsync(User user)
+    public async Task<User> AddAsync(User? user)
     {
-        await context.Users.AddAsync(user);
+        user.Id = new Guid();
+        var newUser = await context.Users.AddAsync(user);
+        await context.SaveChangesAsync(default);
+        return newUser.Entity;
     }
 
     public async Task UpdateAsync(User user)
@@ -41,5 +44,10 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
     public async Task SaveChangesAsync()
     {
         await context.SaveChangesAsync();
+    }
+
+    public Task<List<User>> GetAllAsync()
+    {
+        return context.Users.ToListAsync();
     }
 }
