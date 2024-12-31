@@ -7,7 +7,34 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+      <PackageReference Include="FluentValidation" Version="11.11.0" />
+      <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="9.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Localization\Errors\Errors.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Localization\Business\Business.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Business.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Localization\Errors\Errors.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Errors.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Localization\Business\Business.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Business.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

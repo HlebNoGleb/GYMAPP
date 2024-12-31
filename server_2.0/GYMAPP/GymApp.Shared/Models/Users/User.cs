@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using GymApp.Shared.Enums;
 using Microsoft.EntityFrameworkCore;
 
-namespace GymApp.Shared.Models;
+namespace GymApp.Shared.Models.Users;
 
 public class User
 {
@@ -12,6 +12,12 @@ public class User
     
     [Required] 
     public string Email { get; set; }
-    public string Password { get; set; }
+    public string PasswordHash { get; set; }
     public UserRoles Role { get; set; }
+    
+    public IEnumerable<RefreshToken> RefreshTokens { get; set; }
+    
+    public UserEmailConfirmation EmailConfirmation { get; set; }
+    
+    public UserPasswordReset PasswordReset { get; set; }
 }

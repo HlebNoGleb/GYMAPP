@@ -1,16 +1,15 @@
-using System.Text;
 using GymApp.API;
-using GymApp.API.DbContextModels;
+using GymApp.API.ExceptionHandlers;
 using GymApp.Core.Interfaces;
 using GymApp.Core.Mappers;
 using GymApp.Core.Services;
+using GymApp.Infrastructure.DbContextModels;
 using GymApp.Infrastructure.Repositories;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHttpClient();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
@@ -23,16 +22,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITokensRepository, TokensRepository>();
+builder.Services.AddScoped<IPasswordResetRepository, PasswordResetRepository>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<TokenService>();
 
-// builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 
-
-builder.Services.AddAuthorization(); // Configure the HTTP request pipeline.
+builder.Services.AddAuthorization(); 
 builder.Services.RegisterServices(builder.Configuration);
-
 
 
 var app = builder.Build();
@@ -40,7 +39,8 @@ var app = builder.Build();
 app.UseAuthentication(); 
 app.UseAuthorization();
 
-// Configure the HTTP request pipeline.
+app.UseRequestLocalization();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -48,6 +48,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseExceptionHandler(error =>
+{
+    error.Run(async context => { await ExceptionHandler.Handle(context); });
+});
 
 app.RegisterRoutes();
 

@@ -1,14 +1,17 @@
 ﻿using GymApp.Shared.Models;
+using GymApp.Shared.Models.Users;
 
 namespace GymApp.Core.Interfaces;
 
 public interface IUserRepository
 {
-    Task<User?> GetByIdAsync(int id);
+    Task<User?> GetByIdAsync(Guid id);
     Task<User?> GetByEmailAndPasswordAsync(string email, string password);
-    Task<User> AddAsync(User? user);
-    Task UpdateAsync(User? user);
-    Task DeleteAsync(int id);
+    Task AddAsync(User user);
+    Task UpdateAsync(User user);
+    Task DeleteAsync(Guid id);
     Task SaveChangesAsync();
     Task<List<User>> GetAllAsync();
+    Task<User?> GetByEmailTokenAsync(string token);
+    Task<User?> GetByEmailAsync(string email);
 }
