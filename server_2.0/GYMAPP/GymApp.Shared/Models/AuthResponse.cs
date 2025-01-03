@@ -3,8 +3,8 @@ using GymApp.Shared.Models.Users;
 
 namespace GymApp.Shared.Models;
 
-public class AuthResponse(UserDto userDto, UserTokens tokens)
+public class AuthResponse(BasicUserDto basicUserDto, UserTokens tokens)
 {
-    public UserDto User { get; set; } = userDto;
+    public BasicUserDto BasicUser { get; set; } = basicUserDto;
     public UserTokens Tokens { get; set; } = tokens;
 }

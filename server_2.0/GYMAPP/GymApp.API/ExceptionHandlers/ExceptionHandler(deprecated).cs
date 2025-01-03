@@ -23,14 +23,17 @@ public static class ExceptionHandler
                 {
                     var errors = validationException.Errors;
                     var validationApiResponse = new ErrorApiResponse(validationException.Message, errors);
-
+                    response.StatusCode = StatusCodes.Status400BadRequest;
                     await response.WriteAsJsonAsync(validationApiResponse);
+                    return;
                     break;
                 }
                 case EmailNotConfirmedException emailNotConfirmedException:
                 {
                     var emailNotConfirmedApiResponse = new ErrorApiResponse(emailNotConfirmedException.Message);
+                    response.StatusCode = StatusCodes.Status200OK;
                     await response.WriteAsJsonAsync(emailNotConfirmedApiResponse);
+                    return;
                     break;
                 }
             }

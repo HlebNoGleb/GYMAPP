@@ -14,7 +14,7 @@ public static class ExeptionHelper
             switch (sqliteException.SqliteExtendedErrorCode)
             {
                 case SQLitePCL.raw.SQLITE_CONSTRAINT_UNIQUE: // Уникальное ограничение в SQLite;
-                    throw new ValidationException(ResourceHelper.GetResource(ResourceHelper.ErrorResourceManager,"UserAlreadyExists"), dbInnerException);
+                    throw new ValidationException(ResourceHelper.GetResource(ResourceHelper.ErrorResourceManager, "UserAlreadyExists"), dbInnerException);
                 default:
                     throw new Exception(ResourceHelper.GetResource(ResourceHelper.ErrorResourceManager,"DefaultDbError"), dbInnerException);
             }

@@ -9,6 +9,7 @@ public class MapperProfile : Profile
 {
     public MapperProfile()
     {
+        CreateMap<User, BasicUserDto>().ReverseMap();
         CreateMap<User, UserDto>().ReverseMap();
 
         CreateMap<UserAuthDto, User>().ReverseMap();

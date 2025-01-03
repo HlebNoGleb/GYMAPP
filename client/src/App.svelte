@@ -3,42 +3,37 @@
     import Dev from "./lib/components/pages/dev.svelte";
     import Start from "./lib/components/pages/start.svelte";
     import { ExerciseType } from "./lib/helpers/storage/Exercises/exercises";
+    import Notification from "./lib/components/common/notification.svelte";
+    import { NotificationType } from "./lib/helpers/Enums/notification";
 
-    onMount(() => {
-        // const fixedHistory = localStorage.getItem("fixedHistory");
-        // if (!fixedHistory) {
-            fixHistory();
-        // }
-    })
+    window.onerror = function (message, file, line, col, error) {
+        console.log("onerror")
+    return false;
+  };
 
-    function fixHistory() {
-        //console.log({...localStorage});
-        Object.keys(localStorage).forEach(item => {
-            //console.log(item);
-            if (item.startsWith("history")) {
-                let historyString = localStorage.getItem(item);
-                let historyArray = historyString ? JSON.parse(historyString) : null;
-                // console.log(historyArray)
-                if (history) {
-                    historyArray.forEach(history => {
-                        if (history.time != undefined && history.distance != undefined) {
-                        history.type = ExerciseType.time_distance
-                        } else if (history.time != undefined) {
-                            history.type = ExerciseType.time
-                        } else if (history.weight != undefined && history.count != undefined && history.sets != undefined) {
-                            history.type = ExerciseType.repetition_weight
-                        }
-                    });
+  window.addEventListener("error", function (e) {
+    console.log("errorEventListener")
+    return false;
+  });
 
-                    // console.log(historyArray)
-                    localStorage.setItem(item, JSON.stringify(historyArray));
-                }
-            }
-        })
+  window.addEventListener('unhandledrejection', function (e) {
+    const notification = new Notification({
+        target: document.querySelector("#toast-container"),
+        props: {
+            type: NotificationType.Error,
+            message: e.reason.message,
+        }
+    });
 
-        // localStorage.setItem("fixedHistory", "true");
-    }
+    // setTimeout(() => {
+    //   notification.$destroy();
+    // }, 1000);
+    // return false;
+  })
 </script>
+
+<svelte:window on:error={(e) => {console.log(e)}}/>
 <Dev />
 <Start />
 
+<div id="toast-container"></div>

@@ -5,13 +5,14 @@
 <nav class="navbar fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-buttons">
-            <!-- <button type="button" style="background-image: url('{routes.authSignIn.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.authSignIn)}></button> -->
             <!-- <button type="button" style="background-image: url('{routes.authSignUp.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.authSignUp)}></button> -->
             <button type="button" style="background-image: url('{routes.trainingsGrid.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.trainingsGrid)}></button>
             <button type="button" style="background-image: url('{routes.exercises.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.exercises)}></button>
             <button type="button" style="background-image: url('{routes.calendar.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.calendar)}></button>
             <button type="button" style="background-image: url('{routes.weightList.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.weightList)}></button>
             <button type="button" style="background-image: url('{routes.mainPage.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-2" on:click={() => changeRoute(routes.mainPage)}></button>
+            <button type="button" style="background-image: url('{routes.profile.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.profile)}></button>
+
         </div>
     </div>
 </nav>

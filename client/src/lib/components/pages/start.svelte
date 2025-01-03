@@ -8,6 +8,7 @@
         skipHelloScreen = data.detail.skipHelloScreen;
         localStorage.setItem("skipHelloScreen", `${skipHelloScreen}`);
     }
+
 </script>
 
 {#if skipHelloScreen}

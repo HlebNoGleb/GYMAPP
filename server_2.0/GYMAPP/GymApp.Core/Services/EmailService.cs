@@ -7,31 +7,18 @@ using GymApp.Shared.Models;
 using GymApp.Shared.Models.Users;
 using Microsoft.Extensions.Configuration;
 
-public class EmailService(IConfiguration configuration) : IEmailService
+public class EmailService(IConfiguration configuration) : IEmailService 
 {
-    public async Task SendEmailAsync(string to, object templateParams)
+    public async Task SendEmailAsync(dynamic templateParams, dynamic settings)
     {
         var emailData = new
         {
-            service_id = configuration.GetSection("EmailSettings:EmailJS:ServiceId").Value,
-            template_id = configuration.GetSection("EmailSettings:EmailJS:EmailConfirmationTemplateId").Value,
-            user_id = configuration.GetSection("EmailSettings:EmailJS:UserId").Value,
+            service_id = settings.service_id,
+            template_id = settings.template_id,
+            user_id = settings.user_id,
             template_params = templateParams
         };
 
-        await Send(emailData);
-    }
-
-    public async Task SendPasswordResetEmailAsync(ResetPasswordSendMail resetPasswordSendMail)
-    {
-        var emailData = new
-        {
-            service_id = configuration.GetSection("EmailSettings:EmailJS:ServiceId").Value,
-            template_id = "template_elnz3mb",
-            user_id = configuration.GetSection("EmailSettings:EmailJS:UserId").Value,
-            template_params = resetPasswordSendMail
-        };
-        
         await Send(emailData);
     }
 

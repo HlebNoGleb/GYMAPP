@@ -53,7 +53,7 @@ public class UserService(
         
         // generate tokens
         var tokens = tokenService.GenerateTokens(user);
-        var userDto = mapper.Map<UserDto>(user);
+        var userDto = mapper.Map<BasicUserDto>(user);
         
         var authResponse = new AuthResponse(userDto, tokens);
         
@@ -82,22 +82,38 @@ public class UserService(
         return userDto;
     }
 
-    public async Task<List<UserDto>> GetAllUsersAsync()
+    public async Task<List<BasicUserDto>> GetAllConfirmedUsersAsync()
     {
-        var users = await userRepository.GetAllAsync();
+        var users = await userRepository.GetAllConfirmedAsync();
 
-        var usersDto = mapper.Map<List<UserDto>>(users);
+        var usersDto = mapper.Map<List<BasicUserDto>>(users);
         return usersDto;
     }
 
-    public async Task SendConfirmationEmailAsync(User user)
+    public async Task SendConfirmationEmailAsync(User user, ClientType clientType)
     {
-        var serverUrl = configuration.GetSection("AppSettings:ServerUrl").Value;
-        await emailService.SendEmailAsync(user.Email, new
+        var url = configuration.GetSection("AppSettings:BackendUrl").Value;
+
+        url = clientType switch
+        {
+            ClientType.Web => configuration.GetSection("AppSettings:FrontendUrl").Value,
+            ClientType.Ios => configuration.GetSection("AppSettings:FrontendUrl").Value,
+            ClientType.Android => configuration.GetSection("AppSettings:FrontendUrl").Value,
+            _ => url
+        };
+
+        await emailService.SendEmailAsync(new
         {
             to_name = user.Name,
             message = "Please confirm your email, by clicking on the link",
-            url = $"{serverUrl}/{Consts.CONFIRM_EMAIL_ROUTE}/?token={user.EmailConfirmation.EmailConfirmationToken}"
+            // url = $"{url}/{Consts.CONFIRM_EMAIL_ROUTE}/?token={user.EmailConfirmation.EmailConfirmationToken}"
+            url = $"{url}/confirmEmail?token={user.EmailConfirmation.EmailConfirmationToken}"
+            // todo change /confirmEmail to #confirmEmail and fix client side
+        }, new
+        {
+            service_id = configuration.GetSection("EmailSettings:EmailJS:ServiceId").Value,
+            template_id = configuration.GetSection("EmailSettings:EmailJS:EmailConfirmationTemplateId").Value,
+            user_id = configuration.GetSection("EmailSettings:EmailJS:UserId").Value,
         });
     }
 
@@ -105,13 +121,16 @@ public class UserService(
     {
         var user = await userRepository.GetByEmailTokenAsync(token);
         
-        if (
-            user == null 
-            || user.EmailConfirmation.IsEmailConfirmed 
-            // || user.EmailConfirmationTokenExpiration < DateTime.UtcNow
-        )
+        if (user == null)
         {
+            // || user.EmailConfirmation.IsEmailConfirmed 
+            // || user.EmailConfirmationTokenExpiration < DateTime.UtcNow
             return false;
+        }
+
+        if (user.EmailConfirmation.IsEmailConfirmed)
+        {
+            return true;
         }
 
         user.EmailConfirmation.IsEmailConfirmed = true;
@@ -127,7 +146,7 @@ public class UserService(
         return await userRepository.GetByEmailAsync(email);
     }
 
-    public async Task<ResetPasswordSendMail> GeneratePasswordResetTokenAsync(User user)
+    public async Task GeneratePasswordResetTokenAsync(User user, ClientType clientType)
     {
         var userPasswordReset = new UserPasswordReset
         {
@@ -138,7 +157,28 @@ public class UserService(
         
         await passwordResetRepository.AddAsync(userPasswordReset);
         
-        return new ResetPasswordSendMail(user.Email, userPasswordReset.PasswordResetToken);
+        var url = configuration.GetSection("AppSettings:BackendUrl").Value;
+
+        url = clientType switch
+        {
+            ClientType.Web => configuration.GetSection("AppSettings:FrontendUrl").Value,
+            ClientType.Ios => configuration.GetSection("AppSettings:FrontendUrl").Value,
+            ClientType.Android => configuration.GetSection("AppSettings:FrontendUrl").Value,
+            _ => url
+        };
+        
+        await emailService.SendEmailAsync(new
+        {
+            to_name = user.Name,
+            message = "You can reset uour password by press this link",
+            url = $"{url}/resetPassword?token={userPasswordReset.PasswordResetToken}"
+            // todo change /resetPassword to #resetPassword and fix client side
+        }, new
+        {
+            service_id = configuration.GetSection("EmailSettings:EmailJS:ServiceId").Value,
+            template_id = configuration.GetSection("EmailSettings:EmailJS:PasswordResetTemplateId").Value,
+            user_id = configuration.GetSection("EmailSettings:EmailJS:UserId").Value,
+        });
     }
 
     public async Task<bool> ResetPasswordAsync(string requestToken, string requestNewPassword)
@@ -149,6 +189,8 @@ public class UserService(
         
         var user = await userRepository.GetByIdAsync(userPasswordReset.UserId);
         if (user is null) return false;
+        
+        // todo - remove PasswordResets from DB
         
         user.PasswordHash = HashHelper.HashPassword(requestNewPassword);
         await userRepository.UpdateAsync(user);

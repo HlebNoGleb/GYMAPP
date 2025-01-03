@@ -12,6 +12,7 @@ public interface IUserRepository
     Task DeleteAsync(Guid id);
     Task SaveChangesAsync();
     Task<List<User>> GetAllAsync();
+    Task<List<User>> GetAllConfirmedAsync();
     Task<User?> GetByEmailTokenAsync(string token);
     Task<User?> GetByEmailAsync(string email);
 }

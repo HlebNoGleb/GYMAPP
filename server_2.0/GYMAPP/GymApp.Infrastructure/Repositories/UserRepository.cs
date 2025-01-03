@@ -66,6 +66,11 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
         return context.Users.ToListAsync();
     }
 
+    public Task<List<User>> GetAllConfirmedAsync()
+    {
+        return context.Users.Include(x=>x.EmailConfirmation).Where(x=>x.EmailConfirmation.IsEmailConfirmed).ToListAsync();
+    }
+
     public async Task<User?> GetByEmailTokenAsync(string token)
     {
         return await context.Users.Include(x=>x.EmailConfirmation).FirstOrDefaultAsync(u => u.EmailConfirmation.EmailConfirmationToken == token);

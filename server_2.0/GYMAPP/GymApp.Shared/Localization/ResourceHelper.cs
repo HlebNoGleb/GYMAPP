@@ -8,12 +8,12 @@ public static class ResourceHelper
 
     private static ResourceManager CreateErrorResourceManager()
     {
-        return new ResourceManager("GymApp.Shared.Localization.Errors", typeof(ResourceHelper).Assembly);
+        return new ResourceManager("GymApp.Shared.Localization.Errors.Errors", typeof(ResourceHelper).Assembly);
     }
     
     private static ResourceManager CreateBusinessResourceManager()
     {
-        return new ResourceManager("GymApp.Shared.Localization.Business", typeof(ResourceHelper).Assembly);
+        return new ResourceManager("GymApp.Shared.Localization.Business.Business", typeof(ResourceHelper).Assembly);
     }
 
     public static string GetResource(ResourceManager manager, string name)

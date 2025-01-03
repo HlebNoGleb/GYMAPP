@@ -36,3 +36,4 @@ _ReSharper.*
 .DS_Store
 Logs/
 ssl/
+.codegpt

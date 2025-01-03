@@ -5,6 +5,5 @@ namespace GymApp.Core.Interfaces;
 
 public interface IEmailService
 {
-    Task SendEmailAsync(string to, object body);
-    Task SendPasswordResetEmailAsync(ResetPasswordSendMail resetPasswordSendMail);
+    Task SendEmailAsync(dynamic body, dynamic settings);
 }

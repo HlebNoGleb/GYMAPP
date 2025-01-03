@@ -32,4 +32,8 @@
       <ProjectReference Include="..\GymApp.Infrastructure\GymApp.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="ExceptionHandlers\ExtractUserIdMiddleware.cs" />
+    </ItemGroup>
+
 </Project>
