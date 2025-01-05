@@ -15,4 +15,5 @@ public interface IUserRepository
     Task<List<User>> GetAllConfirmedAsync();
     Task<User?> GetByEmailTokenAsync(string token);
     Task<User?> GetByEmailAsync(string email);
+    Task<List<User>> GetUsersByIds(List<Guid> friendsIds);
 }

@@ -25,6 +25,7 @@
       <Folder Include="Endpoints\Exercises\" />
       <Folder Include="Endpoints\History\" />
       <Folder Include="Endpoints\Trainings\" />
+      <Folder Include="Middleware\" />
     </ItemGroup>
 
     <ItemGroup>

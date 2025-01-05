@@ -57,12 +57,9 @@ public class CustomAuthorizationHandler : AuthorizationHandler<RolesAuthorizatio
             if (validatedToken is JwtSecurityToken jwtToken)
             {
                 var userRoles = jwtToken.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
+                var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
                 if (!requirement.AllowedRoles.Any(role => userRoles.Contains(role)))
-                // {
-                //     context.Succeed(requirement);
-                // }
-                // else
                 {
                     context.Fail(new AuthorizationFailureReason(this, "NoRequiredRole"));
                 
@@ -72,6 +69,13 @@ public class CustomAuthorizationHandler : AuthorizationHandler<RolesAuthorizatio
                     httpContext.Response.ContentType = "application/json";
                     var responseModel = new ErrorApiResponse( ResourceHelper.GetResource(ResourceHelper.ErrorResourceManager, "NoRequiredRole"));
                     return httpContext.Response.WriteAsJsonAsync(responseModel);
+                }
+
+                if (userId is null)
+                {
+                    context.Fail(new AuthorizationFailureReason(this, "Token validation failed."));
+                
+                    return Task.CompletedTask;
                 }
             }
         }

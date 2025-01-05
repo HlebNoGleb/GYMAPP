@@ -3,6 +3,7 @@ using System;
 using GymApp.Infrastructure.DbContextModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,29 +11,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250104221357_AddUserVisibility")]
+    partial class AddUserVisibility
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
-            modelBuilder.Entity("GymApp.Shared.Models.Friends.Friendship", b =>
-                {
-                    b.Property<Guid>("User1Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("User2Id")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("User1Id", "User2Id");
-
-                    b.HasIndex("User2Id");
-
-                    b.ToTable("Friendship");
-                });
-
-            modelBuilder.Entity("GymApp.Shared.Models.Friends.FriendshipRequest", b =>
+            modelBuilder.Entity("GymApp.Shared.Models.Friends.FriendRequest", b =>
                 {
                     b.Property<Guid>("FromUserId")
                         .HasColumnType("TEXT");
@@ -44,7 +32,20 @@ namespace GymApp.Infrastructure.Migrations
 
                     b.HasIndex("ToUserId");
 
-                    b.ToTable("FriendshipRequest");
+                    b.ToTable("FriendRequest");
+                });
+
+            modelBuilder.Entity("GymApp.Shared.Models.Friends.Friendship", b =>
+                {
+                    b.Property<Guid>("User1Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("User2Id")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("User1Id", "User2Id");
+
+                    b.ToTable("Friendship");
                 });
 
             modelBuilder.Entity("GymApp.Shared.Models.RefreshToken", b =>
@@ -139,26 +140,7 @@ namespace GymApp.Infrastructure.Migrations
                     b.ToTable("PasswordResets");
                 });
 
-            modelBuilder.Entity("GymApp.Shared.Models.Friends.Friendship", b =>
-                {
-                    b.HasOne("GymApp.Shared.Models.Users.User", "User1")
-                        .WithMany()
-                        .HasForeignKey("User1Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GymApp.Shared.Models.Users.User", "User2")
-                        .WithMany()
-                        .HasForeignKey("User2Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User1");
-
-                    b.Navigation("User2");
-                });
-
-            modelBuilder.Entity("GymApp.Shared.Models.Friends.FriendshipRequest", b =>
+            modelBuilder.Entity("GymApp.Shared.Models.Friends.FriendRequest", b =>
                 {
                     b.HasOne("GymApp.Shared.Models.Users.User", "FromUser")
                         .WithMany("FriendRequestsSent")

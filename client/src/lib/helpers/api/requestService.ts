@@ -15,6 +15,7 @@ interface RequestService {
 
 export const apiService: RequestService = {
     get: async <T>(url: string) => {
+        await new Promise(resolve => setTimeout(resolve, 500));
         const res = await sendRequestWithToken("GET", url);
         return await parseResponse<T>(res);
     },

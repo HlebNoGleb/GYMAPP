@@ -8,11 +8,11 @@ public class ApiResponse(bool success, string message)
     public string Message { get; set; } = message;
 }
 
-public class PaginationMetadata
+public class PaginationMetadata(int totalItems, int pageSize, int currentPage)
 {
-    public int TotalItems { get; set; }
-    public int PageSize { get; set; }
-    public int CurrentPage { get; set; }
+    public int TotalItems { get; set; } = totalItems;
+    public int PageSize { get; set; } = pageSize;
+    public int CurrentPage { get; set; } = currentPage;
     public int TotalPages => (int)Math.Ceiling((double)TotalItems / PageSize);
 }
 

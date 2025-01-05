@@ -1,5 +1,6 @@
 ﻿using GymApp.Core.Interfaces;
 using GymApp.Infrastructure.DbContextModels;
+using GymApp.Shared.Enums;
 using GymApp.Shared.Helpers;
 using GymApp.Shared.Models;
 using GymApp.Shared.Models.Users;
@@ -68,7 +69,7 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
 
     public Task<List<User>> GetAllConfirmedAsync()
     {
-        return context.Users.Include(x=>x.EmailConfirmation).Where(x=>x.EmailConfirmation.IsEmailConfirmed).ToListAsync();
+        return context.Users.Include(x=>x.EmailConfirmation).Where(x=>x.EmailConfirmation.IsEmailConfirmed && x.Visibility == UserVisibility.Public).ToListAsync();
     }
 
     public async Task<User?> GetByEmailTokenAsync(string token)
@@ -79,5 +80,10 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
     public async Task<User?> GetByEmailAsync(string email)
     {
         return await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+    }
+
+    public async Task<List<User>> GetUsersByIds(List<Guid> friendsIds)
+    {
+        return await context.Users.Where(x => friendsIds.Contains(x.Id)).ToListAsync();
     }
 }

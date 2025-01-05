@@ -1,7 +1,6 @@
 using System.Security.Claims;
 using GymApp.API;
 using GymApp.API.ExceptionHandlers;
-using GymApp.API.Middleware;
 using GymApp.Core.Interfaces;
 using GymApp.Core.Mappers;
 using GymApp.Core.Services;
@@ -25,10 +24,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IFriendshipRepository, FriendshipRepository>();
 builder.Services.AddScoped<ITokensRepository, TokensRepository>();
 builder.Services.AddScoped<IPasswordResetRepository, PasswordResetRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<FriendshipService>();
 builder.Services.AddScoped<TokenService>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
@@ -38,8 +39,6 @@ builder.Services.RegisterServices(builder.Configuration);
 
 
 var app = builder.Build();
-
-app.UseMiddleware<CustomAuthorizationMiddleware>();
 
 app.UseAuthentication(); 
 app.UseAuthorization();

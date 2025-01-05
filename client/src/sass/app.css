@@ -10720,7 +10720,8 @@ textarea.form-control-lg {
   }
 }
 :root {
-  --main-color: #04ba71;
+  --main-color: rgb(4, 186, 113);
+  --main-color-opacity-50: rgba(4, 186, 113, 0.5);
   --sub-color: #fff;
   --blue-color: #287094;
   --gray-color: #d4d4ce;

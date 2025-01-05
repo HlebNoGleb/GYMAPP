@@ -27,6 +27,7 @@ public class UserService(
         newUser.PasswordHash = HashHelper.HashPassword(user.Password);
         newUser.Id = new Guid();
         newUser.Role = UserRoles.User;
+        newUser.Visibility = UserVisibility.Private;
 
         newUser.EmailConfirmation = new UserEmailConfirmation
         {
@@ -219,5 +220,17 @@ public class UserService(
         await userRepository.DeleteAsync(userId);
         
         return true;
+    }
+
+    public async Task UpdateUserAsync(UserDto userDto)
+    {
+        var user = mapper.Map<User>(userDto);
+        await userRepository.UpdateAsync(user);
+    }
+
+    public async Task<List<UserDto>> GetUsersByIds(List<Guid> friendsIds)
+    {
+        var users = await userRepository.GetUsersByIds(friendsIds);
+        return mapper.Map<List<UserDto>>(users);
     }
 }

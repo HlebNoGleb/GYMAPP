@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>{$currentRoute.name}</title>
+    <link rel="icon" type="image/svg+xml" href="{$currentRoute.images.icon}" />
+</svelte:head>
 <script>
     import { _ } from 'svelte-i18n';
     import routes,{ currentRoute, currentRouteData, changeState, changeRoute } from "../../helpers/routes";
@@ -7,14 +11,12 @@
     import { checkAndTryUpdateTokens, CheckTokenState, tokenStore, userStore } from '../../services/userStore';
 
 
+
     let devMode = false;
 
     let tokenState = CheckTokenState.Invalid;
 
     onMount(async () => {
-
-        console.log(window.location);
-
         tokenState = await checkAndTryUpdateTokens();
 
         console.log(tokenState)
@@ -30,18 +32,18 @@
         }
     })
 
-    // currentRoute.subscribe(val => {
-    //     console.log(val);
-    // });
-
     devModeStore.subscribe(val => {
         devMode = val;
     });
 
+    tokenStore.subscribe(async () => {
+        tokenState = await checkAndTryUpdateTokens();
+        console.log(tokenState)
+    });
 
 </script>
 
-<div class="container">
+<div class="container pt-2">
     {#if devMode}
         <h6>{$currentRoute.name}</h6>
         <code lang="json">{JSON.stringify($currentRouteData)}</code>
@@ -57,9 +59,9 @@
     {/await}
 </div>
 
-<!-- {#if tokenState == CheckTokenState.Valid || tokenState == CheckTokenState.NoNeed} -->
+{#if tokenState == CheckTokenState.Valid || tokenState == CheckTokenState.NoNeed}
     <Navbar/>
-<!-- {/if} -->
+{/if}
 
 <svelte:window on:popstate={(e) => {console.log(e); changeState(window.location.hash.slice(1, window.location.hash.length), e.state)}} />
 

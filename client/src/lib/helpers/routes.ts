@@ -303,8 +303,12 @@ export function changeState(routeName, data = undefined) {
         }
     });
 
-    console.log(newRoute);
-    changeRoute(newRoute, data, false);
+    if (newRoute) {
+        changeRoute(newRoute, data, false);
+        return
+    }
+
+    changeRoute(routes.profile, undefined, false);
 }
 
 // export function changeState() {

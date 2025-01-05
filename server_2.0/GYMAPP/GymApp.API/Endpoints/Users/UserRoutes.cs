@@ -188,5 +188,27 @@ public static class UserRoutes
                 return Results.Ok(new ApiResponse<List<BasicUserDto>>("", users));
             })
             .WithTags("Users");
+
+        app.MapPut("/users/{userId}", [Authorize(Policy = "AllRolesPolicy")]
+            async (UserService userService, string userId, UserDto updateUserDto, HttpContext httpContext) =>
+            {
+                var user = httpContext.User;
+
+                if (user.Identity != null && !user.Identity.IsAuthenticated) return Results.Unauthorized();
+
+                var userIdClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+                var userRoleClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+                var isValid = ValidationHelper.Validate(updateUserDto, out var validationResults);
+                if (!isValid) throw new ValidationException(validationResults);
+
+                if (userRoleClaim == UserRoles.Administrator.ToString() || userIdClaim == userId.ToString())
+                {
+                    await userService.UpdateUserAsync(updateUserDto);
+                    return Results.Ok(new ApiResponse(true, "User has been deleted successfully."));
+                }
+
+                return Results.Unauthorized();
+            });
     }
 }

@@ -20,7 +20,6 @@ public static class Routes
     {
         webApplication.MapGet("/", () => "Hello World!");
         UserRoutes.RegisterRoutes(webApplication);
-
-        
+        FriendshipRoutes.RegisterRoutes(webApplication);
     }
 }

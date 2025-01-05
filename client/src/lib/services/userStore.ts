@@ -2,7 +2,7 @@ import { get, type Writable, writable } from 'svelte/store';
 import config  from '../helpers/configs/config';
 import { BasicUserDto, UserTokens } from '../helpers/storage/User/basicUserDto';
 import { ApiResponse } from '../helpers/api/apiResponse';
-import routes, { currentRoute as currentRouteStore } from '../helpers/routes';
+import routes, { changeRoute, currentRoute as currentRouteStore } from '../helpers/routes';
 
 function createPersistedStore<T>(key, initialValue) {
     const storedValue = localStorage.getItem(key);
@@ -21,7 +21,7 @@ export async function checkAndTryUpdateTokens() {
 
     const currentRoute = get(currentRouteStore);
 
-    if (currentRoute.withoutAuth) {
+    if (currentRoute?.withoutAuth) {
         return CheckTokenState.NoNeed
     }
 
@@ -88,4 +88,10 @@ export async function refreshTokens(){
         console.error("Tokens refresh failed");
         return false;
     }
+}
+
+export function logout() {
+    tokenStore.set(null);
+    userStore.set(null);
+    changeRoute(routes.login, undefined);
 }
