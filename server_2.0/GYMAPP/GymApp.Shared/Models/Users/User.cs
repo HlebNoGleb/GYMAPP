@@ -17,7 +17,7 @@ public class User
     public string PasswordHash { get; set; }
     public UserRoles Role { get; set; }
     
-    [DefaultValue(UserVisibility.Private)]
+    [DefaultValue(UserVisibility.Public)] // private (1) почему то не сработало и default в миграции addUserVisibility выставился 0
     public UserVisibility Visibility { get; set; }
     
     public IEnumerable<RefreshToken> RefreshTokens { get; set; }

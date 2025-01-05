@@ -27,7 +27,7 @@ public class UserService(
         newUser.PasswordHash = HashHelper.HashPassword(user.Password);
         newUser.Id = new Guid();
         newUser.Role = UserRoles.User;
-        newUser.Visibility = UserVisibility.Private;
+        newUser.Visibility = UserVisibility.Public;
 
         newUser.EmailConfirmation = new UserEmailConfirmation
         {
