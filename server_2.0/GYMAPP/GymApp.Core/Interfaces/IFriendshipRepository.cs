@@ -1,5 +1,7 @@
 using GymApp.Shared.DTOs;
+using GymApp.Shared.Models;
 using GymApp.Shared.Models.Friends;
+using GymApp.Shared.Models.Users;
 
 namespace GymApp.Core.Interfaces;
 
@@ -12,6 +14,7 @@ public interface IFriendshipRepository
     Task<List<FriendshipRequest>> GetReceivedFriendshipRequests(Guid userId);
     Task RemoveFriendshipRequest(Guid user1Id, Guid user2Id);
     Task RemoveFriendship(Guid user1Id, Guid user2Id);
-    Task<List<Friendship>> GetFriendships(Guid userId);
+    Task<PagedResult<User>> GetFriends(Guid userId, int pageNumber = 1);
     Task<Friendship?> GetFriendship(Guid userId, Guid friendId);
+    Task<PagedResult<UserWithFriendshipStatus>> GetUsers(Guid userId, int currentPage);
 }

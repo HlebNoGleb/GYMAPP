@@ -2,7 +2,9 @@ using AutoMapper;
 using GymApp.Core.Interfaces;
 using GymApp.Shared.DTOs;
 using GymApp.Shared.DTOs.Users.Friends;
+using GymApp.Shared.Models;
 using GymApp.Shared.Models.Friends;
+using GymApp.Shared.Models.Users;
 using Microsoft.Extensions.Configuration;
 
 namespace GymApp.Core.Services;
@@ -22,6 +24,7 @@ public class FriendshipService(
         };
         
         await friendshipRepository.AddRequestAsync(friendshipRequest);
+        await friendshipRepository.TrySaveAsync();
     }
 
     public async Task<List<BasicUserDto>> GetSendedFriendshipRequests(Guid userId)
@@ -56,6 +59,7 @@ public class FriendshipService(
     public async Task RemoveFriendshipRequest(Guid user1Id, Guid user2Id)
     {
         await friendshipRepository.RemoveFriendshipRequest(user1Id, user2Id);
+        await friendshipRepository.TrySaveAsync();
     }
 
     public async Task RemoveFriendship(Guid user1Id, Guid user2Id)
@@ -64,10 +68,11 @@ public class FriendshipService(
         await friendshipRepository.TrySaveAsync();
     }
 
-    public async Task<List<FriendDto>> GetFriends(Guid userId)
+    public async Task<PagedResult<FriendDto>> GetFriends(Guid userId, int pageNumber = 1)
     {
-        var friendships = await friendshipRepository.GetFriendships(userId);
-        return mapper.Map<List<FriendDto>>(friendships);
+        var friendships = await friendshipRepository.GetFriends(userId, pageNumber);
+        
+        return mapper.Map<PagedResult<FriendDto>>(friendships);
     }
     
     public async Task<FriendDto?> GetFriend(Guid userId, Guid friendId)
@@ -75,5 +80,14 @@ public class FriendshipService(
         var friendship = await friendshipRepository.GetFriendship(userId, friendId);
         
         return friendship == null ? null : mapper.Map<FriendDto>(friendship);
+    }
+
+    public async Task<PagedResult<BasicUserDtoWithFriendshipStatus>> GetUsers(Guid userId, int currentPage)
+    {
+        var usersWithFriendshipStatus = await friendshipRepository.GetUsers(userId,  currentPage);
+        
+        var mappedUsersWithFriendshipStatus = mapper.Map<PagedResult<BasicUserDtoWithFriendshipStatus>>(usersWithFriendshipStatus);
+
+        return mappedUsersWithFriendshipStatus;
     }
 }

@@ -9,6 +9,7 @@
     import { devMode as devModeStore } from '../../helpers/routes';
     import { onMount } from 'svelte';
     import { checkAndTryUpdateTokens, CheckTokenState, tokenStore, userStore } from '../../services/userStore';
+    import ButtonsBackForward from '../common/buttonsBackForward.svelte';
 
 
 
@@ -55,6 +56,10 @@
             </div>
         </div>
     {:then component}
+    <!-- <div class="d-flex align-items-center justify-content-start">
+        <ButtonsBackForward />
+        <h1 class="mx-2 my-0">{$_($currentRoute.name)}</h1>
+    </div> -->
         <svelte:component this={component} data={$currentRouteData}/>
     {/await}
 </div>

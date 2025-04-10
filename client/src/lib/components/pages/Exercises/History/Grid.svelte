@@ -11,6 +11,8 @@
     import arrayHelper from '../../../../helpers/array';
     let exerciseData = $currentRouteData;
 
+    console.log(exerciseData);
+
     let exerciseHistoryPromise = storage.getHistory(exerciseData.id);
     //console.log(exerciseHistoryPromise);
 

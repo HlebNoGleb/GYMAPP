@@ -8,18 +8,9 @@ public class ApiResponse(bool success, string message)
     public string Message { get; set; } = message;
 }
 
-public class PaginationMetadata(int totalItems, int pageSize, int currentPage)
-{
-    public int TotalItems { get; set; } = totalItems;
-    public int PageSize { get; set; } = pageSize;
-    public int CurrentPage { get; set; } = currentPage;
-    public int TotalPages => (int)Math.Ceiling((double)TotalItems / PageSize);
-}
-
-public class ApiResponse<T>(string message, T data = default, PaginationMetadata pagination = null) : ApiResponse(true, message)
+public class ApiResponse<T>(string message, T data = default) : ApiResponse(true, message)
 {
     public T Data { get; set; } = data;
-    public PaginationMetadata Pagination { get; set; } = pagination;
 }
 
 public class ErrorApiResponse(string message, List<ApiError> errors = null) : ApiResponse(false, message)

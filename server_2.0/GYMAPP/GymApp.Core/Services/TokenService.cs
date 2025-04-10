@@ -26,7 +26,7 @@ public class TokenService(IConfiguration configuration, ITokensRepository tokens
         var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings["Key"]));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         
-        var expiry = DateTime.Now.AddMinutes(double.Parse(jwtSettings["ExpiryMinutes"]));
+        var expiry = DateTime.Now.AddSeconds(double.Parse(jwtSettings["ExpiryMinutes"]));
         
         var claims = new[]
         {

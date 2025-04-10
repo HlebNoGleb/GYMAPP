@@ -26,7 +26,7 @@ public class User
     
     public UserPasswordReset PasswordReset { get; set; }
     
-    
     public ICollection<FriendshipRequest> FriendRequestsSent { get; set; }
     public ICollection<FriendshipRequest> FriendRequestsReceived { get; set; }
+    
 }

@@ -1,5 +1,6 @@
 ﻿using GymApp.Shared.Models;
 using GymApp.Shared.Models.Friends;
+using GymApp.Shared.Models.Trainings;
 using GymApp.Shared.Models.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,7 +42,6 @@ public sealed class ApplicationDbContext : DbContext
 
         
         modelBuilder.Entity<Friendship>().HasKey(f => new { f.User1Id, f.User2Id });
-        
         
         modelBuilder.Entity<RefreshToken>(entity =>
         {

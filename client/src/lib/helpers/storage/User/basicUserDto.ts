@@ -23,3 +23,15 @@ export class AuthResponseDto {
     tokens: UserTokens;
     user: BasicUserDto;
 }
+
+export enum FriendshipStatus {
+    Sended,
+    Received,
+    Friend,
+    None
+}
+
+export class BasicUserDtoWithFriendshipStatus {
+    user: BasicUserDto;
+    status: FriendshipStatus
+}

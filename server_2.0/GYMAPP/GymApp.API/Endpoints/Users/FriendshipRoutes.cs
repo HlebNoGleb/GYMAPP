@@ -3,6 +3,9 @@ using GymApp.API.Models;
 using GymApp.Core.Services;
 using GymApp.Shared.DTOs;
 using GymApp.Shared.DTOs.Users.Friends;
+using GymApp.Shared.Models;
+using GymApp.Shared.Models.Friends;
+using GymApp.Shared.Models.Users;
 using Microsoft.AspNetCore.Authorization;
 
 namespace GymApp.API.Endpoints.Users;
@@ -44,42 +47,42 @@ public static class FriendshipRoutes
             .WithTags("Friendship");
         
         app.MapPost("/friendships/acceptFriendshipRequest", [Authorize(Policy = "AllRolesPolicy")]
-            async (FriendshipService friendshipService, HttpContext context, string userId) =>
+            async (FriendshipService friendshipService, HttpContext context, string fromUserId) =>
             {
-                var user2Id = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+                var toUserId = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
                 
-                await friendshipService.AcceptFriendshipRequest(Guid.Parse(user2Id), Guid.Parse(user2Id));
+                await friendshipService.AcceptFriendshipRequest(Guid.Parse(fromUserId), Guid.Parse(toUserId));
                 return Results.Ok(new ApiResponse(true, "Friendship request has been accepted successfully."));
             })
         .WithTags("Friendship");
         
-        app.MapDelete("/friendships/removeFriendshipRequest", [Authorize(Policy = "AllRolesPolicy")]
-            async (FriendshipService friendshipService, HttpContext context, string userId) =>
+        app.MapPost("/friendships/cancelFriendshipRequest", [Authorize(Policy = "AllRolesPolicy")]
+            async (FriendshipService friendshipService, HttpContext context, string toUserId) =>
             {
-                var user2Id = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+                var fromUserId = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
                 
-                await friendshipService.RemoveFriendshipRequest(Guid.Parse(userId), Guid.Parse(user2Id));
+                await friendshipService.RemoveFriendshipRequest(Guid.Parse(toUserId), Guid.Parse(fromUserId));
                 return Results.Ok(new ApiResponse(true, "Friendship request has been removed successfully."));
             })
         .WithTags("Friendship");
         
-        app.MapDelete("/friendships/cancelFriendship", [Authorize(Policy = "AllRolesPolicy")]
-            async (FriendshipService friendshipService, HttpContext context, string userId) =>
+        app.MapPost("/friendships/endFriendship", [Authorize(Policy = "AllRolesPolicy")]
+            async (FriendshipService friendshipService, HttpContext context, string withUserId) =>
             {
-                var user2Id = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+                var userId = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
                 
-                await friendshipService.RemoveFriendship(Guid.Parse(userId), Guid.Parse(user2Id));
+                await friendshipService.RemoveFriendship(Guid.Parse(withUserId), Guid.Parse(userId));
                 return Results.Ok(new ApiResponse(true, "Friendship has been removed successfully."));
             })
         .WithTags("Friendship");
         
         app.MapGet("/friendships/getFriends", [Authorize(Policy = "UserPolicy")]
-            async (FriendshipService friendshipService, HttpContext context) =>
+            async (FriendshipService friendshipService, HttpContext context, int pg = 1) =>
             {
                 var userId = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
                 
-                var friends = await friendshipService.GetFriends(Guid.Parse(userId!));
-                return Results.Ok(new ApiResponse<List<FriendDto>>("", friends));
+                var friends = await friendshipService.GetFriends(Guid.Parse(userId!), pg);
+                return Results.Ok(new ApiResponse<PagedResult<FriendDto>>("", friends));
             })
         .WithTags("Friendship");
         
@@ -93,6 +96,15 @@ public static class FriendshipRoutes
                 return friend is null 
                     ? Results.NotFound(new ErrorApiResponse("Friend not found")) 
                     : Results.Ok(new ApiResponse<FriendDto>("", friend));
+            })
+        .WithTags("Friendship");
+        
+        app.MapGet("/friendships/getUsers", [Authorize(Policy = "UserPolicy")] 
+            async (FriendshipService friendshipService, HttpContext context, int pg = 1) =>
+            {
+                var userId = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+                var users = await friendshipService.GetUsers(Guid.Parse(userId!), pg);
+                return Results.Ok(new ApiResponse<PagedResult<BasicUserDtoWithFriendshipStatus>>("", users));
             })
         .WithTags("Friendship");
     }

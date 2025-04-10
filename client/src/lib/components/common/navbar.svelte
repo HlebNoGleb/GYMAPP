@@ -14,8 +14,7 @@
             <button type="button" style="background-image: url('{routes.trainingsGrid.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.trainingsGrid, undefined)}></button>
             <button type="button" style="background-image: url('{routes.exercises.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.exercises, undefined)}></button>
             <!-- <button type="button" style="background-image: url('{routes.calendar.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.calendar, undefined)}></button> -->
-            <!-- <button type="button" style="background-image: url('{routes.weightList.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.weightList, undefined)}></button> -->
-            <!-- <button type="button" style="background-image: url('{routes.profile.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar"></button> -->
+            <button type="button" style="background-image: url('{routes.profile.images.icon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" on:click={() => changeRoute(routes.profile, undefined)}></button>
             <button type="button" style="background-image: url('{menuIcon}');" class="btn btn-outline-secondary navbar-btn navbar-btn-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar"></button>
         </div>
     </div>
@@ -76,6 +75,12 @@
                             <button data-bs-dismiss="offcanvas" on:click={() => changeRoute(routes.usersGrid, undefined)} class:active={$currentRoute === routes.usersGrid} class="d-flex nav-link" style="align-items: center; width: 100%;">
                                 <img src="{routes.usersGrid.images.icon}" alt="" width="30" height="30" class="me-3"/>
                                 {routes.usersGrid.name}
+                            </button>
+                        </li>
+                        <li>
+                            <button data-bs-dismiss="offcanvas" on:click={() => changeRoute(routes.friends, undefined)} class:active={$currentRoute === routes.friends} class="d-flex nav-link" style="align-items: center; width: 100%;">
+                                <img src="{routes.friends.images.icon}" alt="" width="30" height="30" class="me-3"/>
+                                {routes.friends.name}
                             </button>
                         </li>
                     </ul>

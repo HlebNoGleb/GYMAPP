@@ -105,6 +105,7 @@ public class UserService(
 
         await emailService.SendEmailAsync(new
         {
+            to_email = user.Email,
             to_name = user.Name,
             message = "Please confirm your email, by clicking on the link",
             // url = $"{url}/{Consts.CONFIRM_EMAIL_ROUTE}/?token={user.EmailConfirmation.EmailConfirmationToken}"
@@ -170,6 +171,7 @@ public class UserService(
         
         await emailService.SendEmailAsync(new
         {
+            to_email = user.Email,
             to_name = user.Name,
             message = "You can reset uour password by press this link",
             url = $"{url}/resetPassword?token={userPasswordReset.PasswordResetToken}"

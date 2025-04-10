@@ -207,6 +207,13 @@ let routes = {
             icon: socialIcon,
         }
     },
+    friends: {
+        name: "Friends",
+        component: async () => (await import('../components/pages/Social/Friendship/Friends.svelte')).default,
+        images: {
+            icon: socialIcon,
+        }
+    }
 };
 
 export default routes;
@@ -237,7 +244,6 @@ function initRoute(){
         currentRoute.set(routes.profile);
         currentRouteData.set(undefined);
         window.history.replaceState(undefined, "", `#${routes.profile.name}`);
-
         return;
     }
 

@@ -1,7 +1,10 @@
 using GymApp.Core.Interfaces;
 using GymApp.Infrastructure.DbContextModels;
+using GymApp.Shared.Enums;
 using GymApp.Shared.Helpers;
+using GymApp.Shared.Models;
 using GymApp.Shared.Models.Friends;
+using GymApp.Shared.Models.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymApp.Infrastructure.Repositories;
@@ -69,13 +72,26 @@ public class FriendshipRepository(ApplicationDbContext context) : IFriendshipRep
         context.Friendship.RemoveRange(friendship);
     }
 
-    public async Task<List<Friendship>> GetFriendships(Guid userId)
+    public async Task<PagedResult<User>> GetFriends(Guid userId, int pageNumber = 1)
     {
-        return await context.Friendship
+        var query = context.Friendship
             .Where(f => f.User1Id == userId || f.User2Id == userId)
             .Include(f => f.User1)
             .Include(f => f.User2)
-            .ToListAsync();
+            .Select(f => f.User1Id == userId ? f.User2 : f.User1);
+        
+        var pageResult = new PagedResult<User>
+        { 
+            CurrentPage = pageNumber 
+        };
+
+        var totalCount = await query.CountAsync();
+        var items = await query.Skip((pageNumber - 1) * pageResult.PageSize).Take(pageResult.PageSize).ToListAsync();
+
+        pageResult.Items = items;
+        pageResult.TotalCount = totalCount;
+
+        return pageResult;
     }
 
     public async Task<Friendship?> GetFriendship(Guid userId, Guid friendId)
@@ -85,5 +101,42 @@ public class FriendshipRepository(ApplicationDbContext context) : IFriendshipRep
                         (f.User1Id == friendId && f.User2Id == userId))
             .ToListAsync();
         return friendships.FirstOrDefault();
+    }
+
+    public async Task<PagedResult<UserWithFriendshipStatus>> GetUsers(Guid userId, int pageNumber = 1)
+    {
+        var query = context.Users
+            .Include(x => x.EmailConfirmation)
+            .Where(x => x.EmailConfirmation.IsEmailConfirmed && x.Visibility == UserVisibility.Public)
+            .Include(x => x.FriendRequestsSent)
+            .Include(x => x.FriendRequestsReceived)
+            .Where(x => x.Id != userId)
+            .Select(x => new UserWithFriendshipStatus
+                {
+                    User = x,
+                    Status = x.FriendRequestsSent.Any(fr => fr.ToUserId == userId)
+                        ? FriendshipStatus.Received
+                        : x.FriendRequestsReceived.Any(fr => fr.FromUserId == userId)
+                            ? FriendshipStatus.Sended
+                            : context.Friendship.Any(f =>
+                                (f.User1Id == x.Id && f.User2Id == userId) ||
+                                (f.User1Id == userId && f.User2Id == x.Id))
+                                ? FriendshipStatus.Friend
+                                : FriendshipStatus.None
+                }
+            );
+        
+        var pageResult = new PagedResult<UserWithFriendshipStatus>
+        { 
+            CurrentPage = pageNumber 
+        };
+
+        var totalCount = await query.CountAsync();
+        var items = await query.Skip((pageNumber - 1) * pageResult.PageSize).Take(pageResult.PageSize).ToListAsync();
+
+        pageResult.Items = items;
+        pageResult.TotalCount = totalCount;
+
+        return pageResult;
     }
 }

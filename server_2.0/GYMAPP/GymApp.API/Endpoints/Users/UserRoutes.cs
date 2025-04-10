@@ -83,21 +83,21 @@ public static class UserRoutes
         app.MapPost("/users/refresh-token", async (TokenService tokenService, string refreshToken) =>
             {
                 // todo: return refresh token as cookie
-                var token = await tokenService.GetRefreshTokenAsync(refreshToken);
-                if (token is null)
+                var dbRefreshToken = await tokenService.GetRefreshTokenAsync(refreshToken);
+                if (dbRefreshToken is null)
                 {
                     return Results.Unauthorized();
                 }
 
-                if (token.Expiration < DateTime.UtcNow) return Results.Unauthorized();
+                if (dbRefreshToken.Expiration < DateTime.UtcNow) return Results.Unauthorized();
 
-                var tokens = tokenService.GenerateTokens(token.User);
+                var tokens = tokenService.GenerateTokens(dbRefreshToken.User);
 
                 // update refresh token
-                token.Token = tokens.RefreshToken;
-                token.Expiration = tokens.RefreshExpiration;
+                dbRefreshToken.Token = tokens.RefreshToken;
+                dbRefreshToken.Expiration = tokens.RefreshExpiration;
 
-                await tokenService.UpdateRefreshTokenAsync(token);
+                await tokenService.UpdateRefreshTokenAsync(dbRefreshToken);
 
                 return Results.Ok(new ApiResponse<UserTokens>("", tokens));
             })
@@ -182,12 +182,12 @@ public static class UserRoutes
                 })
             .WithTags("Users");
 
-        app.MapGet("/users", [Authorize(Policy = "AllRolesPolicy")] async (UserService userService) =>
-            {
-                var users = await userService.GetAllConfirmedUsersAsync();
-                return Results.Ok(new ApiResponse<List<BasicUserDto>>("", users));
-            })
-            .WithTags("Users");
+        // app.MapGet("/users", [Authorize(Policy = "AllRolesPolicy")] async (UserService userService) =>
+        //     {
+        //         var users = await userService.GetAllConfirmedUsersAsync();
+        //         return Results.Ok(new ApiResponse<List<BasicUserDto>>("", users));
+        //     })
+        //     .WithTags("Users");
 
         app.MapPut("/users/{userId}", [Authorize(Policy = "AllRolesPolicy")]
             async (UserService userService, string userId, UserDto updateUserDto, HttpContext httpContext) =>

@@ -7,6 +7,4 @@ const app = new App({
   target: document.getElementById("app"),
 });
 
-window.yanka = 69;
-
 export default app

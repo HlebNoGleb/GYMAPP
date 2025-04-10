@@ -27,8 +27,10 @@
 
 </script>
 
-<h1>Calendar</h1>
-<ButtonBack />
+<div class="d-flex align-items-center">
+    <ButtonBack />
+    <h1 class="mx-2 my-0">Calendar</h1>
+</div>
 
 <div class="my-2">
     <DatePicker on:setDate={updateExercises} dotsEvent={getDots}/>

@@ -56,3 +56,11 @@ export function handleErrors(response: any) {
 
     return response;
 }
+
+export class PagedResult<T> {
+    items: T[];
+    totalCount: number;
+    pageSize: number;
+    currentPage: number;
+    totalPages: number
+}

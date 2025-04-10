@@ -6,6 +6,7 @@ import routes, { changeRoute, currentRoute as currentRouteStore } from '../helpe
 
 function createPersistedStore<T>(key, initialValue) {
     const storedValue = localStorage.getItem(key);
+    console.log(storedValue)
     const data = storedValue ? JSON.parse(storedValue) : initialValue;
     let store: Writable<T> = writable(data);
     store.subscribe((value) => {
@@ -64,30 +65,64 @@ async function successRefreshTokens() {
     return CheckTokenState.Valid
 }
 
+let isUpdatingToken = false;
+let tokenUpdateQueue = [];
+
 export async function refreshTokens(){
+
+    if (isUpdatingToken) {
+        // Если токен обновляется, добавляем запрос в очередь
+        return new Promise((resolve) => {
+            tokenUpdateQueue.push(resolve);
+        });
+    }
+
+    isUpdatingToken = true;
+
     const refreshToken = get(tokenStore).refreshToken;
 
-    const newTokens = await fetch(`${config.apiUrl}/users/refresh-token?refreshToken=${refreshToken}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE",
-            "Access-Control-Allow-Headers": "Origin, Content-Type, Authorization",
-            "Access-Control-Allow-Credentials": "true",
-            "mode": "no-cors"
-        },
-    });
+    let updatingResult = false;
 
     try {
+        console.log(refreshToken)
+        const newTokens = await fetch(`${config.apiUrl}/users/refresh-token?refreshToken=${refreshToken}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE",
+                "Access-Control-Allow-Headers": "Origin, Content-Type, Authorization",
+                "Access-Control-Allow-Credentials": "true",
+                "mode": "no-cors"
+            },
+        });
+
+        if (!newTokens.ok) {
+            console.error("Tokens refresh failed");
+            updatingResult = false;
+            return;
+        }
+
         const tokens:ApiResponse<UserTokens> = await newTokens.json();
         tokenStore.set(tokens.data);
+
         console.info("Tokens refreshed");
-        return true;
+        updatingResult = true;
     } catch (error) {
+        console.error(error);
         console.error("Tokens refresh failed");
-        return false;
+        updatingResult = false;
     }
+    finally{
+        isUpdatingToken = false;
+
+        while (tokenUpdateQueue.length > 0) {
+            const resolve = tokenUpdateQueue.shift();
+            resolve(updatingResult);
+        }
+    }
+
+    return updatingResult;
 }
 
 export function logout() {
